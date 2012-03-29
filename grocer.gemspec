@@ -19,4 +19,5 @@ Gem::Specification.new do |gem|
   gem.add_development_dependency 'pry', '~> 0.9.8'
   gem.add_development_dependency 'mocha'
   gem.add_development_dependency 'bourne'
+  gem.add_development_dependency 'rake'
 end

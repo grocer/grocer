@@ -1,3 +1,4 @@
+require "socket"
 require "openssl"
 require "forwardable"
 

@@ -17,4 +17,6 @@ Gem::Specification.new do |gem|
 
   gem.add_development_dependency 'rspec', '~> 2.9.0'
   gem.add_development_dependency 'pry', '~> 0.9.8'
+  gem.add_development_dependency 'mocha'
+  gem.add_development_dependency 'bourne'
 end

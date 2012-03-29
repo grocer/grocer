@@ -1,4 +1,5 @@
 require 'forwardable'
+require 'grocer/no_certificate_error'
 require 'grocer/ssl_connection'
 
 module Grocer
@@ -27,11 +28,16 @@ module Grocer
     private
 
     def ssl
-      @ssl_connection ||=
-        Grocer::SSLConnection.new(certificate: certificate,
-                                  passphrase: passphrase,
-                                  gateway: gateway,
-                                  port: port)
+      @ssl_connection ||= build_connection
+    end
+
+    def build_connection
+      fail Grocer::NoCertificateErrror unless certificate
+
+      Grocer::SSLConnection.new(certificate: certificate,
+                                passphrase: passphrase,
+                                gateway: gateway,
+                                port: port)
     end
 
     def with_open_connection(&block)

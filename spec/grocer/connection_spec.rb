@@ -40,6 +40,11 @@ describe Grocer::Connection do
     subject.port.should == connection_options[:port]
   end
 
+  it 'requires a certificate' do
+    connection_options[:certificate] = nil
+    -> { subject.read }.should raise_error(Grocer::NoCertificateErrror)
+  end
+
   context 'an open SSLConnection' do
     before do
       ssl.stubs(:connected?).returns(true)

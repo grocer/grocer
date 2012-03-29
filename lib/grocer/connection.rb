@@ -13,13 +13,15 @@ module Grocer
     end
 
     def read(size = nil, buf = nil)
-      ssl.connect unless ssl.connected?
-      ssl.read(size, buf)
+      with_open_connection do
+        ssl.read(size, buf)
+      end
     end
 
     def write(content)
-      ssl.connect unless ssl.connected?
-      ssl.write(content)
+      with_open_connection do
+        ssl.write(content)
+      end
     end
 
     private
@@ -30,6 +32,11 @@ module Grocer
                                   passphrase: passphrase,
                                   gateway: gateway,
                                   port: port)
+    end
+
+    def with_open_connection(&block)
+      ssl.connect unless ssl.connected?
+      block.call
     end
   end
 end

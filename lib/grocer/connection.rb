@@ -12,6 +12,11 @@ module Grocer
       @port = options.fetch(:port) { 2195 }
     end
 
+    def read(size = nil, buf = nil)
+      ssl.connect unless ssl.connected?
+      ssl.read(size, buf)
+    end
+
     def write(content)
       ssl.connect unless ssl.connected?
       ssl.write(content)

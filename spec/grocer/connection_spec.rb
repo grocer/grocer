@@ -40,19 +40,37 @@ describe Grocer::Connection do
     subject.port.should == connection_options[:port]
   end
 
-  describe '#write' do
-    it 'delegates to open SSLConnection' do
+  context 'an open SSLConnection' do
+    before do
       ssl.stubs(:connected?).returns(true)
+    end
+
+    it '#write delegates to open SSLConnection' do
       subject.write('Apples to Oranges')
       ssl.should have_received(:write).with('Apples to Oranges')
     end
 
-    it 'connects closed SSLConnection and delegates to it' do
+    it '#read delegates to open SSLConnection' do
+      subject.read(42, 'IO')
+      ssl.should have_received(:read).with(42, 'IO')
+    end
+  end
+
+  context 'a closed SSLConnection' do
+    before do
       ssl.stubs(:connected?).returns(false)
+    end
+
+    it '#write connects SSLConnection and delegates to it' do
       subject.write('Apples to Oranges')
       ssl.should have_received(:connect)
       ssl.should have_received(:write).with('Apples to Oranges')
     end
-  end
 
+    it '#read connects SSLConnection delegates to open SSLConnection' do
+      subject.read(42, 'IO')
+      ssl.should have_received(:connect)
+      ssl.should have_received(:read).with(42, 'IO')
+    end
+  end
 end

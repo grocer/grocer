@@ -10,11 +10,6 @@ module Grocer
       @passphrase = options.fetch(:passphrase) { nil }
       @gateway = options.fetch(:gateway) { 'gateway.sandbox.push.apple.com' }
       @port = options.fetch(:port) { 2195 }
-
-      @ssl_connection = Grocer::SSLConnection.new(certificate: certificate,
-                                                  passphrase: passphrase,
-                                                  gateway: gateway,
-                                                  port: port)
     end
 
     def write(content)
@@ -25,7 +20,11 @@ module Grocer
     private
 
     def ssl
-      @ssl_connection
+      @ssl_connection ||=
+        Grocer::SSLConnection.new(certificate: certificate,
+                                  passphrase: passphrase,
+                                  gateway: gateway,
+                                  port: port)
     end
   end
 end

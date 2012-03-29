@@ -4,6 +4,10 @@ require 'grocer/connection'
 describe Grocer::Connection do
   subject { described_class.new(connection_options) }
   let(:connection_options) { { certificate: '/path/to/cert.pom' } }
+  let(:ssl) { stub_everything("SSLConnection") }
+  before do
+    Grocer::SSLConnection.stubs(:new).returns(ssl)
+  end
 
   it 'is initialized with a certificate' do
     subject.certificate.should == connection_options[:certificate]
@@ -35,4 +39,20 @@ describe Grocer::Connection do
     connection_options[:port] = 443
     subject.port.should == connection_options[:port]
   end
+
+  describe '#write' do
+    it 'delegates to open SSLConnection' do
+      ssl.stubs(:connected?).returns(true)
+      subject.write('Apples to Oranges')
+      ssl.should have_received(:write).with('Apples to Oranges')
+    end
+
+    it 'connects closed SSLConnection and delegates to it' do
+      ssl.stubs(:connected?).returns(false)
+      subject.write('Apples to Oranges')
+      ssl.should have_received(:connect!)
+      ssl.should have_received(:write).with('Apples to Oranges')
+    end
+  end
+
 end

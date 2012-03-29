@@ -28,7 +28,7 @@ gem 'grocer'
 connection = Grocer::Connection.new(
     certificate: "/path/to/cert.pem",      # required
     passphrase:  "",                       # optional
-    gateway:     "gateway.push.apple.com", # optional; "sandbox.gateway.push.apple.com" for development
+    gateway:     "gateway.push.apple.com", # optional; "gateway.sandbox.push.apple.com" for development
     port:        2195                      # optional
 )
 ```

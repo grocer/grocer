@@ -1,5 +1,3 @@
-require "grocer/version"
-
-module Grocer
-  # Your code goes here...
-end
+require_relative "grocer/version"
+require_relative "grocer/notification"
+require_relative "grocer/connection"

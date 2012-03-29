@@ -19,7 +19,7 @@ module Grocer
       !@ssl.nil?
     end
 
-    def connect!
+    def connect
       cert_data    = File.read(certificate)
       context      = OpenSSL::SSL::SSLContext.new
       context.key  = OpenSSL::PKey::RSA.new(cert_data, passphrase)
@@ -31,7 +31,7 @@ module Grocer
       @ssl.connect
     end
 
-    def disconnect!
+    def disconnect
       @ssl.close if @ssl
       @ssl = nil
 
@@ -39,9 +39,9 @@ module Grocer
       @sock = nil
     end
 
-    def reconnect!
-      disconnect!
-      connect!
+    def reconnect
+      disconnect
+      connect
     end
   end
 end

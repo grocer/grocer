@@ -13,7 +13,7 @@ module Grocer
     end
 
     def write(content)
-      ssl.connect! unless ssl.connected?
+      ssl.connect unless ssl.connected?
       ssl.write(content)
     end
 

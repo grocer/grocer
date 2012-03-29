@@ -51,13 +51,13 @@ describe Grocer::SSLConnection do
     end
 
     it "sets up an socket connection" do
-      subject.connect!
+      subject.connect
       TCPSocket.should have_received(:new).with(connection_options[:gateway],
                                                 connection_options[:port])
     end
 
     it "sets up an SSL connection" do
-      subject.connect!
+      subject.connect
       OpenSSL::SSL::SSLSocket.should have_received(:new).with(mock_socket, anything)
     end
   end
@@ -69,7 +69,7 @@ describe Grocer::SSLConnection do
     end
 
     it "writes data to the SSL connection" do
-      subject.connect!
+      subject.connect
       subject.write("abc123")
 
       mock_ssl.should have_received(:write).with("abc123")
@@ -83,7 +83,7 @@ describe Grocer::SSLConnection do
     end
 
     it "reads data from the SSL connection" do
-      subject.connect!
+      subject.connect
       subject.read(42)
 
       mock_ssl.should have_received(:read).with(42)

@@ -50,7 +50,7 @@ describe Grocer::Connection do
     it 'connects closed SSLConnection and delegates to it' do
       ssl.stubs(:connected?).returns(false)
       subject.write('Apples to Oranges')
-      ssl.should have_received(:connect!)
+      ssl.should have_received(:connect)
       ssl.should have_received(:write).with('Apples to Oranges')
     end
   end

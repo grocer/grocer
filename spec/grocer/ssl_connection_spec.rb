@@ -75,5 +75,18 @@ describe Grocer::SSLConnection do
       mock_ssl.should have_received(:write).with("abc123")
     end
   end
-end
 
+  describe "reading data" do
+    before do
+      stub_sockets
+      stub_certificate
+    end
+
+    it "reads data from the SSL connection" do
+      subject.connect!
+      subject.read(42)
+
+      mock_ssl.should have_received(:read).with(42)
+    end
+  end
+end

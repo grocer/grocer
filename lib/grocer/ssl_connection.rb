@@ -5,7 +5,7 @@ require "forwardable"
 module Grocer
   class SSLConnection
     extend Forwardable
-    def_delegators :@ssl, :write
+    def_delegators :@ssl, :write, :read
 
     attr_accessor :certificate, :passphrase, :gateway, :port
 

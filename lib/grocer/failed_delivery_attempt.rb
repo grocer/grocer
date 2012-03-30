@@ -2,6 +2,8 @@ require_relative "invalid_format_error"
 
 module Grocer
   class FailedDeliveryAttempt
+    LENGTH = 38
+
     attr_accessor :timestamp, :device_token
 
     def initialize(binary_tuple)

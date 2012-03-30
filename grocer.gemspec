@@ -2,8 +2,8 @@
 require File.expand_path('../lib/grocer/version', __FILE__)
 
 Gem::Specification.new do |gem|
-  gem.authors       = ['Andy Lindeman', 'Steven Harman']
-  gem.email         = ['andy@highgroove.com', 'steven@highgroove.com']
+  gem.authors       = ['Andy Lindeman', 'Steven Harman', 'Patrick Van Stee']
+  gem.email         = ['andy@highgroove.com', 'steven@highgroove.com', 'vanstee@highgroove.com']
   gem.description   = %q{Pushing your Apple notifications since 2012.}
   gem.summary       = %q{Pushing your Apple notifications since 2012.}
   gem.homepage      = 'https://github.com/highgroove/grocer'

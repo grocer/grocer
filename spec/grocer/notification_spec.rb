@@ -41,6 +41,11 @@ describe Grocer::Notification do
       subject[11...43].should == ["fe15a27d5df3c34778defb1f4f3880265cc52c0c047682223be59fb68500a9a2"].pack("H*")
     end
 
+    it "as a convenience, flattens the device token to remove spaces" do
+      token = notification.device_token = "fe15 a27d 5df3c3 4778defb1f4f3880265cc52c0c047682223be59fb68500a9a2"
+      subject[11...43].should == ["fe15a27d5df3c34778defb1f4f3880265cc52c0c047682223be59fb68500a9a2"].pack("H*")
+    end
+
     it "encodes the payload length" do
       notification.alert = "Hello World!"
       subject[43...45].should == [payload_from_bytes.length].pack("n")

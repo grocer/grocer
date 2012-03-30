@@ -23,7 +23,7 @@ describe Grocer::Connection do
   end
 
   it 'defaults to Apple push gateway' do
-    subject.gateway.should == 'gateway.sandbox.push.apple.com'
+    subject.gateway.should == 'gateway.push.apple.com'
   end
 
   it 'is initialized with a gateway' do

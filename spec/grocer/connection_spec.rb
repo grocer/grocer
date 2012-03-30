@@ -4,7 +4,7 @@ require 'grocer/connection'
 describe Grocer::Connection do
   subject { described_class.new(connection_options) }
   let(:connection_options) { { certificate: '/path/to/cert.pom' } }
-  let(:ssl) { stub_everything("SSLConnection") }
+  let(:ssl) { stub_everything('SSLConnection') }
   before do
     Grocer::SSLConnection.stubs(:new).returns(ssl)
   end

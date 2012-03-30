@@ -1,4 +1,4 @@
-require_relative "invalid_format_error"
+require_relative 'invalid_format_error'
 
 module Grocer
   class FailedDeliveryAttempt
@@ -10,7 +10,7 @@ module Grocer
       # N   =>  4 byte timestamp
       # n   =>  2 byte token_length
       # H64 => 32 byte device_token
-      seconds, _, @device_token = binary_tuple.unpack("NnH64")
+      seconds, _, @device_token = binary_tuple.unpack('NnH64')
       raise InvalidFormatError unless seconds && @device_token
       @timestamp = Time.at(seconds)
     end

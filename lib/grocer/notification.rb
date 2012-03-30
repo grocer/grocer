@@ -1,5 +1,5 @@
-require "json"
-require_relative "no_payload_error"
+require 'json'
+require_relative 'no_payload_error'
 
 module Grocer
   class Notification
@@ -17,7 +17,7 @@ module Grocer
       validate_payload
       payload = encoded_payload
 
-      [1, identifier, expiry_epoch_time, device_token_length, sanitized_device_token, payload.length].pack("CNNnH64n") << payload
+      [1, identifier, expiry_epoch_time, device_token_length, sanitized_device_token, payload.length].pack('CNNnH64n') << payload
     end
 
     private
@@ -44,7 +44,7 @@ module Grocer
     end
 
     def sanitized_device_token
-      device_token.tr(" ", "") if device_token
+      device_token.tr(' ', '') if device_token
     end
 
     def device_token_length

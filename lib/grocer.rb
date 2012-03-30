@@ -1,8 +1,8 @@
-require_relative "grocer/connection"
-require_relative "grocer/feedback"
-require_relative "grocer/notification"
-require_relative "grocer/pusher"
-require_relative "grocer/version"
+require_relative 'grocer/connection'
+require_relative 'grocer/feedback'
+require_relative 'grocer/notification'
+require_relative 'grocer/pusher'
+require_relative 'grocer/version'
 
 module Grocer
 

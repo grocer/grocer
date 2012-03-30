@@ -26,10 +26,10 @@ describe Grocer do
     end
   end
 
-  describe ".pusher" do
-    let(:connection_options) { stub("connection options") }
+  describe '.pusher' do
+    let(:connection_options) { stub('connection options') }
     before do
-      Grocer::Connection.stubs(:new).returns(stub("Connection"))
+      Grocer::Connection.stubs(:new).returns(stub('Connection'))
     end
 
     it 'returns a Connection' do

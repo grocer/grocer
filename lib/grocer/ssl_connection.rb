@@ -1,6 +1,6 @@
-require "socket"
-require "openssl"
-require "forwardable"
+require 'socket'
+require 'openssl'
+require 'forwardable'
 
 module Grocer
   class SSLConnection

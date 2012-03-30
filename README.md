@@ -28,7 +28,7 @@ gem 'grocer'
 #
 # Information on obtaining a `.pem` file for use with `certificate` is shown
 # later.
-connection = Grocer::Connection.new(
+pusher = Grocer::pusher.new(
     certificate: "/path/to/cert.pem",      # required
     passphrase:  "",                       # optional
     gateway:     "gateway.push.apple.com", # optional; See note below.
@@ -57,7 +57,6 @@ notification = Grocer::Notification.new(
   identifier:   1234                  # optional
 )
 
-pusher = Grocer::Pusher.new(connection)
 pusher.push(notification)
 ```
 
@@ -66,7 +65,7 @@ multiple notifications. This way the connection is persisted, as is recommended
 by Apple.
 
 ```ruby
-pusher = Grocer::Pusher.new(connections)
+pusher = Grocer::pusher(connection_options)
 notifications.each do |notification|
   pusher.push(notification)
 end
@@ -107,7 +106,7 @@ The key code for this purpose is:
 
     [self sendProviderDeviceToken:[devToken bytes]]; // custom method; e.g., send to a web service and store
 }
- 
+
 - (void)application:(UIApplication *)app didFailToRegisterForRemoteNotificationsWithError:(NSError *)err {
     NSLog(@"Error in registration. Error: %@", err);
 }

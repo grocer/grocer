@@ -28,7 +28,7 @@ gem 'grocer'
 #
 # Information on obtaining a `.pem` file for use with `certificate` is shown
 # later.
-pusher = Grocer::pusher.new(
+pusher = Grocer.pusher.new(
     certificate: "/path/to/cert.pem",      # required
     passphrase:  "",                       # optional
     gateway:     "gateway.push.apple.com", # optional; See note below.
@@ -60,12 +60,11 @@ notification = Grocer::Notification.new(
 pusher.push(notification)
 ```
 
-It is desirable to reuse the same `Connection` and `Pusher` objects to send
-multiple notifications. This way the connection is persisted, as is recommended
-by Apple.
+It is desirable to reuse the same connection to send multiple notifications, as
+is recommended by Apple.
 
 ```ruby
-pusher = Grocer::pusher(connection_options)
+pusher = Grocer.pusher(connection_options)
 notifications.each do |notification|
   pusher.push(notification)
 end

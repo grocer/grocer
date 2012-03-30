@@ -1,4 +1,5 @@
 require 'forwardable'
+require 'grocer'
 require 'grocer/no_certificate_error'
 require 'grocer/ssl_connection'
 
@@ -6,10 +7,13 @@ module Grocer
   class Connection
     attr_accessor :certificate, :passphrase, :gateway, :port
 
+    PRODUCTION_PUSH_GATEWAY = 'gateway.push.apple.com'
+    SANDBOX_PUSH_GATEWAY = 'gateway.sandbox.push.apple.com'
+
     def initialize(options = {})
       @certificate = options[:certificate]
       @passphrase = options.fetch(:passphrase) { nil }
-      @gateway = options.fetch(:gateway) { 'gateway.push.apple.com' }
+      @gateway = options.fetch(:gateway) { find_default_gateway }
       @port = options.fetch(:port) { 2195 }
     end
 
@@ -38,6 +42,10 @@ module Grocer
                                 passphrase: passphrase,
                                 gateway: gateway,
                                 port: port)
+    end
+
+    def find_default_gateway
+      Grocer.env == 'production' ? PRODUCTION_PUSH_GATEWAY : SANDBOX_PUSH_GATEWAY
     end
 
     def with_open_connection(&block)

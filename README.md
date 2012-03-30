@@ -31,10 +31,16 @@ gem 'grocer'
 connection = Grocer::Connection.new(
     certificate: "/path/to/cert.pem",      # required
     passphrase:  "",                       # optional
-    gateway:     "gateway.push.apple.com", # optional; "gateway.sandbox.push.apple.com" for development
+    gateway:     "gateway.push.apple.com", # optional; See note below.
     port:        2195                      # optional
 )
 ```
+
+**NOTE**: The `gateway` option defaults to `gateway.push.apple.com`
+**only** when running in a production environement, as determined by
+either the `RAILS_ENV` or `RACK_ENV` environment variables. In all other
+cases, it defaults to the sandbox gateway,
+`gateway.sandbox.push.apple.com`.
 
 ### Sending Notifications
 

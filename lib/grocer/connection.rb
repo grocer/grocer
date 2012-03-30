@@ -1,4 +1,3 @@
-require 'forwardable'
 require 'grocer'
 require 'grocer/no_certificate_error'
 require 'grocer/no_gateway_error'

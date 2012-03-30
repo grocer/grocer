@@ -73,12 +73,11 @@ end
 ### Feedback
 
 ```ruby
-feedback_connection = Grocer::Connection.new(
+feedback = Grocer.feedback.new(
   certificate: "/path/to/cert.pem",       # required
   gateway:     "feedback.push.apple.com", # required; "feedback.sandbox.push.apple.com" for development
   port:        2196                       # required
 )
-feedback = Grocer::Feedback.new(connection)
 
 feedback.each do |attempt|
   puts "Device #{attempt.device_token} failed at #{attempt.timestamp}

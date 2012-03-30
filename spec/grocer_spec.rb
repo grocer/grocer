@@ -26,20 +26,34 @@ describe Grocer do
     end
   end
 
-  describe '.pusher' do
+  describe 'API facade' do
     let(:connection_options) { stub('connection options') }
     before do
       Grocer::Connection.stubs(:new).returns(stub('Connection'))
     end
 
-    it 'returns a Connection' do
-     subject.pusher(connection_options).should be_a Grocer::Pusher
+    describe '.pusher' do
+      it 'gets a Pusher' do
+        subject.pusher(connection_options).should be_a Grocer::Pusher
+      end
+
+      it 'passes the connection options on to the underlying Connection' do
+        subject.pusher(connection_options)
+        Grocer::Connection.should have_received(:new).with(connection_options)
+      end
     end
 
-    it 'passes the connection options on to the underlying Connection' do
-      subject.pusher(connection_options)
-      Grocer::Connection.should have_received(:new).with(connection_options)
+    describe '.feedback' do
+      it 'gets Feedback' do
+        subject.feedback(connection_options).should be_a Grocer::Feedback
+      end
+
+      it 'passes the connection options on to the underlying Connection' do
+        subject.feedback(connection_options)
+        Grocer::Connection.should have_received(:new).with(connection_options)
+      end
     end
+
   end
 
 end

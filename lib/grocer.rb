@@ -10,8 +10,14 @@ module Grocer
     ENV['RAILS_ENV'] || ENV['RACK_ENV'] || 'development'
   end
 
+  def self.feedback(options)
+    connection = Connection.new(options)
+    Feedback.new(options)
+  end
+
   def self.pusher(options)
     connection = Connection.new(options)
     Pusher.new(connection)
   end
+
 end

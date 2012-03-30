@@ -50,12 +50,20 @@ notification = Grocer::Notification.new(
   identifier:   1234                  # optional
 )
 
-# TODO: How does this API work?
+pusher = Grocer::Pusher.new(connection)
+pusher.push(notification)
 ```
 
-### Errors
+It is desirable to reuse the same `Connection` and `Pusher` objects to send
+multiple notifications. This way the connection is persisted, as is recommended
+by Apple.
 
-TODO
+```ruby
+pusher = Grocer::Pusher.new(connections)
+notifications.each do |notification|
+  pusher.push(notification)
+end
+```
 
 ### Feedback
 

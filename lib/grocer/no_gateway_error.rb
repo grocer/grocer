@@ -1,5 +1,5 @@
 module Grocer
-  class NoGatewayErrror < StandardError
+  class NoGatewayError < StandardError
   end
 
   class NoPortError < StandardError

@@ -12,8 +12,8 @@ module Grocer
     SANDBOX_PUSH_GATEWAY = 'gateway.sandbox.push.apple.com'
 
     def initialize(options = {})
-      @certificate = options.fetch(:certificate) { fail NoCertificateErrror }
-      @gateway = options.fetch(:gateway) { fail NoGatewayErrror }
+      @certificate = options.fetch(:certificate) { fail NoCertificateError }
+      @gateway = options.fetch(:gateway) { fail NoGatewayError }
       @port = options.fetch(:port) { fail NoPortError }
       @passphrase = options.fetch(:passphrase) { nil }
     end

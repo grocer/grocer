@@ -1,4 +1,4 @@
 module Grocer
-  class NoCertificateErrror < StandardError
+  class NoCertificateError < StandardError
   end
 end

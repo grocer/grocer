@@ -14,7 +14,7 @@ describe Grocer::Connection do
 
   it 'requires a certificate' do
     connection_options.delete(:certificate)
-    -> { described_class.new(connection_options) }.should raise_error(Grocer::NoCertificateErrror)
+    -> { described_class.new(connection_options) }.should raise_error(Grocer::NoCertificateError)
   end
 
   it 'can be initialized with a certificate' do
@@ -32,7 +32,7 @@ describe Grocer::Connection do
 
   it 'requires a gateway' do
     connection_options.delete(:gateway)
-    -> { described_class.new(connection_options) }.should raise_error(Grocer::NoGatewayErrror)
+    -> { described_class.new(connection_options) }.should raise_error(Grocer::NoGatewayError)
   end
 
   it 'can be initialized with a gateway' do

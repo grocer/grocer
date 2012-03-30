@@ -50,7 +50,7 @@ notification = Grocer::Notification.new(
   identifier:   1234                  # optional
 )
 
-connection.send_notification(notification)
+# TODO: How does this API work?
 ```
 
 ### Errors
@@ -59,7 +59,18 @@ TODO
 
 ### Feedback
 
-TODO
+```ruby
+feedback_connection = Grocer::Connection.new(
+  certificate: "/path/to/cert.pem",       # required
+  gateway:     "feedback.push.apple.com", # required; "feedback.sandbox.push.apple.com" for development
+  port:        2196                       # required
+)
+feedback = Grocer::Feedback.new(connection)
+
+feedback.each do |attempt|
+  puts "Device #{attempt.device_token} failed at #{attempt.timestamp}
+end
+```
 
 ### Device Token
 

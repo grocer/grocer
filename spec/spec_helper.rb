@@ -1,3 +1,4 @@
+ENV['RACK_ENV'] = 'test'
 require 'mocha'
 require 'bourne'
 

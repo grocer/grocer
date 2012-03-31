@@ -4,8 +4,8 @@ require_relative 'connection'
 module Grocer
   class PushConnection < SimpleDelegator
 
-    PRODUCTION_PUSH_GATEWAY = 'gateway.push.apple.com'
-    SANDBOX_PUSH_GATEWAY = 'gateway.sandbox.push.apple.com'
+    PRODUCTION_GATEWAY = 'gateway.push.apple.com'
+    SANDBOX_GATEWAY = 'gateway.sandbox.push.apple.com'
 
     def initialize(options)
       options = defaults.merge(options)
@@ -22,7 +22,7 @@ module Grocer
     end
 
     def find_default_gateway
-      Grocer.env == 'production' ? PRODUCTION_PUSH_GATEWAY : SANDBOX_PUSH_GATEWAY
+      Grocer.env == 'production' ? PRODUCTION_GATEWAY : SANDBOX_GATEWAY
     end
 
   end

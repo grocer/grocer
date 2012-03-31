@@ -3,8 +3,8 @@ require 'grocer/connection'
 
 describe Grocer::Connection do
   subject { described_class.new(connection_options) }
-  let(:connection_options) { { certificate: '/path/to/cert.pom',
-                               password: 'new england clam chowder',
+  let(:connection_options) { { certificate: '/path/to/cert.pem',
+                               passphrase: 'new england clam chowder',
                                gateway: 'push.example.com',
                                port: 443 } }
   let(:ssl) { stub_everything('SSLConnection') }
@@ -18,7 +18,7 @@ describe Grocer::Connection do
   end
 
   it 'can be initialized with a certificate' do
-    subject.certificate.should == connection_options[:certificate]
+    subject.certificate.should == '/path/to/cert.pem'
   end
 
   it 'defaults to an empty passphrase' do
@@ -27,7 +27,7 @@ describe Grocer::Connection do
   end
 
   it 'can be initialized with a passphrase' do
-    subject.passphrase.should == connection_options[:passphrase]
+    subject.passphrase.should == 'new england clam chowder'
   end
 
   it 'requires a gateway' do
@@ -36,7 +36,7 @@ describe Grocer::Connection do
   end
 
   it 'can be initialized with a gateway' do
-    subject.gateway.should == connection_options[:gateway]
+    subject.gateway.should == 'push.example.com'
   end
 
   it 'requires a port' do
@@ -45,7 +45,7 @@ describe Grocer::Connection do
   end
 
   it 'can be initialized with a port' do
-    subject.port.should == connection_options[:port]
+    subject.port.should == 443
   end
 
 #  it 'defaults to Apple push gateway in production environment' do

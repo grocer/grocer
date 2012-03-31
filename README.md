@@ -75,14 +75,21 @@ end
 ```ruby
 feedback = Grocer.feedback.new(
   certificate: "/path/to/cert.pem",       # required
-  gateway:     "feedback.push.apple.com", # required; "feedback.sandbox.push.apple.com" for development
-  port:        2196                       # required
+  passphrase:  "",                        # optional
+  gateway:     "feedback.push.apple.com", # optional; See note below.
+  port:        2196                       # optional
 )
 
 feedback.each do |attempt|
   puts "Device #{attempt.device_token} failed at #{attempt.timestamp}
 end
 ```
+
+**NOTE**: The `gateway` option defaults to `feedback.push.apple.com`
+**only** when running in a production environement, as determined by
+either the `RAILS_ENV` or `RACK_ENV` environment variables. In all other
+cases, it defaults to the sandbox gateway,
+`feedback.sandbox.push.apple.com`.
 
 ### Device Token
 

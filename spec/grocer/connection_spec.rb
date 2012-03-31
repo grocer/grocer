@@ -48,30 +48,6 @@ describe Grocer::Connection do
     subject.port.should == 443
   end
 
-#  it 'defaults to Apple push gateway in production environment' do
-#    Grocer.stubs(:env).returns('production')
-#    subject.gateway.should == 'gateway.push.apple.com'
-#  end
-#
-#  it 'defaults to the sandboxed Apple push gateway in development environment' do
-#    Grocer.stubs(:env).returns('development')
-#    subject.gateway.should == 'gateway.sandbox.push.apple.com'
-#  end
-#
-#  it 'defaults to the sandboxed Apple push gateway in test environment' do
-#    Grocer.stubs(:env).returns('test')
-#    subject.gateway.should == 'gateway.sandbox.push.apple.com'
-#  end
-#
-#  it 'defaults to the sandboxed Apple push gateway for other random values' do
-#    Grocer.stubs(:env).returns('random')
-#    subject.gateway.should == 'gateway.sandbox.push.apple.com'
-#  end
-
-#  it 'defaults to 2195 as the port' do
-#    subject.port.should == 2195
-#  end
-
   context 'an open SSLConnection' do
     before do
       ssl.stubs(:connected?).returns(true)

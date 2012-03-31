@@ -8,9 +8,6 @@ module Grocer
   class Connection
     attr_reader :certificate, :passphrase, :gateway, :port
 
-    PRODUCTION_PUSH_GATEWAY = 'gateway.push.apple.com'
-    SANDBOX_PUSH_GATEWAY = 'gateway.sandbox.push.apple.com'
-
     def initialize(options = {})
       @certificate = options.fetch(:certificate) { fail NoCertificateError }
       @gateway = options.fetch(:gateway) { fail NoGatewayError }
@@ -41,10 +38,6 @@ module Grocer
                                 passphrase: passphrase,
                                 gateway: gateway,
                                 port: port)
-    end
-
-    def find_default_gateway
-      Grocer.env == 'production' ? PRODUCTION_PUSH_GATEWAY : SANDBOX_PUSH_GATEWAY
     end
 
     def with_open_connection(&block)

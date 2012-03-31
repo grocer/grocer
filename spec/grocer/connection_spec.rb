@@ -4,7 +4,6 @@ require 'grocer/connection'
 describe Grocer::Connection do
   subject { described_class.new(connection_options) }
   let(:connection_options) { { certificate: '/path/to/cert.pem',
-                               passphrase: 'new england clam chowder',
                                gateway: 'push.example.com',
                                port: 443 } }
   let(:ssl) { stub_everything('SSLConnection') }
@@ -22,11 +21,11 @@ describe Grocer::Connection do
   end
 
   it 'defaults to an empty passphrase' do
-    connection_options.delete(:passphrase)
     subject.passphrase.should be_nil
   end
 
   it 'can be initialized with a passphrase' do
+    connection_options[:passphrase] = 'new england clam chowder'
     subject.passphrase.should == 'new england clam chowder'
   end
 

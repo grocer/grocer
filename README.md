@@ -73,6 +73,8 @@ end
 ### Feedback
 
 ```ruby
+# `certificate` is the only required option; the rest will default to the values
+# shown here.
 feedback = Grocer.feedback.new(
   certificate: "/path/to/cert.pem",       # required
   passphrase:  "",                        # optional

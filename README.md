@@ -8,7 +8,7 @@ Service](http://developer.apple.com/library/mac/#documentation/NetworkingInterne
 to send push notifications to iOS devices.
 
 There are other gems out there to do this, but *grocer* plans to be the
-cleanest, most extensible, and best maintained.
+cleanest, most extensible, and friendliest.
 
 ## Installation
 

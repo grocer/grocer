@@ -4,8 +4,18 @@ require File.expand_path('../lib/grocer/version', __FILE__)
 Gem::Specification.new do |gem|
   gem.authors       = ['Andy Lindeman', 'Steven Harman', 'Patrick Van Stee']
   gem.email         = ['andy@highgroove.com', 'steven@highgroove.com', 'vanstee@highgroove.com']
-  gem.description   = %q{Pushing your Apple notifications since 2012.}
-  gem.summary       = %q{Pushing your Apple notifications since 2012.}
+  gem.summary       = %q{Pushing Apple notifications since 2012.}
+  gem.description   = <<-DESC
+                          Grocer interfaces with the Apple Push
+                          Notification Service to send push
+                          notifications to iOS devices and collect
+                          notification feedback via the Feedback
+                          Service.
+
+                          There are other gems out there to do this,
+                          but Grocer plans to be the cleanest, most
+                          extensible, and friendliest.
+                      DESC
   gem.homepage      = 'https://github.com/highgroove/grocer'
 
   gem.executables   = `git ls-files -- bin/*`.split("\n").map{ |f| File.basename(f) }

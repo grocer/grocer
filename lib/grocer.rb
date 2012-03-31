@@ -1,6 +1,7 @@
-require_relative 'grocer/connection'
 require_relative 'grocer/feedback'
 require_relative 'grocer/notification'
+require_relative 'grocer/feedback_connection'
+require_relative 'grocer/push_connection'
 require_relative 'grocer/pusher'
 require_relative 'grocer/version'
 
@@ -11,12 +12,12 @@ module Grocer
   end
 
   def self.feedback(options)
-    connection = Connection.new(options)
+    connection = FeedbackConnection.new(options)
     Feedback.new(options)
   end
 
   def self.pusher(options)
-    connection = Connection.new(options)
+    connection = PushConnection.new(options)
     Pusher.new(connection)
   end
 

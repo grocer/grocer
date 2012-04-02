@@ -13,7 +13,7 @@ module Grocer
 
   def self.feedback(options)
     connection = FeedbackConnection.new(options)
-    Feedback.new(options)
+    Feedback.new(connection)
   end
 
   def self.pusher(options)

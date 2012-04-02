@@ -38,7 +38,7 @@ pusher = Grocer.pusher(
 
 **NOTE**: The `gateway` option defaults to `gateway.push.apple.com`
 **only** when running in a production environement, as determined by
-either the `RAILS\_ENV` or `RACK\_ENV` environment variables. In all other
+either the `RAILS_ENV` or `RACK_ENV` environment variables. In all other
 cases, it defaults to the sandbox gateway,
 `gateway.sandbox.push.apple.com`.
 
@@ -89,7 +89,7 @@ end
 
 **NOTE**: The `gateway` option defaults to `feedback.push.apple.com`
 **only** when running in a production environement, as determined by
-either the `RAILS\_ENV` or `RACK\_ENV` environment variables. In all other
+either the `RAILS_ENV` or `RACK_ENV` environment variables. In all other
 cases, it defaults to the sandbox gateway,
 `feedback.sandbox.push.apple.com`.
 

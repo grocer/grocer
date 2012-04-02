@@ -3,11 +3,11 @@
 [![Build Status](https://secure.travis-ci.org/highgroove/grocer.png)](http://travis-ci.org/highgroove/grocer)
 [![Dependency Status](https://gemnasium.com/highgroove/grocer.png)](https://gemnasium.com/highgroove/grocer)
 
-*grocer* interfaces with the [Apple Push Notification
+**grocer** interfaces with the [Apple Push Notification
 Service](http://developer.apple.com/library/mac/#documentation/NetworkingInternet/Conceptual/RemoteNotificationsPG/ApplePushService/ApplePushService.html)
 to send push notifications to iOS devices.
 
-There are other gems out there to do this, but *grocer* plans to be the
+There are other gems out there to do this, but **grocer** plans to be the
 cleanest, most extensible, and friendliest.
 
 ## Installation
@@ -38,7 +38,7 @@ pusher = Grocer.pusher(
 
 **NOTE**: The `gateway` option defaults to `gateway.push.apple.com`
 **only** when running in a production environement, as determined by
-either the `RAILS_ENV` or `RACK_ENV` environment variables. In all other
+either the `RAILS\_ENV` or `RACK\_ENV` environment variables. In all other
 cases, it defaults to the sandbox gateway,
 `gateway.sandbox.push.apple.com`.
 
@@ -89,7 +89,7 @@ end
 
 **NOTE**: The `gateway` option defaults to `feedback.push.apple.com`
 **only** when running in a production environement, as determined by
-either the `RAILS_ENV` or `RACK_ENV` environment variables. In all other
+either the `RAILS\_ENV` or `RACK\_ENV` environment variables. In all other
 cases, it defaults to the sandbox gateway,
 `feedback.sandbox.push.apple.com`.
 

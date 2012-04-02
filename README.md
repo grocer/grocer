@@ -32,15 +32,20 @@ pusher = Grocer.pusher(
     certificate: "/path/to/cert.pem",      # required
     passphrase:  "",                       # optional
     gateway:     "gateway.push.apple.com", # optional; See note below.
-    port:        2195                      # optional
+    port:        2195,                     # optional
+    retries:     3                         # optional
 )
 ```
 
-**NOTE**: The `gateway` option defaults to `gateway.push.apple.com`
-**only** when running in a production environement, as determined by
-either the `RAILS_ENV` or `RACK_ENV` environment variables. In all other
-cases, it defaults to the sandbox gateway,
-`gateway.sandbox.push.apple.com`.
+#### Notes
+
+* `gateway`: Defaults to `gateway.push.apple.com` **only** when running in a
+  production environment, as determined by either the `RAILS_ENV` or
+  `RACK_ENV` environment variables. In all other cases, it defaults to the
+  sandbox gateway, `gateway.sandbox.push.apple.com`.
+* `retries`: The number of times **grocer** will retry writing to or reading
+  from the Apple Push Notification Service before raising any errors to client
+  code.
 
 ### Sending Notifications
 
@@ -80,6 +85,7 @@ feedback = Grocer.feedback(
   passphrase:  "",                        # optional
   gateway:     "feedback.push.apple.com", # optional; See note below.
   port:        2196                       # optional
+  retries:     3                          # optional
 )
 
 feedback.each do |attempt|
@@ -87,11 +93,15 @@ feedback.each do |attempt|
 end
 ```
 
-**NOTE**: The `gateway` option defaults to `feedback.push.apple.com`
-**only** when running in a production environement, as determined by
-either the `RAILS_ENV` or `RACK_ENV` environment variables. In all other
-cases, it defaults to the sandbox gateway,
-`feedback.sandbox.push.apple.com`.
+#### Notes
+
+* `gateway`: Defaults to `feedback.push.apple.com` **only** when running in a
+  production environment, as determined by either the `RAILS_ENV` or
+  `RACK_ENV` environment variables. In all other cases, it defaults to the
+  sandbox gateway, `feedback.sandbox.push.apple.com`.
+* `retries`: The number of times **grocer** will retry writing to or reading
+  from the Apple Push Notification Service before raising any errors to client
+  code.
 
 ### Device Token
 

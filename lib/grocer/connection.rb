@@ -6,23 +6,24 @@ require 'grocer/ssl_connection'
 
 module Grocer
   class Connection
-    attr_reader :certificate, :passphrase, :gateway, :port
+    attr_reader :certificate, :passphrase, :gateway, :port, :retries
 
     def initialize(options = {})
       @certificate = options.fetch(:certificate) { fail NoCertificateError }
       @gateway = options.fetch(:gateway) { fail NoGatewayError }
       @port = options.fetch(:port) { fail NoPortError }
       @passphrase = options.fetch(:passphrase) { nil }
+      @retries = options.fetch(:retries) { 3 }
     end
 
     def read(size = nil, buf = nil)
-      with_open_connection do
+      with_connection do
         ssl.read(size, buf)
       end
     end
 
     def write(content)
-      with_open_connection do
+      with_connection do
         ssl.write(content)
       end
     end
@@ -40,9 +41,25 @@ module Grocer
                                 port: port)
     end
 
-    def with_open_connection(&block)
-      ssl.connect unless ssl.connected?
-      block.call
+    def destroy_connection
+      return unless @ssl_connection
+
+      @ssl_connection.disconnect rescue nil
+      @ssl_connection = nil
+    end
+
+    def with_connection
+      attempts = 1
+      begin
+        ssl.connect unless ssl.connected?
+        yield
+      rescue StandardError, Errno::EPIPE
+        raise unless attempts < @retries
+
+        destroy_connection
+        attempts += 1
+        retry
+      end
     end
   end
 end

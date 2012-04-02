@@ -5,7 +5,8 @@ describe Grocer::Connection do
   subject { described_class.new(connection_options) }
   let(:connection_options) { { certificate: '/path/to/cert.pem',
                                gateway: 'push.example.com',
-                               port: 443 } }
+                               port: 443,
+                               retries: 3 } }
   let(:ssl) { stub_everything('SSLConnection') }
   before do
     Grocer::SSLConnection.stubs(:new).returns(ssl)
@@ -47,6 +48,10 @@ describe Grocer::Connection do
     subject.port.should == 443
   end
 
+  it 'can be initialized with a number of retries' do
+    subject.retries.should == 3
+  end
+
   context 'an open SSLConnection' do
     before do
       ssl.stubs(:connected?).returns(true)
@@ -78,6 +83,20 @@ describe Grocer::Connection do
       subject.read(42, 'IO')
       ssl.should have_received(:connect)
       ssl.should have_received(:read).with(42, 'IO')
+    end
+  end
+
+  describe 'retries' do
+    [SocketError, OpenSSL::SSL::SSLError, Errno::EPIPE].each do |error|
+      it "retries #read in the case of an #{error}" do
+        ssl.stubs(:read).raises(error).then.returns(42)
+        subject.read
+      end
+
+      it "retries #write in the case of an #{error}" do
+        ssl.stubs(:write).raises(error).then.returns(42)
+        subject.write("abc123")
+      end
     end
   end
 end

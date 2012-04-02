@@ -121,4 +121,24 @@ The key code for this purpose is:
 
 ### Certificate File
 
-TODO: Describe how to get a .pem
+Login to the [iOS Provisioning Portal (App IDs)](https://developer.apple.com/ios/manage/bundles/index.action).
+
+Configure the appropriate certificate for push notifications and download the certificate:
+
+![Downloading the Push Notification Certificate](https://img.skitch.com/20120402-gtj3bkqi1kq92kgw2pbr5puk5d.png)
+
+Open the file in Keychain Access, then expand the certificate to show both the certificate *and* the private key. Command select so both are highlighted:
+
+![Selecting both the certificate and private key](https://img.skitch.com/20120402-e8deartr2uhimaiatgccttkggi.png)
+
+Control click and select to export the 2 items:
+
+![Exporting the certificate and private key](https://img.skitch.com/20120402-mbmgjrybyym846cy58a9kpyxp5.png)
+
+Save the items as a `.p12` file. Open a terminal window and run the following command:
+
+```bash
+openssl pkcs12 -in exported_certificate.p12 -out certificate.pem -nodes -clcerts
+```
+
+The `certificate.pem` file that is generated can be used with **grocer**.

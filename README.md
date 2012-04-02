@@ -28,7 +28,7 @@ gem 'grocer'
 #
 # Information on obtaining a `.pem` file for use with `certificate` is shown
 # later.
-pusher = Grocer.pusher.new(
+pusher = Grocer.pusher(
     certificate: "/path/to/cert.pem",      # required
     passphrase:  "",                       # optional
     gateway:     "gateway.push.apple.com", # optional; See note below.
@@ -75,7 +75,7 @@ end
 ```ruby
 # `certificate` is the only required option; the rest will default to the values
 # shown here.
-feedback = Grocer.feedback.new(
+feedback = Grocer.feedback(
   certificate: "/path/to/cert.pem",       # required
   passphrase:  "",                        # optional
   gateway:     "feedback.push.apple.com", # optional; See note below.

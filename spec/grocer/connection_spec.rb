@@ -5,8 +5,7 @@ describe Grocer::Connection do
   subject { described_class.new(connection_options) }
   let(:connection_options) { { certificate: '/path/to/cert.pem',
                                gateway: 'push.example.com',
-                               port: 443,
-                               retries: 3 } }
+                               port: 443 } }
   let(:ssl) { stub_everything('SSLConnection') }
   before do
     Grocer::SSLConnection.stubs(:new).returns(ssl)
@@ -30,6 +29,15 @@ describe Grocer::Connection do
     subject.passphrase.should == 'new england clam chowder'
   end
 
+  it 'defaults to 3 retries' do
+    subject.retries.should == 3
+  end
+
+  it 'can be initialized with a number of retries' do
+    connection_options[:retries] = 2
+    subject.retries.should == 2
+  end
+
   it 'requires a gateway' do
     connection_options.delete(:gateway)
     -> { described_class.new(connection_options) }.should raise_error(Grocer::NoGatewayError)
@@ -46,10 +54,6 @@ describe Grocer::Connection do
 
   it 'can be initialized with a port' do
     subject.port.should == 443
-  end
-
-  it 'can be initialized with a number of retries' do
-    subject.retries.should == 3
   end
 
   context 'an open SSLConnection' do

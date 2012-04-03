@@ -99,7 +99,7 @@ describe Grocer::Connection do
 
       it "retries #write in the case of an #{error}" do
         ssl.stubs(:write).raises(error).then.returns(42)
-        subject.write("abc123")
+        subject.write('abc123')
       end
 
       it 'raises the error if none of the retries work' do

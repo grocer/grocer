@@ -101,6 +101,12 @@ describe Grocer::Connection do
         ssl.stubs(:write).raises(error).then.returns(42)
         subject.write("abc123")
       end
+
+      it 'raises the error if none of the retries work' do
+        connection_options[:retries] = 1
+        ssl.stubs(:read).raises(error).then.raises(error)
+        -> { subject.read }.should raise_error(error)
+      end
     end
   end
 end

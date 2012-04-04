@@ -12,7 +12,7 @@ cleanest, most extensible, and friendliest.
 
 ## Requirements
 
-* Ruby/MRI 1.9.x *or* Rubinius in 1.9 mode *or* JRuby in 1.9 mode
+* Ruby/MRI 1.9.x *or* Rubinius in 1.9 mode (JRuby in 1.9 is broken due to some problem with 'json' not being in the stdlib?)
 
 ## Installation
 

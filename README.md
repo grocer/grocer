@@ -10,6 +10,10 @@ to send push notifications to iOS devices.
 There are other gems out there to do this, but **grocer** plans to be the
 cleanest, most extensible, and friendliest.
 
+## Requirements
+
+* Ruby/MRI 1.9.x *or* Rubinius in 1.9 mode *or* JRuby in 1.9 mode
+
 ## Installation
 
 Add this line to your application's Gemfile:

@@ -3,7 +3,8 @@ require_relative 'no_payload_error'
 
 module Grocer
   class Notification
-    attr_accessor :identifier, :expiry, :device_token, :alert, :badge, :sound
+    attr_accessor :identifier, :expiry, :device_token, :alert, :badge, :sound,
+                  :custom
 
     def initialize(payload = {})
       @identifier = 0
@@ -36,7 +37,7 @@ module Grocer
       aps_hash[:badge] = badge if badge
       aps_hash[:sound] = sound if sound
 
-      { aps: aps_hash }
+      { aps: aps_hash }.merge(custom || { })
     end
 
     def expiry_epoch_time

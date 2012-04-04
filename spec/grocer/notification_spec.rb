@@ -66,7 +66,10 @@ describe Grocer::Notification do
       payload_dictionary_from_bytes[:aps][:sound].should == 'siren.aiff'
     end
 
-    it 'encodes custom payload attributes'
+    it 'encodes custom payload attributes' do
+      notification.custom = { :foo => 'bar' }
+      payload_dictionary_from_bytes[:foo].should == 'bar'
+    end
 
     context 'invalid payload' do
       let(:payload_options) { Hash.new }

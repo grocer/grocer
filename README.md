@@ -75,6 +75,25 @@ notifications.each do |notification|
 end
 ```
 
+#### Custom Payloads
+
+The Apple documentation says "Providers can specify custom payload values
+outside the Apple-reserved aps namespace." To specify a custom payload, set
+`Grocer::Notification#custom`.
+
+```ruby
+notification = Grocer::Notification.new(
+  device_token: "...",
+  alert:        "Hello from Grocer",
+  custom: {
+    "acme2": ["bang", "whiz"]
+  }
+)
+
+# Generates a JSON payload like:
+# {"aps": {"alert": "Hello from Grocer"}, "acme2": ["bang", "whiz"]}
+```
+
 ### Feedback
 
 ```ruby

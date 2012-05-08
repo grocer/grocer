@@ -175,3 +175,48 @@ openssl pkcs12 -in exported_certificate.p12 -out certificate.pem -nodes -clcerts
 ```
 
 The `certificate.pem` file that is generated can be used with **grocer**.
+
+## Acceptance Testing
+
+** YET TO BE IMPLEMENTED **
+
+Grocer ships with framework to setup a real looking APNS server. It listens on
+a real SSL-capable socket bound to localhost.
+
+You can setup an APNS client to talk to it, then inspect the notifications the
+server received.
+
+For example, in RSpec:
+
+```ruby
+describe "apple push notifications" do
+  before do
+    @server = Grocer.server(
+      port: 12345     # required; should be > 1024
+      read_timeout: 3 # optional; in seconds
+    )
+  end
+
+  after do
+    @server.close
+  end
+
+  specify "As a user, I receive notifications on my phone when awesome things happen" do
+    # ... exercise code that would send APNS notifications using port 12345 ...
+
+    notification = @server.next_notification
+    notification.alert.should == "An awesome thing happened"
+  end
+end
+```
+
+### Notes
+
+* `read_timeout` is the number of seconds `Grocer::Server` will wait when
+  reading from its sockets. Since the socket is being listened to in another
+  thread, there is some asyncronity to this kind of testing.
+* **`Grocer::Client` will work with `Grocer::Server` only when the `RAILS_ENV`
+  or `RACK_ENV` environment variable is set to `test`. This is because
+  `Grocer::Server` uses a self-signed SSL certificate; in other modes,
+  `Grocer::Client` will not validate against it correctly for security
+  reasons.**

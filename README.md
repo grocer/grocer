@@ -197,10 +197,7 @@ require 'timeout'
 
 describe "apple push notifications" do
   before do
-    @server = Grocer.server(
-      port: 12345     # required; should be > 1024
-      read_timeout: 3 # optional; in seconds
-    )
+    @server = Grocer.server(port: 12345) # port should be > 1024
   end
 
   after do

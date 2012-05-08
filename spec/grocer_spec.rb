@@ -59,6 +59,22 @@ describe Grocer do
       end
     end
 
+    describe '.server' do
+      let(:ssl_server) { stub_everything('SSLServer') }
+      before do
+        Grocer::SSLServer.stubs(:new).returns(ssl_server)
+      end
+
+      it 'gets Server' do
+        subject.server(connection_options).should be_a Grocer::Server
+      end
+
+      it 'passes the connection options on to the underlying SSLServer' do
+        subject.server(connection_options)
+        Grocer::SSLServer.should have_received(:new).with(connection_options)
+      end
+    end
+
   end
 
 end

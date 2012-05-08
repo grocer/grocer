@@ -37,13 +37,6 @@ describe Grocer::SSLServer do
       subject.close
     end
 
-    it "closes the TCP socket" do
-      mock_server.expects(:close)
-
-      subject.accept # "open" socket
-      subject.close
-    end
-
     it "is a no-op if the server has not been started" do
       mock_server.expects(:close).never
       mock_ssl_server.expects(:close).never

@@ -198,6 +198,7 @@ require 'timeout'
 describe "apple push notifications" do
   before do
     @server = Grocer.server(port: 12345) # port should be > 1024
+    @server.accept # starts listening in background
   end
 
   after do
@@ -205,9 +206,10 @@ describe "apple push notifications" do
   end
 
   specify "As a user, I receive notifications on my phone when awesome things happen" do
-    # ... exercise code that would send APNS notifications using port 12345 ...
+    # ... exercise code that would send APNS notifications using gateway
+    # 'localhost' and port 12345 ...
 
-    Timeout.timeout(5) {
+    Timeout.timeout(3) {
       notification = @server.notifications.pop # blocking
       notification.alert.should == "An awesome thing happened"
     }

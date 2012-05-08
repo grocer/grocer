@@ -20,10 +20,6 @@ module Grocer
       if @ssl_socket
         @ssl_socket.close
         @ssl_socket = nil
-      end
-
-      if @socket
-        @socket.close
         @socket = nil
       end
     end

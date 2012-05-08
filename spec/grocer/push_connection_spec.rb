@@ -35,9 +35,9 @@ describe Grocer::PushConnection do
     subject.gateway.should == 'gateway.sandbox.push.apple.com'
   end
 
-  it 'defaults to the sandboxed Apple push gateway in test environment' do
+  it 'defaults to the localhost Apple push gateway in test environment' do
     Grocer.stubs(:env).returns('test')
-    subject.gateway.should == 'gateway.sandbox.push.apple.com'
+    subject.gateway.should == '127.0.0.1'
   end
 
   it 'defaults to the sandboxed Apple push gateway for other random values' do

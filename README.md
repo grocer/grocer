@@ -43,10 +43,11 @@ pusher = Grocer.pusher(
 
 #### Notes
 
-* `gateway`: Defaults to `gateway.push.apple.com` **only** when running in a
-  production environment, as determined by either the `RAILS_ENV` or
-  `RACK_ENV` environment variables. In all other cases, it defaults to the
-  sandbox gateway, `gateway.sandbox.push.apple.com`.
+* `gateway`: Defaults to different values depending on the `RAILS_ENV` or
+  `RACK_ENV` environment variables. If set to `production`, defaults to
+  `gateway.push.apple.com`, if set to `test`, defaults to `localhost` (see
+  "Acceptance Testing" later), otherwise defaults to
+  `gateway.sandbox.push.apple.com`.
 * `retries`: The number of times **grocer** will retry writing to or reading
   from the Apple Push Notification Service before raising any errors to client
   code.
@@ -197,7 +198,7 @@ require 'timeout'
 
 describe "apple push notifications" do
   before do
-    @server = Grocer.server(port: 12345) # port should be > 1024
+    @server = Grocer.server(port: 2195)
     @server.accept # starts listening in background
   end
 
@@ -206,8 +207,7 @@ describe "apple push notifications" do
   end
 
   specify "As a user, I receive notifications on my phone when awesome things happen" do
-    # ... exercise code that would send APNS notifications using gateway
-    # 'localhost' and port 12345 ...
+    # ... exercise code that would send APNS notifications ...
 
     Timeout.timeout(3) {
       notification = @server.notifications.pop # blocking
@@ -216,11 +216,3 @@ describe "apple push notifications" do
   end
 end
 ```
-
-### Notes
-
-* **`Grocer::Client` will work with `Grocer::Server` only when the `RAILS_ENV`
-  or `RACK_ENV` environment variable is set to `test`. This is because
-  `Grocer::Server` uses a self-signed SSL certificate; in other modes,
-  `Grocer::Client` will not validate against it correctly for security
-  reasons.**

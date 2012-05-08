@@ -7,7 +7,14 @@ module Grocer
     attr_accessor :port
 
     def initialize(options = {})
+      options = defaults.merge(options)
       options.each { |k, v| send("#{k}=", v) }
+    end
+
+    def defaults
+      {
+        port: 2195
+      }
     end
 
     def accept

@@ -5,6 +5,7 @@ module Grocer
   class PushConnection < SimpleDelegator
 
     PRODUCTION_GATEWAY = 'gateway.push.apple.com'
+    LOCAL_GATEWAY = '127.0.0.1'
     SANDBOX_GATEWAY = 'gateway.sandbox.push.apple.com'
 
     def initialize(options)
@@ -22,7 +23,14 @@ module Grocer
     end
 
     def find_default_gateway
-      Grocer.env == 'production' ? PRODUCTION_GATEWAY : SANDBOX_GATEWAY
+      case Grocer.env
+      when 'production'
+        PRODUCTION_GATEWAY
+      when 'test'
+        LOCAL_GATEWAY
+      else
+        SANDBOX_GATEWAY
+      end
     end
 
   end

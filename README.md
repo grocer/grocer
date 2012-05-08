@@ -186,9 +186,15 @@ a real SSL-capable socket bound to localhost.
 You can setup an APNS client to talk to it, then inspect the notifications the
 server received.
 
+The server simply exposes a blocking queue where notifications are placed when
+they are received. It is your responsibility to timeout if a message is not
+received in a reasonable amount of time.
+
 For example, in RSpec:
 
 ```ruby
+require 'timeout'
+
 describe "apple push notifications" do
   before do
     @server = Grocer.server(
@@ -204,17 +210,16 @@ describe "apple push notifications" do
   specify "As a user, I receive notifications on my phone when awesome things happen" do
     # ... exercise code that would send APNS notifications using port 12345 ...
 
-    notification = @server.next_notification
-    notification.alert.should == "An awesome thing happened"
+    Timeout.timeout(5) {
+      notification = @server.notifications.pop # blocking
+      notification.alert.should == "An awesome thing happened"
+    }
   end
 end
 ```
 
 ### Notes
 
-* `read_timeout` is the number of seconds `Grocer::Server` will wait when
-  reading from its sockets. Since the socket is being listened to in another
-  thread, there is some asyncronity to this kind of testing.
 * **`Grocer::Client` will work with `Grocer::Server` only when the `RAILS_ENV`
   or `RACK_ENV` environment variable is set to `test`. This is because
   `Grocer::Server` uses a self-signed SSL certificate; in other modes,

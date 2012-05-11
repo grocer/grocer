@@ -22,7 +22,7 @@ module Grocer
     Pusher.new(connection)
   end
 
-  def self.server(options)
+  def self.server(options = { })
     ssl_server = SSLServer.new(options)
     Server.new(ssl_server)
   end

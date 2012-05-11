@@ -15,14 +15,21 @@ module Grocer
 
     def accept
       Thread.new {
-        @server.accept { |client|
-          @clients << client
+        begin
+          @server.accept { |client|
+            @clients << client
 
-          Thread.new {
-            # Read from client into queue
-            NotificationReader.new(client).each(&notifications.method(:push))
+            Thread.new {
+              begin
+                NotificationReader.new(client).each(&notifications.method(:push))
+              rescue Errno::EBADF, NoMethodError
+                # Expected when another thread closes the socket
+              end
+            }
           }
-        }
+        rescue Errno::EBADF
+          # Expected when another thread closes the socket
+        end
       }
     end
 

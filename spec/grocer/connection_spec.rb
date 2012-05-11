@@ -11,11 +11,6 @@ describe Grocer::Connection do
     Grocer::SSLConnection.stubs(:new).returns(ssl)
   end
 
-  it 'requires a certificate' do
-    connection_options.delete(:certificate)
-    -> { described_class.new(connection_options) }.should raise_error(Grocer::NoCertificateError)
-  end
-
   it 'can be initialized with a certificate' do
     subject.certificate.should == '/path/to/cert.pem'
   end

@@ -1,5 +1,4 @@
 require 'grocer'
-require 'grocer/no_certificate_error'
 require 'grocer/no_gateway_error'
 require 'grocer/no_port_error'
 require 'grocer/ssl_connection'
@@ -9,7 +8,7 @@ module Grocer
     attr_reader :certificate, :passphrase, :gateway, :port, :retries
 
     def initialize(options = {})
-      @certificate = options.fetch(:certificate) { fail NoCertificateError }
+      @certificate = options.fetch(:certificate) { nil }
       @gateway = options.fetch(:gateway) { fail NoGatewayError }
       @port = options.fetch(:port) { fail NoPortError }
       @passphrase = options.fetch(:passphrase) { nil }

@@ -20,10 +20,13 @@ module Grocer
     end
 
     def connect
-      cert_data    = File.read(certificate)
       context      = OpenSSL::SSL::SSLContext.new
-      context.key  = OpenSSL::PKey::RSA.new(cert_data, passphrase)
-      context.cert = OpenSSL::X509::Certificate.new(cert_data)
+
+      if certificate
+        cert_data    = File.read(certificate)
+        context.key  = OpenSSL::PKey::RSA.new(cert_data, passphrase)
+        context.cert = OpenSSL::X509::Certificate.new(cert_data)
+      end
 
       @sock     = TCPSocket.new(gateway, port)
       @ssl      = OpenSSL::SSL::SSLSocket.new(@sock, context)

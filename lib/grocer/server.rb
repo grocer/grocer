@@ -27,8 +27,13 @@ module Grocer
     end
 
     def close
-      @server.close
+      if @server
+        @server.close
+        @server = nil
+      end
+
       @clients.each(&:close)
+      @clients = []
     end
   end
 end

@@ -51,6 +51,11 @@ describe Grocer::Connection do
     subject.port.should == 443
   end
 
+  it 'can open the connection to the apple push notification service' do
+    subject.connect
+    ssl.should have_received(:connect)
+  end
+
   context 'an open SSLConnection' do
     before do
       ssl.stubs(:connected?).returns(true)

@@ -127,6 +127,44 @@ end
   from the Apple Push Notification Service before raising any errors to client
   code.
 
+## Acceptance Testing
+
+Grocer ships with framework to setup a real looking APNS server. It listens on
+a real SSL-capable socket bound to localhost.
+
+You can setup an APNS client to talk to it, then inspect the notifications the
+server received.
+
+The server simply exposes a blocking queue where notifications are placed when
+they are received. It is your responsibility to timeout if a message is not
+received in a reasonable amount of time.
+
+For example, in RSpec:
+
+```ruby
+require 'timeout'
+
+describe "apple push notifications" do
+  before do
+    @server = Grocer.server(port: 2195)
+    @server.accept # starts listening in background
+  end
+
+  after do
+    @server.close
+  end
+
+  specify "As a user, I receive notifications on my phone when awesome things happen" do
+    # ... exercise code that would send APNS notifications ...
+
+    Timeout.timeout(3) {
+      notification = @server.notifications.pop # blocking
+      notification.alert.should == "An awesome thing happened"
+    }
+  end
+end
+```
+
 ### Device Token
 
 A device token is obtained from within the iOS app. More details are in Apple's
@@ -176,43 +214,3 @@ openssl pkcs12 -in exported_certificate.p12 -out certificate.pem -nodes -clcerts
 ```
 
 The `certificate.pem` file that is generated can be used with **grocer**.
-
-## Acceptance Testing
-
-** YET TO BE IMPLEMENTED **
-
-Grocer ships with framework to setup a real looking APNS server. It listens on
-a real SSL-capable socket bound to localhost.
-
-You can setup an APNS client to talk to it, then inspect the notifications the
-server received.
-
-The server simply exposes a blocking queue where notifications are placed when
-they are received. It is your responsibility to timeout if a message is not
-received in a reasonable amount of time.
-
-For example, in RSpec:
-
-```ruby
-require 'timeout'
-
-describe "apple push notifications" do
-  before do
-    @server = Grocer.server(port: 2195)
-    @server.accept # starts listening in background
-  end
-
-  after do
-    @server.close
-  end
-
-  specify "As a user, I receive notifications on my phone when awesome things happen" do
-    # ... exercise code that would send APNS notifications ...
-
-    Timeout.timeout(3) {
-      notification = @server.notifications.pop # blocking
-      notification.alert.should == "An awesome thing happened"
-    }
-  end
-end
-```

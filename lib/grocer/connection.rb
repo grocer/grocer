@@ -27,6 +27,10 @@ module Grocer
       end
     end
 
+    def connect
+      ssl.connect unless ssl.connected?
+    end
+
     private
 
     def ssl

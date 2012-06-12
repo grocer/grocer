@@ -30,6 +30,13 @@ describe Grocer::SSLServer do
   end
 
   describe "#close" do
+    it "shutdowns the SSL socket" do
+      mock_ssl_server.expects(:shutdown)
+
+      subject.accept # "open" socket
+      subject.close
+    end
+
     it "closes the SSL socket" do
       mock_ssl_server.expects(:close)
 

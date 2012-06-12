@@ -25,6 +25,7 @@ module Grocer
 
     def close
       if @ssl_socket
+        @ssl_socket.shutdown
         @ssl_socket.close
         @ssl_socket = nil
         @socket = nil

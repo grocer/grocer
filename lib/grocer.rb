@@ -1,10 +1,10 @@
-require_relative 'grocer/feedback'
-require_relative 'grocer/notification'
-require_relative 'grocer/feedback_connection'
-require_relative 'grocer/push_connection'
-require_relative 'grocer/pusher'
-require_relative 'grocer/version'
-require_relative 'grocer/server'
+require 'grocer/feedback'
+require 'grocer/notification'
+require 'grocer/feedback_connection'
+require 'grocer/push_connection'
+require 'grocer/pusher'
+require 'grocer/version'
+require 'grocer/server'
 
 module Grocer
 

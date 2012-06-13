@@ -1,5 +1,5 @@
 require 'json'
-require_relative 'no_payload_error'
+require 'grocer/no_payload_error'
 
 module Grocer
   class Notification

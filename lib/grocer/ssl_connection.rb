@@ -20,7 +20,7 @@ module Grocer
     end
 
     def connect
-      context      = OpenSSL::SSL::SSLContext.new
+      context = OpenSSL::SSL::SSLContext.new
 
       if certificate
         cert_data    = File.read(certificate)

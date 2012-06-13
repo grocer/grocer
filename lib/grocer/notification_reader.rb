@@ -1,5 +1,5 @@
 require 'json'
-require_relative 'notification'
+require 'grocer/notification'
 
 module Grocer
   class NotificationReader

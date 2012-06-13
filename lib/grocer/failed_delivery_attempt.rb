@@ -1,4 +1,4 @@
-require_relative 'invalid_format_error'
+require 'grocer/invalid_format_error'
 
 module Grocer
   class FailedDeliveryAttempt

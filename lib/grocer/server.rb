@@ -1,6 +1,6 @@
 require 'thread'
-require_relative 'notification_reader'
-require_relative 'ssl_server'
+require 'grocer/notification_reader'
+require 'grocer/ssl_server'
 
 module Grocer
   class Server

@@ -1,4 +1,4 @@
-require_relative 'failed_delivery_attempt'
+require 'grocer/failed_delivery_attempt'
 
 module Grocer
   class Feedback

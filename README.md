@@ -128,7 +128,7 @@ end
   from the Apple Push Notification Service before raising any errors to client
   code.
 
-## Acceptance Testing
+### Acceptance Testing
 
 Grocer ships with framework to setup a real looking APNS server. It listens on
 a real SSL-capable socket bound to localhost.
@@ -166,7 +166,7 @@ describe "apple push notifications" do
 end
 ```
 
-### Device Token
+## Device Token
 
 A device token is obtained from within the iOS app. More details are in Apple's
 [Registering for Remote
@@ -192,7 +192,7 @@ The key code for this purpose is:
 }
 ```
 
-### Certificate File
+## Certificate File
 
 Login to the [iOS Provisioning Portal (App IDs)](https://developer.apple.com/ios/manage/bundles/index.action).
 

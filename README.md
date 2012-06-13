@@ -12,7 +12,8 @@ cleanest, most extensible, and friendliest.
 
 ## Requirements
 
-* Ruby/MRI 1.9.x *or* Rubinius in 1.9 mode (JRuby in 1.9 is broken due to some problem with 'json' not being in the stdlib?)
+* Ruby/MRI 1.9.x *or* Rubinius in 1.9 mode (JRuby in 1.9 is broken due to some
+  problem with `json` not being in the stdlib?)
 
 ## Installation
 
@@ -46,7 +47,7 @@ pusher = Grocer.pusher(
 * `gateway`: Defaults to different values depending on the `RAILS_ENV` or
   `RACK_ENV` environment variables. If set to `production`, defaults to
   `gateway.push.apple.com`, if set to `test`, defaults to `localhost` (see
-  "Acceptance Testing" later), otherwise defaults to
+  [Acceptance Testing](#acceptance-testing) later), otherwise defaults to
   `gateway.sandbox.push.apple.com`.
 * `retries`: The number of times **grocer** will retry writing to or reading
   from the Apple Push Notification Service before raising any errors to client
@@ -195,11 +196,13 @@ The key code for this purpose is:
 
 Login to the [iOS Provisioning Portal (App IDs)](https://developer.apple.com/ios/manage/bundles/index.action).
 
-Configure the appropriate certificate for push notifications and download the certificate:
+Configure the appropriate certificate for push notifications and download the
+certificate:
 
 ![Downloading the Push Notification Certificate](https://img.skitch.com/20120402-gtj3bkqi1kq92kgw2pbr5puk5d.png)
 
-Open the file in Keychain Access, then expand the certificate to show both the certificate *and* the private key. Command select so both are highlighted:
+Open the file in Keychain Access, then expand the certificate to show both the
+certificate *and* the private key. Command select so both are highlighted:
 
 ![Selecting both the certificate and private key](https://img.skitch.com/20120402-e8deartr2uhimaiatgccttkggi.png)
 
@@ -207,7 +210,8 @@ Control click and select to export the 2 items:
 
 ![Exporting the certificate and private key](https://img.skitch.com/20120402-mbmgjrybyym846cy58a9kpyxp5.png)
 
-Save the items as a `.p12` file. Open a terminal window and run the following command:
+Save the items as a `.p12` file. Open a terminal window and run the following
+command:
 
 ```bash
 openssl pkcs12 -in exported_certificate.p12 -out certificate.pem -nodes -clcerts

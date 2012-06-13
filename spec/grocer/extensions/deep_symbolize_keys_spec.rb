@@ -14,7 +14,7 @@ describe Grocer::Extensions::DeepSymbolizeKeys do
     nested_illegal_symbols.extend described_class
   end
 
-  it 'symbolizes does not change nested symbols' do
+  it 'does not change nested symbols' do
     nested_symbols.deep_symbolize_keys.should == nested_symbols
   end
 
@@ -26,12 +26,11 @@ describe Grocer::Extensions::DeepSymbolizeKeys do
     nested_mixed.deep_symbolize_keys.should == nested_symbols
   end
 
-  it 'preseves fixnum keys' do
+  it 'preserves fixnum keys' do
     nested_fixnums.deep_symbolize_keys.should == nested_fixnums
   end
 
   it 'preserves keys that cannot be symbolized' do
     nested_illegal_symbols.deep_symbolize_keys.should == nested_illegal_symbols
   end
-
 end

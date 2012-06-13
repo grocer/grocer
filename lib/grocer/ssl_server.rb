@@ -1,13 +1,15 @@
 require 'openssl'
 require 'socket'
 require 'thread'
+require 'grocer/extensions/deep_symbolize_keys'
 
 module Grocer
   class SSLServer
     attr_accessor :port
 
     def initialize(options = {})
-      options = defaults.merge(options)
+      options.extend Extensions::DeepSymbolizeKeys
+      options = defaults.merge(options.deep_symbolize_keys)
       options.each { |k, v| send("#{k}=", v) }
     end
 

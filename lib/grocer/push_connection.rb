@@ -1,5 +1,6 @@
 require 'delegate'
-require_relative 'connection'
+require 'grocer/extensions/deep_symbolize_keys'
+require 'grocer/connection'
 
 module Grocer
   class PushConnection < SimpleDelegator
@@ -9,7 +10,8 @@ module Grocer
     SANDBOX_GATEWAY = 'gateway.sandbox.push.apple.com'
 
     def initialize(options)
-      options = defaults.merge(options)
+      options.extend Extensions::DeepSymbolizeKeys
+      options = defaults.merge(options.deep_symbolize_keys)
       super(Connection.new(options))
     end
 

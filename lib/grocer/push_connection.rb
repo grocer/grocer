@@ -10,8 +10,7 @@ module Grocer
     SANDBOX_GATEWAY = 'gateway.sandbox.push.apple.com'
 
     def initialize(options)
-      options.extend Extensions::DeepSymbolizeKeys
-      options = defaults.merge(options.deep_symbolize_keys)
+      options = apply_defaults(options)
       super(Connection.new(options))
     end
 
@@ -33,6 +32,11 @@ module Grocer
       else
         SANDBOX_GATEWAY
       end
+    end
+
+    def apply_defaults(options)
+      options.extend Extensions::DeepSymbolizeKeys
+      defaults.merge(options.deep_symbolize_keys)
     end
 
   end

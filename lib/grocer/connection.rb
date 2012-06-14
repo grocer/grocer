@@ -9,9 +9,9 @@ module Grocer
 
     def initialize(options = {})
       @certificate = options.fetch(:certificate) { nil }
+      @passphrase = options.fetch(:passphrase) { nil }
       @gateway = options.fetch(:gateway) { fail NoGatewayError }
       @port = options.fetch(:port) { fail NoPortError }
-      @passphrase = options.fetch(:passphrase) { nil }
       @retries = options.fetch(:retries) { 3 }
     end
 
@@ -57,7 +57,7 @@ module Grocer
         ssl.connect unless ssl.connected?
         yield
       rescue StandardError, Errno::EPIPE
-        raise unless attempts < @retries
+        raise unless attempts < retries
 
         destroy_connection
         attempts += 1

@@ -54,7 +54,7 @@ module Grocer
     def with_connection
       attempts = 1
       begin
-        ssl.connect unless ssl.connected?
+        connect
         yield
       rescue StandardError, Errno::EPIPE
         raise unless attempts < retries

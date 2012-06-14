@@ -1,4 +1,5 @@
 require 'thread'
+require 'openssl'
 require 'grocer/notification_reader'
 require 'grocer/ssl_server'
 
@@ -22,7 +23,7 @@ module Grocer
             Thread.new {
               begin
                 NotificationReader.new(client).each(&notifications.method(:push))
-              rescue Errno::EBADF, NoMethodError
+              rescue Errno::EBADF, NoMethodError, OpenSSL::OpenSSLError
                 # Expected when another thread closes the socket
               end
             }

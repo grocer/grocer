@@ -28,9 +28,10 @@ module Grocer
         context.cert = OpenSSL::X509::Certificate.new(cert_data)
       end
 
-      @sock     = TCPSocket.new(gateway, port)
-      @ssl      = OpenSSL::SSL::SSLSocket.new(@sock, context)
-      @ssl.sync = true
+      @sock            = TCPSocket.new(gateway, port)
+      @sock.setsockopt   Socket::SOL_SOCKET, Socket::SO_KEEPALIVE, true
+      @ssl             = OpenSSL::SSL::SSLSocket.new(@sock, context)
+      @ssl.sync        = true
       @ssl.connect
     end
 

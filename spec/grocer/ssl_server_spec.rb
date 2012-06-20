@@ -33,14 +33,30 @@ describe Grocer::SSLServer do
     it "shutdowns the SSL socket" do
       mock_ssl_server.expects(:shutdown)
 
-      subject.accept # "open" socket
+      # Emulate opening the socket
+      subject.accept
+      mock_ssl_server.stubs(:closed? => false)
+
+      subject.close
+    end
+
+    it "ignores Errno::ENOTCONN errors that might be raised when shutting down the socket" do
+      mock_ssl_server.stubs(:shutdown).raises(Errno::ENOTCONN)
+
+      # Emulate opening the socket
+      subject.accept
+      mock_ssl_server.stubs(:closed? => false)
+
       subject.close
     end
 
     it "closes the SSL socket" do
       mock_ssl_server.expects(:close)
 
-      subject.accept # "open" socket
+      # Emulate opening the socket
+      subject.accept
+      mock_ssl_server.stubs(:closed? => false)
+
       subject.close
     end
 

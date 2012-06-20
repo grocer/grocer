@@ -26,12 +26,19 @@ module Grocer
     end
 
     def close
-      if @ssl_socket
-        @ssl_socket.shutdown
+      if @ssl_socket && !@ssl_socket.closed?
+        begin
+          @ssl_socket.shutdown
+        rescue Errno::ENOTCONN
+          # Some platforms raise this if the socket is not connected. Not sure
+          # how to avoid it.
+        end
+
         @ssl_socket.close
-        @ssl_socket = nil
-        @socket = nil
       end
+
+      @ssl_socket = nil
+      @socket = nil
     end
 
     private

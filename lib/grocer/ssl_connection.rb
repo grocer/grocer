@@ -1,6 +1,7 @@
 require 'socket'
 require 'openssl'
 require 'forwardable'
+require 'stringio'
 
 module Grocer
   class SSLConnection
@@ -23,7 +24,14 @@ module Grocer
       context = OpenSSL::SSL::SSLContext.new
 
       if certificate
-        cert_data    = File.read(certificate)
+
+        if certificate.respond_to?(:read)
+          cert_data = certificate.read
+          certificate.rewind if certificate.respond_to?(:rewind)
+        else
+          cert_data = File.read(certificate)
+        end
+
         context.key  = OpenSSL::PKey::RSA.new(cert_data, passphrase)
         context.cert = OpenSSL::X509::Certificate.new(cert_data)
       end

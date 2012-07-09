@@ -24,6 +24,21 @@ describe Grocer::SSLConnection do
     }
   }
 
+  describe 'configuration with pre-read certificate' do
+    before do
+      stub_certificate
+    end
+
+    subject {
+      string_io = File.read(connection_options[:certificate])
+      described_class.new(connection_options.merge(certificate: string_io))
+    }
+
+    it 'is initialized with a certificate 2' do
+      subject.certificate.should == File.read(connection_options[:certificate])
+    end
+  end
+  
   subject { described_class.new(connection_options) }
 
   describe 'configuration' do

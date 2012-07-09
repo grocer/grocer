@@ -45,6 +45,9 @@ pusher = Grocer.pusher(
 
 #### Notes
 
+* `certificate`: If you don't have the certificate stored in a file, you 
+  can pass any object that responds to `read`.
+  Example: `certificate: StringIO.new(pem_string)`
 * `gateway`: Defaults to different values depending on the `RAILS_ENV` or
   `RACK_ENV` environment variables. If set to `production`, defaults to
   `gateway.push.apple.com`, if set to `test`, defaults to `localhost` (see

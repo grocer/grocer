@@ -34,7 +34,7 @@ describe Grocer::SSLConnection do
       described_class.new(connection_options.merge(certificate: string_io))
     }
 
-    it 'is initialized with a certificate 2' do
+    it 'is initialized with a certificate IO' do
       subject.certificate.should == File.read(connection_options[:certificate])
     end
   end

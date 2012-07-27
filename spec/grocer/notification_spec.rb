@@ -1,3 +1,5 @@
+# encoding: UTF-8
+
 require 'spec_helper'
 require 'grocer/notification'
 
@@ -69,6 +71,11 @@ describe Grocer::Notification do
     it 'encodes custom payload attributes' do
       notification.custom = { :foo => 'bar' }
       payload_dictionary_from_bytes[:foo].should == 'bar'
+    end
+
+    it 'encodes UTF-8 characters to binary correctly' do
+      notification.alert = '私のホバークラフトは鰻でいっぱいです。'
+      notification.to_bytes.encoding.name.should == 'ASCII-8BIT' # binary
     end
 
     context 'invalid payload' do

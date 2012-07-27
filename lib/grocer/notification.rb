@@ -18,7 +18,15 @@ module Grocer
       validate_payload
       payload = encoded_payload
 
-      [1, identifier, expiry_epoch_time, device_token_length, sanitized_device_token, payload.length].pack('CNNnH64n') << payload
+      [
+        1,
+        identifier,
+        expiry_epoch_time,
+        device_token_length,
+        sanitized_device_token,
+        payload.length,
+        payload
+      ].pack('CNNnH64nA*')
     end
 
     private

@@ -75,7 +75,7 @@ describe Grocer::Notification do
 
     it 'encodes UTF-8 characters' do
       notification.alert = '私'
-      payload_dictionary_from_bytes[:aps][:alert].should == '私'
+      payload_dictionary_from_bytes[:aps][:alert].force_encoding("UTF-8").should == '私'
     end
 
     it 'encodes the payload length correctly for multibyte UTF-8 strings' do

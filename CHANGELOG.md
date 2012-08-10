@@ -3,6 +3,8 @@
 ## Development
 
 * Enables socket keepalive option on APNS client sockets (Kyle Drake)
+* Supports non-ASCII characters in notifications (Patrick Van Stee)
+* Certificate can be any object that responds to #read (Kyle Drake)
 
 ## 0.0.13
 

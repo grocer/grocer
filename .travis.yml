@@ -3,5 +3,5 @@ rvm:
   - 1.9.2
   - 1.9.3
   - ruby-head
+  - jruby-head
   # - rbx-19mode # rubinius still incorrectly defaults to 'US-ASCII'
-  # - jruby-19mode

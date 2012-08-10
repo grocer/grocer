@@ -24,7 +24,7 @@ module Grocer
         expiry_epoch_time,
         device_token_length,
         sanitized_device_token,
-        payload.length,
+        payload.bytesize,
         payload
       ].pack('CNNnH64nA*')
     end

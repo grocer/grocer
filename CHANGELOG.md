@@ -1,6 +1,6 @@
 # CHANGELOG
 
-## Development
+## 0.1.0
 
 * Enables socket keepalive option on APNS client sockets (Kyle Drake)
 * Supports non-ASCII characters in notifications (Patrick Van Stee, Andy Lindeman)

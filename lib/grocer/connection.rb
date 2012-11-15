@@ -60,7 +60,6 @@ module Grocer
       rescue OpenSSL::SSL::SSLError => e
         raise CertificateExpiredError, e.message if e.message =~ /certificate expired/i
       rescue StandardError, Errno::EPIPE
-        binding.pry
         raise unless attempts < retries
 
         destroy_connection

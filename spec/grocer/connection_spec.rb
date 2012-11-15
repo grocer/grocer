@@ -55,6 +55,11 @@ describe Grocer::Connection do
     subject.connect
     ssl.should have_received(:connect)
   end
+  
+  it 'raises CertificateExpiredError for OpenSSL::SSL::SSLError with /certificate expired/i message' do
+    ssl.stubs(:write).raises(OpenSSL::SSL::SSLError.new('certificate expired'))
+    -> {subject.write('abc123')}.should raise_error(Grocer::CertificateExpiredError)
+  end
 
   context 'an open SSLConnection' do
     before do
@@ -91,7 +96,7 @@ describe Grocer::Connection do
   end
 
   describe 'retries' do
-    [SocketError, OpenSSL::SSL::SSLError, Errno::EPIPE].each do |error|
+    [SocketError, Errno::EPIPE].each do |error|
       it "retries #read in the case of an #{error}" do
         ssl.stubs(:read).raises(error).then.returns(42)
         subject.read

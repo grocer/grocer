@@ -57,9 +57,11 @@ module Grocer
       begin
         connect
         yield
-      rescue OpenSSL::SSL::SSLError => e
-        raise CertificateExpiredError, e.message if e.message =~ /certificate expired/i
-      rescue StandardError, Errno::EPIPE
+      rescue StandardError, Errno::EPIPE => e
+        if e.class == OpenSSL::SSL::SSLError && e.message =~ /certificate expired/i
+          raise CertificateExpiredError
+        end
+        
         raise unless attempts < retries
 
         destroy_connection

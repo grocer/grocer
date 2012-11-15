@@ -96,7 +96,7 @@ describe Grocer::Connection do
   end
 
   describe 'retries' do
-    [SocketError, Errno::EPIPE].each do |error|
+    [SocketError, OpenSSL::SSL::SSLError, Errno::EPIPE].each do |error|
       it "retries #read in the case of an #{error}" do
         ssl.stubs(:read).raises(error).then.returns(42)
         subject.read

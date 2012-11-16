@@ -23,6 +23,12 @@ Add this line to your application's Gemfile:
 gem 'grocer'
 ```
 
+If you are using JRuby, you will also need to add this to enable full OpenSSL support:
+
+```ruby
+gem 'jruby-openssl'
+```
+
 ## Usage
 
 ### Connecting

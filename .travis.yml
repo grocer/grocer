@@ -3,7 +3,6 @@ rvm:
   - 1.9.2
   - 1.9.3
   - jruby-19mode
+  - jruby-head # To get JRuby 1.7.x, which defaults to -19mode
   - rbx-19mode
   # - ruby-head  # seems unstable on travis at this time
-  # - jruby-head # seems unstable on travis at this time
-  # - rbx-19mode # rubinius still incorrectly defaults to 'US-ASCII'

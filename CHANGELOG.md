@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 0.1.1
+
+* Warn that `jruby-openssl` is needed on JRuby platform. (Kyle Drake)
+
 ## 0.1.0
 
 * Enables socket keepalive option on APNS client sockets (Kyle Drake)

@@ -1,4 +1,3 @@
 module Grocer
-  class CertificateExpiredError < StandardError
-  end
+  CertificateExpiredError = Module.new
 end

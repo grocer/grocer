@@ -2,6 +2,6 @@ language: ruby
 rvm:
   - 1.9.2
   - 1.9.3
-  - jruby-head # To get JRuby 1.7.x, which defaults to -19mode
+  - jruby-19mode # JRuby 1.7.0
   - rbx-19mode
   # - ruby-head  # seems unstable on travis at this time

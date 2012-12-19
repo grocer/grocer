@@ -1,6 +1,6 @@
 # Grocer
 
-[![Build Status](https://secure.travis-ci.org/highgroove/grocer.png)](http://travis-ci.org/highgroove/grocer)
+[![Build Status](https://api.travis-ci.org/highgroove/grocer.png?branch=master)](https://travis-ci.org/highgroove/grocer)
 [![Dependency Status](https://gemnasium.com/highgroove/grocer.png)](https://gemnasium.com/highgroove/grocer)
 [![Code Climate](https://codeclimate.com/badge.png)](https://codeclimate.com/github/highgroove/grocer)
 

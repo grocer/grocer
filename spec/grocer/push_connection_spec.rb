@@ -40,14 +40,14 @@ describe Grocer::PushConnection do
     subject.gateway.should == '127.0.0.1'
   end
 
+  it 'uses a case-insensitive environment to determine the push gateway' do
+    Grocer.stubs(:env).returns('TEST')
+    subject.gateway.should == '127.0.0.1'
+  end
+
   it 'defaults to the sandboxed Apple push gateway for other random values' do
     Grocer.stubs(:env).returns('random')
     subject.gateway.should == 'gateway.sandbox.push.apple.com'
-  end
-
-  it 'downcases the environment' do
-    Grocer.stubs(:env).returns('TEST')
-    subject.gateway.should == '127.0.0.1'
   end
 
   it 'can be initialized with a gateway' do

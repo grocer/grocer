@@ -24,7 +24,7 @@ module Grocer
     end
 
     def find_default_gateway
-      case Grocer.env
+      case Grocer.env.downcase
       when 'production'
         PRODUCTION_GATEWAY
       when 'test'

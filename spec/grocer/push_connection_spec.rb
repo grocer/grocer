@@ -45,6 +45,11 @@ describe Grocer::PushConnection do
     subject.gateway.should == 'gateway.sandbox.push.apple.com'
   end
 
+  it 'downcases the environment' do
+    Grocer.stubs(:env).returns('TEST')
+    subject.gateway.should == '127.0.0.1'
+  end
+
   it 'can be initialized with a gateway' do
     options[:gateway] = 'gateway.example.com'
     subject.gateway.should == 'gateway.example.com'

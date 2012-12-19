@@ -16,7 +16,7 @@ describe Grocer::SSLServer do
   end
 
   it "is constructed with a port option" do
-    subject.port.should == 12345
+    expect(subject.port).to eq(12345)
   end
 
 
@@ -25,7 +25,7 @@ describe Grocer::SSLServer do
       clients = []
       subject.accept { |c| clients << c }
 
-      clients.should == [mock_client]
+      expect(clients).to eq([mock_client])
     end
   end
 

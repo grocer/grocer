@@ -35,7 +35,7 @@ describe Grocer::SSLConnection do
     }
 
     it 'is initialized with a certificate IO' do
-      subject.certificate.should == File.read(connection_options[:certificate])
+      expect(subject.certificate).to eq(File.read(connection_options[:certificate]))
     end
   end
   
@@ -43,19 +43,19 @@ describe Grocer::SSLConnection do
 
   describe 'configuration' do
     it 'is initialized with a certificate' do
-      subject.certificate.should == connection_options[:certificate]
+      expect(subject.certificate).to eq(connection_options[:certificate])
     end
 
     it 'is initialized with a passphrase' do
-      subject.passphrase.should == connection_options[:passphrase]
+      expect(subject.passphrase).to eq(connection_options[:passphrase])
     end
 
     it 'is initialized with a gateway' do
-      subject.gateway.should == connection_options[:gateway]
+      expect(subject.gateway).to eq(connection_options[:gateway])
     end
 
     it 'is initialized with a port' do
-      subject.port.should == connection_options[:port]
+      expect(subject.port).to eq(connection_options[:port])
     end
   end
 

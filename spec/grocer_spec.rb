@@ -12,17 +12,17 @@ describe Grocer do
     end
 
     it 'defaults to development' do
-      subject.env.should == 'development'
+      expect(subject.env).to eq('development')
     end
 
     it 'reads RAILS_ENV from ENV' do
       ENV.stubs(:[]).with('RAILS_ENV').returns('staging')
-      subject.env.should == 'staging'
+      expect(subject.env).to eq('staging')
     end
 
     it 'reads RACK_ENV from ENV' do
       ENV.stubs(:[]).with('RACK_ENV').returns('staging')
-      subject.env.should == 'staging'
+      expect(subject.env).to eq('staging')
     end
   end
 
@@ -35,7 +35,7 @@ describe Grocer do
       end
 
       it 'gets a Pusher' do
-        subject.pusher(connection_options).should be_a Grocer::Pusher
+        expect(subject.pusher(connection_options)).to be_a Grocer::Pusher
       end
 
       it 'passes the connection options on to the underlying Connection' do
@@ -50,7 +50,7 @@ describe Grocer do
       end
 
       it 'gets Feedback' do
-        subject.feedback(connection_options).should be_a Grocer::Feedback
+        expect(subject.feedback(connection_options)).to be_a Grocer::Feedback
       end
 
       it 'passes the connection options on to the underlying Connection' do
@@ -66,7 +66,7 @@ describe Grocer do
       end
 
       it 'gets Server' do
-        subject.server(connection_options).should be_a Grocer::Server
+        expect(subject.server(connection_options)).to be_a Grocer::Server
       end
 
       it 'passes the connection options on to the underlying SSLServer' do
@@ -76,5 +76,4 @@ describe Grocer do
     end
 
   end
-
 end

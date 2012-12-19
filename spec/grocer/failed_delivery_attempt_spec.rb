@@ -10,8 +10,8 @@ describe Grocer::FailedDeliveryAttempt do
   describe 'decoding' do
     it 'accepts a binary tuple and sets each attribute' do
       failed_delivery_attempt = described_class.new(binary_tuple)
-      failed_delivery_attempt.timestamp.should == timestamp
-      failed_delivery_attempt.device_token.should == device_token
+      expect(failed_delivery_attempt.timestamp).to eq(timestamp)
+      expect(failed_delivery_attempt.device_token).to eq(device_token)
     end
 
     it 'raises an exception when there are problems decoding' do

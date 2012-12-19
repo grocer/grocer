@@ -169,7 +169,7 @@ describe "apple push notifications" do
 
     Timeout.timeout(3) {
       notification = @server.notifications.pop # blocking
-      notification.alert.should == "An awesome thing happened"
+      expect(notification.alert).to eq("An awesome thing happened")
     }
   end
 end

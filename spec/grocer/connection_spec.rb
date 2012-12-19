@@ -12,25 +12,25 @@ describe Grocer::Connection do
   end
 
   it 'can be initialized with a certificate' do
-    subject.certificate.should == '/path/to/cert.pem'
+    expect(subject.certificate).to eq('/path/to/cert.pem')
   end
 
   it 'defaults to an empty passphrase' do
-    subject.passphrase.should be_nil
+    expect(subject.passphrase).to be_nil
   end
 
   it 'can be initialized with a passphrase' do
     connection_options[:passphrase] = 'new england clam chowder'
-    subject.passphrase.should == 'new england clam chowder'
+    expect(subject.passphrase).to eq('new england clam chowder')
   end
 
   it 'defaults to 3 retries' do
-    subject.retries.should == 3
+    expect(subject.retries).to eq(3)
   end
 
   it 'can be initialized with a number of retries' do
     connection_options[:retries] = 2
-    subject.retries.should == 2
+    expect(subject.retries).to eq(2)
   end
 
   it 'requires a gateway' do
@@ -39,7 +39,7 @@ describe Grocer::Connection do
   end
 
   it 'can be initialized with a gateway' do
-    subject.gateway.should == 'push.example.com'
+    expect(subject.gateway).to eq('push.example.com')
   end
 
   it 'requires a port' do
@@ -48,14 +48,14 @@ describe Grocer::Connection do
   end
 
   it 'can be initialized with a port' do
-    subject.port.should == 443
+    expect(subject.port).to eq(443)
   end
 
   it 'can open the connection to the apple push notification service' do
     subject.connect
     ssl.should have_received(:connect)
   end
-  
+
   it 'raises CertificateExpiredError for OpenSSL::SSL::SSLError with /certificate expired/i message' do
     ssl.stubs(:write).raises(OpenSSL::SSL::SSLError.new('certificate expired'))
     -> {subject.write('abc123')}.should raise_error(Grocer::CertificateExpiredError)

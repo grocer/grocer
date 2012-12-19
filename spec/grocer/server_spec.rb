@@ -25,7 +25,7 @@ describe Grocer::Server do
     subject.accept
     Timeout.timeout(5) {
       notification = subject.notifications.pop
-      notification.alert.should == "Hi!"
+      expect(notification.alert).to eq("Hi!")
     }
   end
 

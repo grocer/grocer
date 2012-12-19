@@ -12,7 +12,7 @@ describe Grocer::NotificationReader do
       io.rewind
 
       notification = subject.first
-      notification.identifier.should == 1234
+      expect(notification.identifier).to eq(1234)
     end
 
     it "reads expiry" do
@@ -20,7 +20,7 @@ describe Grocer::NotificationReader do
       io.rewind
 
       notification = subject.first
-      notification.expiry.should == Time.utc(2013, 3, 24)
+      expect(notification.expiry).to eq(Time.utc(2013, 3, 24))
     end
 
     it "reads device token" do
@@ -28,7 +28,7 @@ describe Grocer::NotificationReader do
       io.rewind
 
       notification = subject.first
-      notification.device_token.should == 'fe15a27d5df3c34778defb1f4f3880265cc52c0c047682223be59fb68500a9a2'
+      expect(notification.device_token).to eq('fe15a27d5df3c34778defb1f4f3880265cc52c0c047682223be59fb68500a9a2')
     end
 
     it "reads alert" do
@@ -36,7 +36,7 @@ describe Grocer::NotificationReader do
       io.rewind
 
       notification = subject.first
-      notification.alert.should == "Foo"
+      expect(notification.alert).to eq("Foo")
     end
 
     it "reads badge" do
@@ -44,7 +44,7 @@ describe Grocer::NotificationReader do
       io.rewind
 
       notification = subject.first
-      notification.badge.should == 5
+      expect(notification.badge).to eq(5)
     end
 
     it "reads sound" do
@@ -52,7 +52,7 @@ describe Grocer::NotificationReader do
       io.rewind
 
       notification = subject.first
-      notification.sound.should == "foo.aiff"
+      expect(notification.sound).to eq("foo.aiff")
     end
 
     it "reads custom attributes" do
@@ -60,7 +60,7 @@ describe Grocer::NotificationReader do
       io.rewind
 
       notification = subject.first
-      notification.custom.should == { foo: "bar" }
+      expect(notification.custom).to eq({ foo: "bar" })
     end
   end
 end

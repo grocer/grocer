@@ -15,22 +15,22 @@ describe Grocer::Extensions::DeepSymbolizeKeys do
   end
 
   it 'does not change nested symbols' do
-    nested_symbols.deep_symbolize_keys.should == nested_symbols
+    expect(nested_symbols.deep_symbolize_keys).to eq(nested_symbols)
   end
 
   it 'symbolizes nested strings' do
-    nested_strings.deep_symbolize_keys.should == nested_symbols
+    expect(nested_strings.deep_symbolize_keys).to eq(nested_symbols)
   end
 
   it 'symbolizes a mix of nested strings and symbols' do
-    nested_mixed.deep_symbolize_keys.should == nested_symbols
+    expect(nested_mixed.deep_symbolize_keys).to eq(nested_symbols)
   end
 
   it 'preserves fixnum keys' do
-    nested_fixnums.deep_symbolize_keys.should == nested_fixnums
+    expect(nested_fixnums.deep_symbolize_keys).to eq(nested_fixnums)
   end
 
   it 'preserves keys that cannot be symbolized' do
-    nested_illegal_symbols.deep_symbolize_keys.should == nested_illegal_symbols
+    expect(nested_illegal_symbols.deep_symbolize_keys).to eq(nested_illegal_symbols)
   end
 end

@@ -21,7 +21,7 @@ describe Grocer::Feedback do
   subject { described_class.new(connection) }
 
   it 'is enumerable' do
-    subject.should be_kind_of(Enumerable)
+    expect(subject).to be_kind_of(Enumerable)
   end
 
   it 'reads failed delivery attempt messages from the connection' do
@@ -29,10 +29,10 @@ describe Grocer::Feedback do
 
     delivery_attempts = subject.to_a
 
-    delivery_attempts[0].timestamp.should == jan1
-    delivery_attempts[0].device_token.should == device_token
+    expect(delivery_attempts[0].timestamp).to eq(jan1)
+    expect(delivery_attempts[0].device_token).to eq(device_token)
 
-    delivery_attempts[1].timestamp.should == jan2
-    delivery_attempts[1].device_token.should == device_token
+    expect(delivery_attempts[1].timestamp).to eq(jan2)
+    expect(delivery_attempts[1].device_token).to eq(device_token)
   end
 end

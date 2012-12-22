@@ -1,5 +1,5 @@
 ENV['RACK_ENV'] = 'test'
-require 'mocha'
+require 'mocha/api'
 require 'bourne'
 
 RSpec.configure do |config|

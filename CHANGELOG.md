@@ -1,5 +1,7 @@
 # CHANGELOG
 
+## 0.3.0
+
 * Add `Grocer::PassbookNotification` for sending, well... Passbook
   notifications. This kind of notification requires no payload.
 * Determining current environment is case-insensitive ([Oriol

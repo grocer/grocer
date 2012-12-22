@@ -3,7 +3,7 @@ require File.expand_path('../lib/grocer/version', __FILE__)
 
 Gem::Specification.new do |gem|
   gem.authors       = ['Andy Lindeman', 'Steven Harman', 'Patrick Van Stee']
-  gem.email         = ['andy@highgroove.com', 'steven@highgroove.com', 'vanstee@highgroove.com']
+  gem.email         = ['alindeman@gmail.com', 'steveharman@gmail.com', 'patrickvanstee@gmail.com']
   gem.summary       = %q{Pushing Apple notifications since 2012.}
   gem.description   = <<-DESC
                           Grocer interfaces with the Apple Push
@@ -16,7 +16,7 @@ Gem::Specification.new do |gem|
                           but Grocer plans to be the cleanest, most
                           extensible, and friendliest.
                       DESC
-  gem.homepage      = 'https://github.com/highgroove/grocer'
+  gem.homepage      = 'https://github.com/grocer/grocer'
   gem.license       = 'MIT'
 
   gem.executables   = `git ls-files -- bin/*`.split("\n").map{ |f| File.basename(f) }

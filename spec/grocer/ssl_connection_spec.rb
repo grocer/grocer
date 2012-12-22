@@ -19,7 +19,7 @@ describe Grocer::SSLConnection do
     {
       certificate: '/path/to/cert.pem',
       passphrase:  'abc123',
-      gateway:     'gateway.push.highgroove.com',
+      gateway:     'gateway.push.example.com',
       port:         1234
     }
   }
@@ -38,7 +38,7 @@ describe Grocer::SSLConnection do
       expect(subject.certificate).to eq(File.read(connection_options[:certificate]))
     end
   end
-  
+
   subject { described_class.new(connection_options) }
 
   describe 'configuration' do

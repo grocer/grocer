@@ -117,7 +117,7 @@ not to](http://developer.apple.com/library/ios/#Documentation/UserExperience/Con
 send any payload for a Passbook notification. If you do, it will be ignored.
 
 ```ruby
-notification = Grocer::Notification.new(device_token: "...")
+notification = Grocer::PassbookNotification.new(device_token: "...")
 
 # Generates a JSON payload like:
 # {"aps": {}}

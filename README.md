@@ -50,7 +50,7 @@ pusher = Grocer.pusher(
 
 #### Notes
 
-* `certificate`: If you don't have the certificate stored in a file, you 
+* `certificate`: If you don't have the certificate stored in a file, you
   can pass any object that responds to `read`.
   Example: `certificate: StringIO.new(pem_string)`
 * `gateway`: Defaults to different values depending on the `RAILS_ENV` or
@@ -107,6 +107,20 @@ notification = Grocer::Notification.new(
 
 # Generates a JSON payload like:
 # {"aps": {"alert": "Hello from Grocer"}, "acme2": ["bang", "whiz"]}
+```
+
+#### Passbook Notifications
+
+A `Grocer::PassbookNotification` is a specialized kind of notification which
+does not require any payload. That is, you need not (and *[Apple explicitly says
+not to](http://developer.apple.com/library/ios/#Documentation/UserExperience/Conceptual/PassKit_PG/Chapters/Updating.html#//apple_ref/doc/uid/TP40012195-CH5-SW1)*)
+send any payload for a Passbook notification. If you do, it will be ignored.
+
+```ruby
+notification = Grocer::Notification.new(device_token: "...")
+
+# Generates a JSON payload like:
+# {"aps": {}}
 ```
 
 ### Feedback

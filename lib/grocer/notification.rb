@@ -2,10 +2,20 @@ require 'json'
 require 'grocer/no_payload_error'
 
 module Grocer
+  # Public: An object used to send notifications to APNS.
   class Notification
     attr_accessor :identifier, :expiry, :device_token, :alert, :badge, :sound,
                   :custom
 
+    # Public: Initialize a new Grocer::Notification. You must specify at least an `alert` or `badge`.
+    #
+    # payload - The Hash of notification parameters and payload to be sent to APNS.:
+    #           :device_token - The String representing to device token sent to APNS.
+    #           :alert        - The String or Hash to be sent as the alert portion of the payload. (optional)
+    #           :badge        - The Integer to be sent as the badge portion of the payload. (optional)
+    #           :sound        - The String representing the sound portion of the payload. (optional)
+    #           :expiry       - The Integer representing UNIX epoch date sent to APNS as the notification expiry. (default: 0)
+    #           :identifier   - The arbitrary value sent to APNS to uniquely this notification. (default: 0)
     def initialize(payload = {})
       @identifier = 0
 

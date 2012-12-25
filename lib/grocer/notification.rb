@@ -46,13 +46,30 @@ module Grocer
       encoded_payload.bytesize > MAX_PAYLOAD_SIZE
     end
 
+    def alert= alert
+      @alert = alert
+      @encoded_payload = nil
+    end
+
+    def badge= badge
+      @badge = badge
+      @encoded_payload = nil
+    end
+
+    def sound= sound
+      @sound = sound
+      @encoded_payload = nil
+    end
+
     def validate_payload
       fail NoPayloadError unless alert || badge || custom
       fail PayloadTooLargeError if payload_too_large?
     end
 
+    private
+
     def encoded_payload
-      JSON.dump(payload_hash)
+      @encoded_payload ||= JSON.dump(payload_hash)
     end
 
     def payload_hash

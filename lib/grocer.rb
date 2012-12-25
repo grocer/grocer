@@ -1,3 +1,4 @@
+require 'grocer/error_response'
 require 'grocer/feedback'
 require 'grocer/feedback_connection'
 require 'grocer/mobile_device_management_notification'

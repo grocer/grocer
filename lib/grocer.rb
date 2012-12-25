@@ -1,3 +1,4 @@
+require 'grocer/error_response'
 require 'grocer/feedback'
 require 'grocer/feedback_connection'
 require 'grocer/newsstand_notification'

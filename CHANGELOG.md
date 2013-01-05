@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## 0.3.1
+
+* Move repo to the Grocer organization.
+* Automatically require `passbook_notification` when `require 'grocer'`.
+  ([lgleasain](https://github.com/lgleasain))
+
 ## 0.3.0
 
 * Add `Grocer::PassbookNotification` for sending, well... Passbook

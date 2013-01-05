@@ -1,5 +1,5 @@
 require 'spec_helper'
-require 'grocer'
+require 'grocer/passbook_notification'
 require 'grocer/shared_examples_for_notifications'
 
 describe Grocer::PassbookNotification do

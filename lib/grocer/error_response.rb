@@ -1,10 +1,3 @@
-require 'grocer/invalid_format_error'
-
-module Grocer
-  class InvalidCommandError < StandardError
-  end
-end
-
 module Grocer
   class ErrorResponse
     STATUS_CODE_DESCRIPTIONS = {
@@ -21,6 +14,7 @@ module Grocer
     }
 
     COMMAND = 8
+    LENGTH = 6
 
     attr_accessor :status_code, :identifier
 

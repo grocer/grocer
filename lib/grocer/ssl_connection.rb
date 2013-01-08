@@ -2,6 +2,7 @@ require 'socket'
 require 'openssl'
 require 'forwardable'
 require 'stringio'
+require 'grocer/error_response_checker'
 
 module Grocer
   class SSLConnection

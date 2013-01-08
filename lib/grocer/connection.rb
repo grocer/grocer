@@ -3,7 +3,7 @@ require 'grocer/ssl_connection'
 
 module Grocer
   class Connection
-    attr_reader :certificate, :passphrase, :gateway, :port, :retries
+    attr_reader :certificate, :checker, :gateway, :passphrase, :port, :retries
 
     def initialize(options = {})
       @certificate = options.fetch(:certificate) { nil }
@@ -27,6 +27,7 @@ module Grocer
 
     def connect
       ssl.connect unless ssl.connected?
+      checker.continually_check_for_responses if checker
     end
 
     private
@@ -65,6 +66,17 @@ module Grocer
         destroy_connection
         attempts += 1
         retry
+      end
+    end
+
+    def error_response_handler(&block)
+      @checker = ErrorResponseChecker.new(block)
+      continually_check_for_responses
+    end
+
+    def continually_check_for_responses
+      with_connection do
+        checker.continually_check_for_responses(ssl)
       end
     end
   end

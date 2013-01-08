@@ -1,4 +1,5 @@
 require 'grocer/error_response'
+require 'grocer/error_response_checker'
 require 'grocer/feedback'
 require 'grocer/feedback_connection'
 require 'grocer/newsstand_notification'
@@ -11,6 +12,7 @@ require 'grocer/version'
 
 module Grocer
   Error = Class.new(::StandardError)
+  InvalidCommandError = Class.new(Error)
   InvalidFormatError = Class.new(Error)
   NoGatewayError = Class.new(Error)
   NoPayloadError = Class.new(Error)

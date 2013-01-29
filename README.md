@@ -137,7 +137,7 @@ feedback = Grocer.feedback(
 )
 
 feedback.each do |attempt|
-  puts "Device #{attempt.device_token} failed at #{attempt.timestamp}
+  puts "Device #{attempt.device_token} failed at #{attempt.timestamp}"
 end
 ```
 

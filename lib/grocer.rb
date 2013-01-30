@@ -2,7 +2,7 @@ require 'grocer/feedback'
 require 'grocer/notification'
 require 'grocer/passbook_notification'
 require 'grocer/feedback_connection'
-require 'grocer/push_connection'
+require 'grocer/push_connection_pool'
 require 'grocer/pusher'
 require 'grocer/version'
 require 'grocer/server'
@@ -19,8 +19,8 @@ module Grocer
   end
 
   def self.pusher(options)
-    connection = PushConnection.new(options)
-    Pusher.new(connection)
+    pool = PushConnectionPool.new(options)
+    Pusher.new(pool)
   end
 
   def self.server(options = { })

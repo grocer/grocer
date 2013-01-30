@@ -1,11 +1,11 @@
 module Grocer
   class Pusher
-    def initialize(connection)
-      @connection = connection
+    def initialize(pool)
+      @pool = pool
     end
 
     def push(notification)
-      @connection.write(notification.to_bytes)
+      @pool.write(notification.to_bytes)
     end
   end
 end

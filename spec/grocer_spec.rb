@@ -31,16 +31,16 @@ describe Grocer do
 
     describe '.pusher' do
       before do
-        Grocer::PushConnection.stubs(:new).returns(stub('PushConnection'))
+        Grocer::PushConnectionPool.stubs(:new).returns(stub('PushConnectionPool'))
       end
 
       it 'gets a Pusher' do
         expect(subject.pusher(connection_options)).to be_a Grocer::Pusher
       end
 
-      it 'passes the connection options on to the underlying Connection' do
+      it 'passes the connection options on to the underlying ConnectionPool' do
         subject.pusher(connection_options)
-        Grocer::PushConnection.should have_received(:new).with(connection_options)
+        Grocer::PushConnectionPool.should have_received(:new).with(connection_options)
       end
     end
 

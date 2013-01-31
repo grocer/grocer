@@ -22,6 +22,7 @@ module Grocer
             @used[instance] = instance
           elsif @size > (@available.size + @used.size)
             instance = new_instance
+            @used[instance] = instance
           else
             @condition.wait(@lock)
           end

@@ -7,7 +7,6 @@ module Grocer
       @options   = options.dup
       @available = []
       @used      = {}
-      @expiries  = {}
       @size      = @options.delete(:pool_size) || 5
 
       @condition = ConditionVariable.new

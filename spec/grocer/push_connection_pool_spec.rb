@@ -6,16 +6,19 @@ describe Grocer::PushConnectionPool do
   let(:options)         { { certificate: '/path/to/cert.pem' } }
   let(:push_connection) { stub('PushConnection') }
 
-  it 'instantiates a PushConnection on write' do
+  before do
+    # we can ignore the args as we'll assert against them later.
+    Grocer::PushConnection.stubs(:new).returns(push_connection)
     push_connection.stubs(:write)
-    Grocer::PushConnection.stubs(:new).with(options).returns(push_connection)
+  end
+
+  it 'instantiates a PushConnection on write' do
     subject.write('abc')
     Grocer::PushConnection.should have_received(:new).with(options)
   end
 
   it 'delegates the write to the PushConnection' do
-    push_connection.expects(:write).returns(true)
-    Grocer::PushConnection.stubs(:new).with(options).returns(push_connection)
-    subject.write('abc').should == true
+    push_connection.stubs(:write).returns(true)
+    expect(subject.write('abc')).to be_true
   end
 end

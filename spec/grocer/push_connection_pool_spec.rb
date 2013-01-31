@@ -7,7 +7,6 @@ describe Grocer::PushConnectionPool do
   let(:push_connection) { stub('PushConnection') }
 
   before do
-    # we can ignore the args as we'll assert against them later.
     Grocer::PushConnection.stubs(:new).returns(push_connection)
     push_connection.stubs(:write)
   end

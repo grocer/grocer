@@ -2,7 +2,7 @@
 
 [![Build Status](https://api.travis-ci.org/grocer/grocer.png?branch=master)](https://travis-ci.org/grocer/grocer)
 [![Dependency Status](https://gemnasium.com/grocer/grocer.png)](https://gemnasium.com/grocer/grocer)
-[![Code Climate](https://codeclimate.com/badge.png)](https://codeclimate.com/github/grocer/grocer)
+[![Code Climate](https://codeclimate.com/github/grocer/grocer.png)](https://codeclimate.com/github/grocer/grocer)
 
 **grocer** interfaces with the [Apple Push Notification
 Service](http://developer.apple.com/library/mac/#documentation/NetworkingInternet/Conceptual/RemoteNotificationsPG/ApplePushService/ApplePushService.html)

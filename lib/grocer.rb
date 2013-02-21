@@ -1,6 +1,7 @@
 require 'grocer/feedback'
 require 'grocer/notification'
 require 'grocer/passbook_notification'
+require 'grocer/newsstand_notification'
 require 'grocer/feedback_connection'
 require 'grocer/push_connection'
 require 'grocer/pusher'

@@ -5,6 +5,7 @@ require 'grocer/shared_examples_for_notifications'
 describe Grocer::NewsstandNotification do
   describe 'binary format' do
     let(:payload_options) { Hash.new }
+    let(:payload_from_bytes) { notification.to_bytes[45..-1] }
     let(:payload_dictionary_from_bytes) { JSON.parse(payload_from_bytes, symbolize_names: true) }
 
     include_examples 'a notification'

@@ -118,10 +118,21 @@ send any payload for a Passbook notification. If you do, it will be ignored.
 
 ```ruby
 notification = Grocer::PassbookNotification.new(device_token: "...")
-
 # Generates a JSON payload like:
 # {"aps": {}}
 ```
+
+#### Newsstand Notifications
+
+Grocer also supports the special Newsstand 'content-available' notification. `Grocer::NewsstandNotification` can be
+used for this. Like `Grocer::PassbookNotification`, it is a specialized kind of notification which does not require
+any payload. Likewise, anything you add to it will be ignored.
+
+```ruby
+notification = Grocer::NewsstandNotification.new(device_token: "...")
+# Generates a JSON payload like:
+# {"aps": {"content-available":1}}
+````
 
 ### Feedback
 

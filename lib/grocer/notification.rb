@@ -40,11 +40,11 @@ module Grocer
       ].pack('CNNnH64nA*')
     end
 
+    private
+
     def payload_too_large?
       encoded_payload.bytesize > MAX_PAYLOAD_SIZE
     end
-
-    private
 
     def validate_payload
       fail NoPayloadError unless alert || badge

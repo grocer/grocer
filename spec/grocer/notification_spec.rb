@@ -4,11 +4,19 @@ require 'grocer/notification'
 require 'grocer/shared_examples_for_notifications'
 
 describe Grocer::Notification do
+  
+  MAX_ALERT_LENGTH = Grocer::Notification::MAX_PAYLOAD_SIZE - 20
+  MAX_UTF_8_ALERT_LENGTH = MAX_ALERT_LENGTH / 2
+  
+  let(:payload_max_length_options) {{alert: 'a'*MAX_ALERT_LENGTH}}
+  let(:payload_max_utf8_length_options) {{alert: 'à'*MAX_UTF_8_ALERT_LENGTH}}
+  let(:payload_too_large_options) {{alert: 'a'*(MAX_ALERT_LENGTH+1)}}
+  let(:payload_too_large_utf8_options) {{alert: 'à'*(MAX_UTF_8_ALERT_LENGTH+1)}}
+  
   describe 'binary format' do
     let(:payload_options) { { alert: 'hi', badge: 2, sound: 'siren.aiff' } }
     let(:payload_dictionary_from_bytes) { JSON.parse(payload_from_bytes, symbolize_names: true) }
     let(:payload_from_bytes) { notification.to_bytes[45..-1] }
-
     include_examples 'a notification'
 
     it 'encodes alert as part of the payload' do
@@ -54,36 +62,66 @@ describe Grocer::Notification do
       end
     end
     
-    # if you include anything else in the notification, the number of characters in your alert is reduced
-    context 'valid ascii payload' do
-      let(:payload_options) { {alert: 'a'*236}}
+    context 'ascii payload maximum length' do
+      let(:payload_options) { payload_max_length_options }
       it 'encodes a 236 character payload' do
         expect(payload_dictionary_from_bytes[:aps][:alert]).to eq(notification.alert)      
       end      
     end
 
-    context 'valid UTF-8 payload' do
-      let(:payload_options) { {alert: 'à'*118}}
+    context 'UTF-8 payload maximum length' do
+      let(:payload_options) { payload_max_utf8_length_options}
       it 'encodes a 118 character payload' do
         expect(payload_dictionary_from_bytes[:aps][:alert]).to eq(notification.alert)      
       end      
     end
     
-    context 'invalid payload' do
-      let(:payload_options) {{ alert: 'a'*237 }}
+    context 'ascii payload too large' do
+      let(:payload_options) {payload_too_large_options}
       
       it 'raises and error when the payload is too large' do
-        -> { notification.to_bytes }.should raise_error(Grocer::InvalidPayloadError)
+        -> { notification.to_bytes }.should raise_error(Grocer::PayloadTooLargeError)
       end
     end
 
-    context 'invalid UTF-8 payload' do
-      let(:payload_options) { {alert: 'à'*119} }
+    context 'UTF-8 payload too large'  do
+      let(:payload_options) { payload_too_large_utf8_options }
       
       it 'raises and error when the payload is too large' do
-        -> { notification.to_bytes }.should raise_error(Grocer::InvalidPayloadError)
+        -> { notification.to_bytes }.should raise_error(Grocer::PayloadTooLargeError)
+      end
+    end    
+  end
+  
+  describe "payload size" do
+    let(:payload_options) { { alert: 'hi' } }
+    include_examples 'a notification'
+    
+    context "ascii payload maximum legnth" do
+      let(:payload_options) {payload_max_length_options}
+      it "is valid" do
+        notification.should_not be_payload_too_large
+      end
+    end
+    context "ascii payload maximum legnth" do
+      let(:payload_options) {payload_max_utf8_length_options}
+      it "is valid" do
+        notification.should_not be_payload_too_large
+      end
+    end
+    context "ascii payload too large" do
+      let(:payload_options) {payload_too_large_options}
+      it "is invalid" do
+        notification.should be_payload_too_large
+      end
+    end
+    context "ascii payload to large" do
+      let(:payload_options) {payload_too_large_utf8_options}
+      it "is invalid" do
+        notification.should be_payload_too_large
       end
     end
     
   end
+  
 end

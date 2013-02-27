@@ -1,4 +1,5 @@
 require 'json'
+require 'grocer/invalid_payload_error'
 
 module Grocer
   # Public: An object used to send notifications to APNS.
@@ -42,6 +43,7 @@ module Grocer
 
     def validate_payload
       fail NoPayloadError unless alert || badge
+      fail InvalidPayloadError if encoded_payload.bytesize > 256
     end
 
     def encoded_payload

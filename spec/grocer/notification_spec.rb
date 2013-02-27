@@ -53,5 +53,37 @@ describe Grocer::Notification do
         -> { notification.to_bytes }.should raise_error(Grocer::NoPayloadError)
       end
     end
+    
+    # if you include anything else in the notification, the number of characters in your alert is reduced
+    context 'valid ascii payload' do
+      let(:payload_options) { {alert: 'a'*236}}
+      it 'encodes a 236 character payload' do
+        expect(payload_dictionary_from_bytes[:aps][:alert]).to eq(notification.alert)      
+      end      
+    end
+
+    context 'valid UTF-8 payload' do
+      let(:payload_options) { {alert: 'à'*118}}
+      it 'encodes a 118 character payload' do
+        expect(payload_dictionary_from_bytes[:aps][:alert]).to eq(notification.alert)      
+      end      
+    end
+    
+    context 'invalid payload' do
+      let(:payload_options) {{ alert: 'a'*237 }}
+      
+      it 'raises and error when the payload is too large' do
+        -> { notification.to_bytes }.should raise_error(Grocer::InvalidPayloadError)
+      end
+    end
+
+    context 'invalid UTF-8 payload' do
+      let(:payload_options) { {alert: 'à'*119} }
+      
+      it 'raises and error when the payload is too large' do
+        -> { notification.to_bytes }.should raise_error(Grocer::InvalidPayloadError)
+      end
+    end
+    
   end
 end

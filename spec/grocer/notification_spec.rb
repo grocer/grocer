@@ -94,31 +94,32 @@ describe Grocer::Notification do
   end
   
   describe "payload size" do
-    let(:payload_options) { { alert: 'hi' } }
-    include_examples 'a notification'
+    before do
+      @notification = described_class.new(payload_options)
+    end
     
     context "ascii payload maximum legnth" do
       let(:payload_options) {payload_max_length_options}
       it "is valid" do
-        notification.should_not be_payload_too_large
+        @notification.should_not be_payload_too_large
       end
     end
     context "ascii payload maximum legnth" do
       let(:payload_options) {payload_max_utf8_length_options}
       it "is valid" do
-        notification.should_not be_payload_too_large
+        @notification.should_not be_payload_too_large
       end
     end
     context "ascii payload too large" do
       let(:payload_options) {payload_too_large_options}
       it "is invalid" do
-        notification.should be_payload_too_large
+        @notification.should be_payload_too_large
       end
     end
     context "ascii payload to large" do
       let(:payload_options) {payload_too_large_utf8_options}
       it "is invalid" do
-        notification.should be_payload_too_large
+        @notification.should be_payload_too_large
       end
     end
     

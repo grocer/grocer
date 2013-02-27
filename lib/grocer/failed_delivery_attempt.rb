@@ -1,5 +1,3 @@
-require 'grocer/invalid_format_error'
-
 module Grocer
   class FailedDeliveryAttempt
     LENGTH = 38

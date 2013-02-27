@@ -9,6 +9,12 @@ require 'grocer/version'
 require 'grocer/server'
 
 module Grocer
+  Error = Class.new(::StandardError)
+  InvalidFormatError = Class.new(Error)
+  NoGatewayError = Class.new(Error)
+  NoPayloadError = Class.new(Error)
+  NoPortError = Class.new(Error)
+  CertificateExpiredError = Module.new
 
   def self.env
     ENV['RAILS_ENV'] || ENV['RACK_ENV'] || 'development'

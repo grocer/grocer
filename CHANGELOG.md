@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 0.3.2
+
+* Validate the size of the payload before sending a notification
+
 ## 0.3.1
 
 * Move repo to the Grocer organization.

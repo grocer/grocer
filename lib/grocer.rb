@@ -14,6 +14,7 @@ module Grocer
   NoGatewayError = Class.new(Error)
   NoPayloadError = Class.new(Error)
   NoPortError = Class.new(Error)
+  PayloadTooLargeError = Class.new(Error)
   CertificateExpiredError = Module.new
 
   def self.env

@@ -46,11 +46,19 @@ describe Grocer::Notification do
       expect(bytes[43...45]).to eq([payload_from_bytes.bytesize].pack('n'))
     end
 
-    context 'invalid payload' do
+    context 'missing payload' do
       let(:payload_options) { Hash.new }
 
       it 'raises an error when neither alert nor badge is specified' do
         -> { notification.to_bytes }.should raise_error(Grocer::NoPayloadError)
+      end
+    end
+
+    context 'oversized payload' do
+      let(:payload_options) { { alert: 'a' * (Grocer::Notification::MAX_PAYLOAD_SIZE + 1) } }
+
+      it 'raises an error when the size of the payload in bytes is too large' do
+        -> { notification.to_bytes }.should raise_error(Grocer::PayloadTooLargeError)
       end
     end
   end

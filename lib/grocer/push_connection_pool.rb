@@ -3,11 +3,13 @@ require 'thread'
 
 module Grocer
   class PushConnectionPool
+    DEFAULT_POOL_SIZE = 5
+
     def initialize(options)
       @options   = options.dup
       @available = []
       @used      = {}
-      @size      = @options.delete(:pool_size) || 5
+      @size      = @options.delete(:pool_size) || DEFAULT_POOL_SIZE
 
       @condition = ConditionVariable.new
       @lock      = Mutex.new

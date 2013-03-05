@@ -46,8 +46,10 @@ module Grocer
     end
 
     def release(instance)
+      return unless instance
+
       @lock.synchronize do
-        @available << @used.delete(instance) if instance
+        @available << @used.delete(instance)
         @condition.signal
       end
     end

@@ -20,7 +20,7 @@ module Grocer
     def acquire
       instance = nil
       begin
-        lock.synchronize do
+        synchronize do
           if instance = available.pop
             used[instance] = instance
           elsif size > (available.size + used.size)
@@ -50,10 +50,14 @@ module Grocer
     def release(instance)
       return unless instance
 
-      lock.synchronize do
+      synchronize do
         available << used.delete(instance)
         condition.signal
       end
+    end
+
+    def synchronize(&block)
+      lock.synchronize(&block)
     end
   end
 end

@@ -10,7 +10,7 @@ module Grocer
     def initialize(options)
       @options   = options.dup
       @available = []
-      @used      = {}
+      @used      = []
       @size      = @options.delete(:pool_size) || DEFAULT_POOL_SIZE
 
       @condition = ConditionVariable.new
@@ -22,10 +22,10 @@ module Grocer
       begin
         synchronize do
           if instance = available.pop
-            used[instance] = instance
+            used << instance
           elsif size > (available.size + used.size)
             instance = new_instance
-            used[instance] = instance
+            used << instance
           else
             condition.wait(lock)
           end

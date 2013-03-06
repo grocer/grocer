@@ -17,23 +17,23 @@ module Grocer
     end
 
     def acquire
-      instance = nil
+      connection = nil
       begin
         synchronize do
-          if instance = available.pop
-            used << instance
+          if connection = available.pop
+            used << connection
           elsif size > (available.size + used.size)
-            instance = new_instance
-            used << instance
+            connection = new_connection
+            used << connection
           else
             condition.wait(lock)
           end
         end
-      end until instance
+      end until connection
 
-      yield instance
+      yield connection
     ensure
-      release(instance)
+      release(connection)
     end
 
     def write(bytes)
@@ -42,15 +42,15 @@ module Grocer
 
     private
 
-    def new_instance
+    def new_connection
       PushConnection.new(options)
     end
 
-    def release(instance)
-      return unless instance
+    def release(connection)
+      return unless connection
 
       synchronize do
-        available << used.delete(instance)
+        available << used.delete(connection)
         condition.signal
       end
     end

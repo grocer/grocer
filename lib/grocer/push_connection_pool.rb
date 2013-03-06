@@ -11,8 +11,7 @@ module Grocer
       @options   = options.dup
       @available = []
       @used      = []
-      @size      = @options.delete(:pool_size) || DEFAULT_POOL_SIZE
-
+      @size      = options.fetch(:pool_size, DEFAULT_POOL_SIZE)
       @condition = ConditionVariable.new
       @lock      = Mutex.new
     end

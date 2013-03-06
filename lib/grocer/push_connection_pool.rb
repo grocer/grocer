@@ -5,6 +5,8 @@ module Grocer
   class PushConnectionPool
     DEFAULT_POOL_SIZE = 5
 
+    attr_reader :available, :condition, :lock, :options, :size, :used
+
     def initialize(options)
       @options   = options.dup
       @available = []
@@ -18,14 +20,14 @@ module Grocer
     def acquire
       instance = nil
       begin
-        @lock.synchronize do
-          if instance = @available.pop
-            @used[instance] = instance
-          elsif @size > (@available.size + @used.size)
+        lock.synchronize do
+          if instance = available.pop
+            used[instance] = instance
+          elsif size > (available.size + used.size)
             instance = new_instance
-            @used[instance] = instance
+            used[instance] = instance
           else
-            @condition.wait(@lock)
+            condition.wait(lock)
           end
         end
       end until instance
@@ -42,15 +44,15 @@ module Grocer
     private
 
     def new_instance
-      PushConnection.new(@options)
+      PushConnection.new(options)
     end
 
     def release(instance)
       return unless instance
 
-      @lock.synchronize do
-        @available << @used.delete(instance)
-        @condition.signal
+      lock.synchronize do
+        available << used.delete(instance)
+        condition.signal
       end
     end
   end

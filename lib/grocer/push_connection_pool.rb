@@ -26,7 +26,7 @@ module Grocer
             connection = new_connection
             used << connection
           else
-            condition.wait(lock)
+            wait_for_signal
           end
         end
       end until connection
@@ -51,8 +51,16 @@ module Grocer
 
       synchronize do
         available << used.delete(connection)
-        condition.signal
+        signal
       end
+    end
+
+    def wait_for_signal
+      condition.wait(lock)
+    end
+
+    def signal
+      condition.signal
     end
 
     def synchronize(&block)

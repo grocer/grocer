@@ -20,11 +20,11 @@ module Grocer
       connection = nil
       begin
         synchronize do
-          if connection = available.pop
-            used << connection
+          if connection = reuse_connection
+            checkout(connection)
           elsif !at_connection_limit?
             connection = new_connection
-            used << connection
+            checkout(connection)
           else
             wait_for_signal
           end
@@ -55,6 +55,14 @@ module Grocer
         available << used.delete(connection)
         signal
       end
+    end
+
+    def checkout(connection)
+      used << connection
+    end
+
+    def reuse_connection
+      available.pop
     end
 
     def at_connection_limit?

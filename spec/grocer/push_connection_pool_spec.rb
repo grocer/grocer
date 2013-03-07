@@ -2,22 +2,19 @@ require 'spec_helper'
 require 'grocer/push_connection_pool'
 
 describe Grocer::PushConnectionPool do
-  subject { described_class.new(options) }
-  let(:options)         { { certificate: '/path/to/cert.pem' } }
-  let(:push_connection) { stub('PushConnection') }
+  let(:connection) { stub('PushConnection') }
+
+  subject(:connection_pool) { described_class.new({}) }
 
   before do
-    Grocer::PushConnection.stubs(:new).returns(push_connection)
-    push_connection.stubs(:write)
+    connection_pool.stubs(:new_connection) { connections }
   end
 
-  it 'instantiates a PushConnection on write' do
-    subject.write('abc')
-    Grocer::PushConnection.should have_received(:new).with(options)
-  end
+  it 'creates a new connection when asked for one' do
+    connection_pool.with_connection do |connection|
+      # do nothing
+    end
 
-  it 'delegates the write to the PushConnection' do
-    push_connection.stubs(:write).returns(true)
-    expect(subject.write('abc')).to be_true
+    connection_pool.should have_received(:new_connection)
   end
 end

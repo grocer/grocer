@@ -16,12 +16,6 @@ module Grocer
       @lock            = Mutex.new
     end
 
-    def write(content)
-      with_connection do |connection|
-        connection.write(content)
-      end
-    end
-
     def with_connection
       connection = checkout_connection
       yield connection

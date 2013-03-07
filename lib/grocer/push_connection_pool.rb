@@ -16,7 +16,7 @@ module Grocer
       @lock      = Mutex.new
     end
 
-    def acquire
+    def checkout_connection
       connection = nil
       begin
         synchronize do
@@ -33,11 +33,13 @@ module Grocer
 
       yield connection
     ensure
-      release(connection)
+      checkin(connection)
     end
 
-    def write(bytes)
-      acquire { |connection| connection.write(bytes) }
+    def write(content)
+      checkout_connection do |connection|
+        connection.write(content)
+      end
     end
 
     private
@@ -46,7 +48,7 @@ module Grocer
       PushConnection.new(options)
     end
 
-    def release(connection)
+    def checkin(connection)
       return unless connection
 
       synchronize do

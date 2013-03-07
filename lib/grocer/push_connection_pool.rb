@@ -35,17 +35,12 @@ module Grocer
       connection = nil
 
       synchronize do
-        connection = wait_for_connection
+        wait_for_signal until connection_available?
+        connection = find_connection
         checkout(connection)
       end
 
       connection
-    end
-
-    def wait_for_connection
-      wait_for_signal until connection_available?
-
-      find_connection
     end
 
     def checkout(connection)

@@ -22,7 +22,7 @@ module Grocer
         synchronize do
           if connection = available.pop
             used << connection
-          elsif size > (available.size + used.size)
+          elsif !at_connection_limit?
             connection = new_connection
             used << connection
           else
@@ -55,6 +55,10 @@ module Grocer
         available << used.delete(connection)
         signal
       end
+    end
+
+    def at_connection_limit?
+      available.size + used.size >= size
     end
 
     def wait_for_signal

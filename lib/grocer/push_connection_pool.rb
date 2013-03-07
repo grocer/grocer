@@ -5,15 +5,15 @@ module Grocer
   class PushConnectionPool
     DEFAULT_POOL_SIZE = 5
 
-    attr_reader :available, :condition, :lock, :options, :size, :used
+    attr_reader :available, :condition, :lock, :max_connections, :options, :used
 
     def initialize(options)
-      @options   = options.dup
-      @available = []
-      @used      = []
-      @size      = options.fetch(:pool_size, DEFAULT_POOL_SIZE)
-      @condition = ConditionVariable.new
-      @lock      = Mutex.new
+      @options         = options.dup
+      @available       = []
+      @used            = []
+      @max_connections = options.fetch(:pool_size, DEFAULT_POOL_SIZE)
+      @condition       = ConditionVariable.new
+      @lock            = Mutex.new
     end
 
     def write(content)
@@ -67,11 +67,7 @@ module Grocer
     end
 
     def connection_available?
-      !available.empty? || !at_connection_limit?
-    end
-
-    def at_connection_limit?
-      available.size + used.size >= size
+      available.any? || used.size < max_connections
     end
 
     def wait_for_signal

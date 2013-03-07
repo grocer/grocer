@@ -16,53 +16,63 @@ module Grocer
       @lock      = Mutex.new
     end
 
-    def checkout_connection
-      connection = nil
-      begin
-        synchronize do
-          if connection = reuse_connection
-            checkout(connection)
-          elsif !at_connection_limit?
-            connection = new_connection
-            checkout(connection)
-          else
-            wait_for_signal
-          end
-        end
-      end until connection
+    def write(content)
+      with_connection do |connection|
+        connection.write(content)
+      end
+    end
 
+    def with_connection
+      connection = checkout_connection
       yield connection
     ensure
       checkin(connection)
     end
 
-    def write(content)
-      checkout_connection do |connection|
-        connection.write(content)
-      end
-    end
-
     private
 
-    def new_connection
-      PushConnection.new(options)
-    end
-
-    def checkin(connection)
-      return unless connection
+    def checkout_connection
+      connection = nil
 
       synchronize do
-        available << used.delete(connection)
-        signal
+        connection = wait_for_connection
+        checkout(connection)
       end
+
+      connection
+    end
+
+    def wait_for_connection
+      wait_for_signal until connection_available?
+
+      find_connection
     end
 
     def checkout(connection)
       used << connection
     end
 
+    def checkin(connection)
+      synchronize do
+        available << used.delete(connection)
+        signal
+      end
+    end
+
+    def find_connection
+      reuse_connection || new_connection
+    end
+
     def reuse_connection
       available.pop
+    end
+
+    def new_connection
+      PushConnection.new(options)
+    end
+
+    def connection_available?
+      !available.empty? || !at_connection_limit?
     end
 
     def at_connection_limit?

@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 0.3.3
+
+* Notifications that only include a custom payload are now valid. ([overlycommonname](https://github.com/overlycommonname))
+
 ## 0.3.2
 
 * Validate the size of the payload before sending a notification

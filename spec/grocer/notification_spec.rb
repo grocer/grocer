@@ -49,8 +49,18 @@ describe Grocer::Notification do
     context 'missing payload' do
       let(:payload_options) { Hash.new }
 
-      it 'raises an error when neither alert nor badge is specified' do
+      it 'raises an error when none of alert, badge, or custom are specified' do
         -> { notification.to_bytes }.should raise_error(Grocer::NoPayloadError)
+      end
+
+      [{alert: 'hi'}, {badge: 1}, {custom: {a: 'b'}}].each do |payload|
+        context "when #{payload.keys.first} exists, but not any other payload keys" do
+          let(:payload_options) { payload }
+
+          it 'does not raise an error' do
+            -> { notification.to_bytes }.should_not raise_error
+          end
+        end
       end
     end
 

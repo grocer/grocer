@@ -10,11 +10,11 @@ describe Grocer::NewsstandNotification do
     include_examples 'a notification'
 
     it 'does require a payload' do
-      expect(payload[:'content-available']).to_not be_nil
+      expect(payload[:aps]).to_not be_empty
     end
 
-    it 'has a content-available hash' do
-      expect(payload[:'content-available']).to eq(1)
+    it 'encodes content-available as part of the payload' do
+      expect(payload[:aps][:'content-available']).to eq(1)
     end
   end
 end

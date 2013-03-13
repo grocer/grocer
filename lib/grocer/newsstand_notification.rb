@@ -17,7 +17,7 @@ module Grocer
     end
     
     def payload_hash
-      { "content-available" => 1 }
+      { aps: {"content-available" => 1} }
     end
 
   end

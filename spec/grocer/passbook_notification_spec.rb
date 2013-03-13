@@ -5,13 +5,11 @@ require 'grocer/shared_examples_for_notifications'
 describe Grocer::PassbookNotification do
   describe 'binary format' do
     let(:payload_options) { Hash.new }
-    let(:payload_dictionary_from_bytes) { JSON.parse(payload_from_bytes, symbolize_names: true) }
-    let(:payload_from_bytes) { notification.to_bytes[45..-1] }
 
     include_examples 'a notification'
 
     it 'does not require a payload' do
-      expect(payload_dictionary_from_bytes[:aps]).to be_empty
+      expect(payload_hash(notification)[:aps]).to be_empty
     end
 
     it 'encodes the payload length' do

@@ -9,7 +9,7 @@ describe Grocer::NewsstandNotification do
 
     include_examples 'a notification'
 
-    it 'does require a payload' do
+    it 'requires a payload' do
       expect(payload[:aps]).to_not be_empty
     end
 

@@ -8,6 +8,7 @@ module Grocer
   # Examples
   #
   #   Grocer::NewsstandNotification.new(device_token: '...')
+  #     #=> { aps: { 'content-available' => 1 } }
   class NewsstandNotification < Notification
 
     private
@@ -15,9 +16,9 @@ module Grocer
     def validate_payload
       true
     end
-    
+
     def payload_hash
-      { aps: {"content-available" => 1} }
+      { aps: {'content-available' => 1} }
     end
 
   end

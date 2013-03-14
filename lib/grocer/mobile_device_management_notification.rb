@@ -17,8 +17,8 @@ module Grocer
     end
 
     def validate_payload
-      fail NoPayloadError unless push_magic
-      fail InvalidFormat if alert || badge || custom 
+      raise NoPayloadError unless push_magic
+      fail InvalidFormatError if alert || badge || custom 
       fail PayloadTooLargeError if payload_too_large?
     end
   end

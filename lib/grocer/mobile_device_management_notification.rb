@@ -7,7 +7,7 @@ module Grocer
   # Examples
   #
   #   Grocer::PassbookNotification.new(device_token: '...', push_magic: '...')
-  class MdmNotification < Notification
+  class MobileDeviceManagementNotification < Notification
     attr_accessor :push_magic
 
     private

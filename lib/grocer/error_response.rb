@@ -1,10 +1,3 @@
-require 'grocer/invalid_format_error'
-
-module Grocer
-  class InvalidCommandError < StandardError
-  end
-end
-
 module Grocer
   class ErrorResponse
     STATUS_CODE_DESCRIPTIONS = {
@@ -34,7 +27,7 @@ module Grocer
     end
 
     def status
-      STATUS_CODE_DESCRIPTIONS[@status_code]
+      STATUS_CODE_DESCRIPTIONS[status_code]
     end
   end
 end

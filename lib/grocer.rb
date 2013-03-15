@@ -18,6 +18,7 @@ module Grocer
   NoPortError = Class.new(Error)
   PayloadTooLargeError = Class.new(Error)
   CertificateExpiredError = Module.new
+  InvalidCommandError = Class.new(Error)
 
   def self.env
     ENV['RAILS_ENV'] || ENV['RACK_ENV'] || 'development'
@@ -37,5 +38,4 @@ module Grocer
     ssl_server = SSLServer.new(options)
     Server.new(ssl_server)
   end
-
 end

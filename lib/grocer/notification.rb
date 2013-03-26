@@ -16,7 +16,7 @@ module Grocer
     #           :badge        - The Integer to be sent as the badge portion of the payload. (optional)
     #           :sound        - The String representing the sound portion of the payload. (optional)
     #           :expiry       - The Integer representing UNIX epoch date sent to APNS as the notification expiry. (default: 0)
-    #           :identifier   - The arbitrary value sent to APNS to uniquely this notification. (default: 0)
+    #           :identifier   - The arbitrary Integer sent to APNS to uniquely this notification. (default: 0)
     def initialize(payload = {})
       @identifier = 0
 
@@ -27,7 +27,6 @@ module Grocer
 
     def to_bytes
       validate_payload
-      payload = encoded_payload
 
       [
         1,
@@ -35,28 +34,26 @@ module Grocer
         expiry_epoch_time,
         device_token_length,
         sanitized_device_token,
-        payload.bytesize,
-        payload
+        encoded_payload.bytesize,
+        encoded_payload
       ].pack('CNNnH64nA*')
     end
-
-    private
 
     def payload_too_large?
       encoded_payload.bytesize > MAX_PAYLOAD_SIZE
     end
 
-    def alert= alert
+    def alert=(alert)
       @alert = alert
       @encoded_payload = nil
     end
 
-    def badge= badge
+    def badge=(badge)
       @badge = badge
       @encoded_payload = nil
     end
 
-    def sound= sound
+    def sound=(sound)
       @sound = sound
       @encoded_payload = nil
     end
@@ -65,6 +62,7 @@ module Grocer
       fail NoPayloadError unless alert || badge || custom
       fail PayloadTooLargeError if payload_too_large?
     end
+    alias_method :valid?, :validate_payload
 
     private
 

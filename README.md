@@ -252,3 +252,11 @@ openssl pkcs12 -in exported_certificate.p12 -out certificate.pem -nodes -clcerts
 ```
 
 The `certificate.pem` file that is generated can be used with **grocer**.
+
+## Support Channels
+
+[GitHub Issues](https://github.com/grocer/grocer/issues) and [Pull
+Requests](https://github.com/grocer/grocer/pulls) are the primary venues for
+communicating issues and discussing possible features. Several of us also
+regularly hang out in the `#grocer` channel on Freenode; feel free to pop in
+and ask questions there as well. Thanks! :heart:

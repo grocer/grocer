@@ -39,10 +39,6 @@ module Grocer
       ].pack('CNNnH64nA*')
     end
 
-    def payload_too_large?
-      encoded_payload.bytesize > MAX_PAYLOAD_SIZE
-    end
-
     def alert=(alert)
       @alert = alert
       @encoded_payload = nil
@@ -82,6 +78,10 @@ module Grocer
       aps_hash[:sound] = sound if sound
 
       { aps: aps_hash }.merge(custom || { })
+    end
+
+    def payload_too_large?
+      encoded_payload.bytesize > MAX_PAYLOAD_SIZE
     end
 
     def expiry_epoch_time

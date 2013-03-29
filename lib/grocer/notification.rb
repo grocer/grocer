@@ -5,8 +5,8 @@ module Grocer
   class Notification
     MAX_PAYLOAD_SIZE = 256
 
-    attr_accessor :identifier, :expiry, :device_token, :alert, :badge, :sound,
-                  :custom
+    attr_accessor :identifier, :expiry, :device_token
+    attr_reader :alert, :badge, :custom, :sound
 
     # Public: Initialize a new Grocer::Notification. You must specify at least an `alert` or `badge`.
     #
@@ -50,6 +50,11 @@ module Grocer
 
     def badge=(badge)
       @badge = badge
+      @encoded_payload = nil
+    end
+
+    def custom=(custom)
+      @custom = custom
       @encoded_payload = nil
     end
 

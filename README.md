@@ -143,7 +143,7 @@ feedback = Grocer.feedback(
   certificate: "/path/to/cert.pem",       # required
   passphrase:  "",                        # optional
   gateway:     "feedback.push.apple.com", # optional; See note below.
-  port:        2196                       # optional
+  port:        2196,                      # optional
   retries:     3                          # optional
 )
 

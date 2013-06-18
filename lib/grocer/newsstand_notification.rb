@@ -11,14 +11,14 @@ module Grocer
   #     #=> { aps: { 'content-available' => 1 } }
   class NewsstandNotification < Notification
 
+    def initialize(payload = {})
+      super(payload.merge(content_available: true))
+    end
+
     private
 
     def validate_payload
       true
-    end
-
-    def payload_hash
-      { aps: {'content-available' => 1} }
     end
 
   end

@@ -45,6 +45,11 @@ describe Grocer::Notification do
       expect(bytes[43...45]).to eq([payload_bytes(notification).bytesize].pack('n'))
     end
 
+    it 'encodes content-available as part of the payload' do
+      notification.content_available = 1
+      expect(payload[:aps][:"content-available"]).to eq(1)
+    end
+
     context 'missing payload' do
       let(:payload_options) { Hash.new }
 

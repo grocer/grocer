@@ -61,8 +61,8 @@ module Grocer
       @encoded_payload = nil
     end
 
-    def content_available=(_)
-      @content_available = CONTENT_AVAILABLE_INDICATOR
+    def content_available=(content_available)
+      @content_available = CONTENT_AVAILABLE_INDICATOR if content_available
       @encoded_payload = nil
     end
 

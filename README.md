@@ -75,7 +75,7 @@ notification = Grocer::Notification.new(
   sound:             "siren.aiff",         # optional
   expiry:            Time.now + 60*60,     # optional; 0 is default, meaning the message is not stored
   identifier:        1234,                 # optional
-  content_available: 1                     # optional; will always be 1
+  content_available: true                  # optional; any truthy value will set 'content-available' to 1
 )
 
 pusher.push(notification)

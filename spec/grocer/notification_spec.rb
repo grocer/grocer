@@ -47,7 +47,7 @@ describe Grocer::Notification do
 
     it 'encodes content-available as part of the payload if a truthy value is passed' do
       notification.content_available = :foo
-      expect(payload[:aps][:"content-available"]).to eq(1)
+      expect(payload[:aps][:'content-available']).to eq(1)
     end
 
     it 'does not encode content-available as part of the payload if a falsy value is passed' do

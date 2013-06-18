@@ -18,7 +18,7 @@ module Grocer
     #           :sound             - The String representing the sound portion of the payload. (optional)
     #           :expiry            - The Integer representing UNIX epoch date sent to APNS as the notification expiry. (default: 0)
     #           :identifier        - The arbitrary Integer sent to APNS to uniquely this notification. (default: 0)
-    #           :content_available - Pass a truthy value to indicate the availability of new content for background fetch. (optional)
+    #           :content_available - The truthy or falsy value indicating the availability of new content for background fetch. (optional)
     def initialize(payload = {})
       @identifier = 0
 

@@ -4,6 +4,7 @@ module Grocer
   # Public: An object used to send notifications to APNS.
   class Notification
     MAX_PAYLOAD_SIZE = 256
+    CONTENT_AVAILABLE_INDICATOR = 1
 
     attr_accessor :identifier, :expiry, :device_token
     attr_reader :alert, :badge, :custom, :sound, :content_available
@@ -60,8 +61,8 @@ module Grocer
       @encoded_payload = nil
     end
 
-    def content_available=(content_available)
-      @content_available = 1
+    def content_available=(_)
+      @content_available = CONTENT_AVAILABLE_INDICATOR
       @encoded_payload = nil
     end
 

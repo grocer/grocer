@@ -39,14 +39,10 @@ module Grocer
     end
 
     def sanitize_keys(hash)
-      hash ||= {}
-
-      clean_hash = hash.map { |k, v|
-        new_key = k.to_s.gsub(/-/i, '_').to_sym
-        [new_key, v]
-      }
-
-      Hash[clean_hash]
+      hash.each_with_object({}) do |(k,v), h|
+        new_key = k.to_s.gsub(/-/,'_').to_sym
+        h[new_key] = v
+      end
     end
   end
 end

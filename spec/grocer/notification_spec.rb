@@ -55,11 +55,19 @@ describe Grocer::Notification do
       expect(payload[:aps]).to_not have_key(:'content-available')
     end
 
+    it "is valid" do
+      expect(notification.valid?).to be_true
+    end
+
     context 'missing payload' do
       let(:payload_options) { Hash.new }
 
       it 'raises an error when none of alert, badge, or custom are specified' do
         -> { notification.to_bytes }.should raise_error(Grocer::NoPayloadError)
+      end
+
+      it 'is not valid' do
+        expect(notification.valid?).to be_false
       end
 
       [{alert: 'hi'}, {badge: 1}, {custom: {a: 'b'}}].each do |payload|
@@ -78,6 +86,10 @@ describe Grocer::Notification do
 
       it 'raises an error when the size of the payload in bytes is too large' do
         -> { notification.to_bytes }.should raise_error(Grocer::PayloadTooLargeError)
+      end
+
+      it 'is not valid' do
+        expect(notification.valid?).to be_false
       end
     end
   end

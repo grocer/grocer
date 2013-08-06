@@ -69,8 +69,12 @@ module Grocer
     def validate_payload
       fail NoPayloadError unless alert || badge || custom
       fail PayloadTooLargeError if payload_too_large?
+      true
     end
-    alias_method :valid?, :validate_payload
+
+    def valid?
+      validate_payload rescue false
+    end
 
     private
 

@@ -72,7 +72,7 @@ module Grocer
     end
 
     def valid?
-      true if validate_payload.nil? rescue false
+      validate_payload.nil? rescue false
     end
 
     private

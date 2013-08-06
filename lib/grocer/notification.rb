@@ -70,7 +70,10 @@ module Grocer
       fail NoPayloadError unless alert || badge || custom
       fail PayloadTooLargeError if payload_too_large?
     end
-    alias_method :valid?, :validate_payload
+
+    def valid?
+      true if validate_payload.nil? rescue false
+    end
 
     private
 

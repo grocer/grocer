@@ -22,8 +22,8 @@ module Grocer
   #         "body": "...",
   #         "action": "..."
   #       }
-  #     },
-  #     "url-args": ["..."]
+  #       "url-args": ["..."]
+  #     }
   #   }
   class SafariNotification < Notification
 
@@ -33,11 +33,11 @@ module Grocer
       payload.each do |key, val|
         send("#{key}=", val)
       end
-      notification = {alert: {}, custom: {}}
+      notification = {alert: {}}
       notification[:alert][:title] = title if title
       notification[:alert][:body] = body if body
       notification[:alert][:action] = action if action
-      notification[:custom][:'url-args'] = url_args if url_args
+      notification[:url_args] = url_args if url_args
       super(notification)
     end
 

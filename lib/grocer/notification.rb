@@ -7,7 +7,7 @@ module Grocer
     CONTENT_AVAILABLE_INDICATOR = 1
 
     attr_accessor :identifier, :expiry, :device_token
-    attr_reader :alert, :badge, :custom, :sound, :content_available
+    attr_reader :alert, :badge, :custom, :sound, :content_available, :url_args
 
     # Public: Initialize a new Grocer::Notification. You must specify at least an `alert` or `badge`.
     #
@@ -66,6 +66,11 @@ module Grocer
       @encoded_payload = nil
     end
 
+    def url_args=(url_args)
+      @url_args = url_args
+      @encoded_payload = nil
+    end
+
     def validate_payload
       fail NoPayloadError unless alert || badge || custom
       fail PayloadTooLargeError if payload_too_large?
@@ -88,6 +93,7 @@ module Grocer
       aps_hash[:badge] = badge if badge
       aps_hash[:sound] = sound if sound
       aps_hash[:'content-available'] = content_available if content_available
+      aps_hash[:'url-args'] = url_args if url_args
 
       { aps: aps_hash }.merge(custom || { })
     end

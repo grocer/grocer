@@ -159,8 +159,8 @@ Generates a JSON payload like:
       "body": "Hi",
       "action": "Read"
     }
-  },
-  "url-args": [ "arg1" ]
+    "url-args": [ "arg1" ]
+  }
 }
 ```
 

@@ -39,7 +39,7 @@ describe Grocer::SafariNotification do
       expect(payload[:aps][:'url-args']).to eq(['hello','world'])
     end
 
-    it "is valid" do
+    it 'is valid' do
       expect(notification.valid?).to be_true
     end
 

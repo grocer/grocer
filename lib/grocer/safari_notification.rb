@@ -27,8 +27,6 @@ module Grocer
   #   }
   class SafariNotification < Notification
 
-    attr_reader :url_args
-
     def initialize(payload = {})
       self.alert = {}
       super(payload)

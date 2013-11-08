@@ -61,6 +61,10 @@ module Grocer
       @encoded_payload = nil
     end
 
+    def url_args
+      Array(@url_args)
+    end
+
     def url_args=(args)
       @url_args = args.dup
       @encoded_payload = nil
@@ -76,7 +80,7 @@ module Grocer
 
     def payload_hash
       aps_hash = { alert: alert }
-      aps_hash[:'url-args'] = url_args if url_args
+      aps_hash[:'url-args'] = url_args
       { aps: aps_hash }
     end
   end

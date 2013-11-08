@@ -2,6 +2,12 @@
 
 ## Unreleased
 
+## 0.5.0
+
+* Add `Grocer::SafariNotification` for sending Safari notifications in OS X
+  Mavericks. ([Ben Ubois](https://github.com/benubois) and [Adam
+  Duke](adamvduke))
+
 ## 0.4.1
 
 * Fix `Grocer::NotificationReader`, ensuring it sanitizes incoming `aps`

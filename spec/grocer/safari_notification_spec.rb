@@ -20,13 +20,11 @@ describe Grocer::SafariNotification do
     it 'encodes title as part of the payload' do
       notification.title = 'Hello World!'
       expect(payload[:aps][:alert][:title]).to eq('Hello World!')
-      expect(payload[:aps][:alert][:body]).to eq('Grocer now supports Safari Notifications')
     end
 
     it 'encodes body as part of the payload' do
       notification.body = 'In the body'
       expect(payload[:aps][:alert][:body]).to eq('In the body')
-      expect(payload[:aps][:alert][:title]).to eq('Grocer Update!')
     end
 
     it 'encodes action as part of the payload' do

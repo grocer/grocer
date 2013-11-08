@@ -21,40 +21,49 @@ module Grocer
   #         "title": "...",
   #         "body": "...",
   #         "action": "..."
-  #       }
+  #       },
   #       "url-args": ["..."]
   #     }
   #   }
   class SafariNotification < Notification
 
-    attr_reader :title, :body, :action, :url_args
+    attr_reader :url_args
 
     def initialize(payload = {})
-      payload.each do |key, val|
-        send("#{key}=", val)
-      end
-      notification = {alert: {}}
-      notification[:alert][:title] = title if title
-      notification[:alert][:body] = body if body
-      notification[:alert][:action] = action if action
-      notification[:url_args] = url_args if url_args
-      super(notification)
+      self.alert = {}
+      super(payload)
+    end
+
+    def title
+      alert[:title]
     end
 
     def title=(title)
-      @title = title
+      alert[:title] = title
+      @encoded_payload = nil
+    end
+
+    def body
+      alert[:body]
     end
 
     def body=(body)
-      @body = body
+      alert[:body] = body
+      @encoded_payload = nil
+    end
+
+    def action
+      alert[:action]
     end
 
     def action=(action)
-      @action = action
+      alert[:action] = action
+      @encoded_payload = nil
     end
 
     def url_args=(args)
-      @url_args = [*args]
+      @url_args = args.dup
+      @encoded_payload = nil
     end
 
     private
@@ -65,5 +74,10 @@ module Grocer
       super
     end
 
+    def payload_hash
+      aps_hash = { alert: alert }
+      aps_hash[:'url-args'] = url_args if url_args
+      { aps: aps_hash }
+    end
   end
 end

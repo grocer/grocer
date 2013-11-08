@@ -145,7 +145,8 @@ notification = Grocer::SafariNotification.new(
   title: 'Hello from Grocer', # required
   body: 'Hi',                 # required
   action: 'Read',             # optional; the label of the action button
-  url_args: ['arg1']          # optional (array or string); values that are paired with the placeholders inside the urlFormatString
+  url_args: ['arg1']          # required(array); values that are paired with the placeholders inside the urlFormatString.
+                              # Apple's documention lists url-args as optional, but in testing it was found to be required
 )
 ```
 
@@ -158,7 +159,7 @@ Generates a JSON payload like:
       "title": "Hello from Grocer",
       "body": "Hi",
       "action": "Read"
-    }
+    },
     "url-args": [ "arg1" ]
   }
 }

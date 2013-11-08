@@ -125,9 +125,10 @@ notification = Grocer::PassbookNotification.new(device_token: "...")
 
 #### Newsstand Notifications
 
-Grocer also supports the special Newsstand 'content-available' notification. `Grocer::NewsstandNotification` can be
-used for this. Like `Grocer::PassbookNotification`, it is a specialized kind of notification which does not require
-any payload. Likewise, anything you add to it will be ignored.
+Grocer also supports the special Newsstand 'content-available' notification.
+`Grocer::NewsstandNotification` can be used for this. Like
+`Grocer::PassbookNotification`, it is a specialized kind of notification which
+does not require any payload. Likewise, anything you add to it will be ignored.
 
 ```ruby
 notification = Grocer::NewsstandNotification.new(device_token: "...")
@@ -135,9 +136,11 @@ notification = Grocer::NewsstandNotification.new(device_token: "...")
 # {"aps": {"content-available":1}}
 ````
 
-#### Safari Push Notifications
+#### Safari Notifications
 
-Grocer can be used for [Safari Push Notifications](https://developer.apple.com/notifications/safari-push-notifications/) introduced in Mavericks.
+Grocer can be used for [Safari Push
+Notifications](https://developer.apple.com/notifications/safari-push-notifications/)
+introduced in Mavericks.
 
 ```ruby
 notification = Grocer::SafariNotification.new(
@@ -145,7 +148,7 @@ notification = Grocer::SafariNotification.new(
   title: 'Hello from Grocer', # required
   body: 'Hi',                 # required
   action: 'Read',             # optional; the label of the action button
-  url_args: ['arg1']          # required(array); values that are paired with the placeholders inside the urlFormatString.
+  url_args: ['arg1']          # required (array); values that are paired with the placeholders inside the urlFormatString.
                               # Apple's documention lists url-args as optional, but in testing it was found to be required
 )
 ```

@@ -1,8 +1,9 @@
 language: ruby
 rvm:
-  - 1.9.2
-  - 1.9.3
+  - 2.1.0
   - 2.0.0
-  - jruby-19mode # JRuby 1.7.0
-  - rbx-19mode
+  - 1.9.3
+  - 1.9.2
+  - jruby-19mode
+  - rbx
   # - ruby-head  # seems unstable on travis at this time

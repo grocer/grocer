@@ -4,7 +4,7 @@ require 'grocer/push_connection'
 describe Grocer::PushConnection do
   subject { described_class.new(options) }
   let(:options) { { certificate: '/path/to/cert.pem' } }
-  let(:connection) { stub('Connection') }
+  let(:connection) { double('Connection') }
 
   it 'delegates reading to the Connection' do
     Grocer::Connection.any_instance.expects(:read).with(42, 'lolIO')

@@ -11,7 +11,7 @@ describe Grocer::Pusher do
       notification = stub(:to_bytes => 'abc123')
       subject.push(notification)
 
-      connection.should have_received(:write).with('abc123')
+      expect(connection).to have_received(:write).with('abc123')
     end
   end
 end

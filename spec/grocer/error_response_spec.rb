@@ -4,7 +4,7 @@ describe Grocer::ErrorResponse do
   let(:status_code) { 1 }
   let(:identifier) { 8342 }
   let(:binary_tuple) { [described_class::COMMAND, status_code, identifier].pack('CCN') }
-  let(:invalid_binary_tuple) { 'totally not the right format' }
+  let(:invalid_binary_tuple) { 'short' }
 
   subject(:error_response) { described_class.new(binary_tuple) }
 
@@ -15,8 +15,7 @@ describe Grocer::ErrorResponse do
     end
 
     it 'raises an exception when there are problems decoding' do
-      -> { described_class.new(invalid_binary_tuple) }.should
-        raise_error(Grocer::InvalidFormatError)
+      expect { described_class.new(invalid_binary_tuple) }.to raise_error(Grocer::InvalidFormatError)
     end
   end
 

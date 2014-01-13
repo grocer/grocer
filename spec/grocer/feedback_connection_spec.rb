@@ -4,7 +4,7 @@ require 'grocer/feedback_connection'
 describe Grocer::FeedbackConnection do
   subject { described_class.new(options) }
   let(:options) { { certificate: '/path/to/cert.pem' } }
-  let(:connection) { stub('Connection') }
+  let(:connection) { double('Connection') }
 
   it 'delegates reading to the Connection' do
     Grocer::Connection.any_instance.expects(:read).with(42, 'lolIO')

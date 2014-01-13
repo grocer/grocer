@@ -40,7 +40,7 @@ describe Grocer do
 
       it 'passes the connection options on to the underlying Connection' do
         subject.pusher(connection_options)
-        Grocer::PushConnection.should have_received(:new).with(connection_options)
+        expect(Grocer::PushConnection).to have_received(:new).with(connection_options)
       end
     end
 
@@ -55,7 +55,7 @@ describe Grocer do
 
       it 'passes the connection options on to the underlying Connection' do
         subject.feedback(connection_options)
-        Grocer::FeedbackConnection.should have_received(:new).with(connection_options)
+        expect(Grocer::FeedbackConnection).to have_received(:new).with(connection_options)
       end
     end
 
@@ -71,7 +71,7 @@ describe Grocer do
 
       it 'passes the connection options on to the underlying SSLServer' do
         subject.server(connection_options)
-        Grocer::SSLServer.should have_received(:new).with(connection_options)
+        expect(Grocer::SSLServer).to have_received(:new).with(connection_options)
       end
     end
 

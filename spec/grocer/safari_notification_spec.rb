@@ -46,7 +46,7 @@ describe Grocer::SafariNotification do
         let(:payload_options) { { alert: { body: 'This is a body' } } }
 
         it 'raises an error when title is missing' do
-          -> { notification.to_bytes }.should raise_error(ArgumentError)
+          expect { notification.to_bytes }.to raise_error(ArgumentError)
         end
 
         it 'is not valid' do
@@ -58,7 +58,7 @@ describe Grocer::SafariNotification do
         let(:payload_options) { { alert: { title: 'This is a title' } } }
 
         it 'raises an error when body is missing' do
-          -> { notification.to_bytes }.should raise_error(ArgumentError)
+          expect { notification.to_bytes }.to raise_error(ArgumentError)
         end
 
         it 'is not valid' do
@@ -71,7 +71,7 @@ describe Grocer::SafariNotification do
       let(:payload_options) { { alert: { title: 'Test', body: 'a' * (Grocer::Notification::MAX_PAYLOAD_SIZE + 1) } } }
 
       it 'raises an error when the size of the payload in bytes is too large' do
-        -> { notification.to_bytes }.should raise_error(Grocer::PayloadTooLargeError)
+        expect { notification.to_bytes }.to raise_error(Grocer::PayloadTooLargeError)
       end
 
       it 'is not valid' do

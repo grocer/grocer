@@ -63,7 +63,7 @@ describe Grocer::Notification do
       let(:payload_options) { Hash.new }
 
       it 'raises an error when none of alert, badge, or custom are specified' do
-        -> { notification.to_bytes }.should raise_error(Grocer::NoPayloadError)
+        expect { notification.to_bytes }.to raise_error(Grocer::NoPayloadError)
       end
 
       it 'is not valid' do
@@ -75,7 +75,7 @@ describe Grocer::Notification do
           let(:payload_options) { payload }
 
           it 'does not raise an error' do
-            -> { notification.to_bytes }.should_not raise_error
+            expect { notification.to_bytes }.not_to raise_error
           end
         end
       end
@@ -85,7 +85,7 @@ describe Grocer::Notification do
       let(:payload_options) { { alert: 'a' * (Grocer::Notification::MAX_PAYLOAD_SIZE + 1) } }
 
       it 'raises an error when the size of the payload in bytes is too large' do
-        -> { notification.to_bytes }.should raise_error(Grocer::PayloadTooLargeError)
+        expect { notification.to_bytes }.to raise_error(Grocer::PayloadTooLargeError)
       end
 
       it 'is not valid' do

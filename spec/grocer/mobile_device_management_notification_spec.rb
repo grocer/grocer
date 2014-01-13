@@ -24,7 +24,7 @@ describe Grocer::MobileDeviceManagementNotification do
     let(:notification) { Grocer::MobileDeviceManagementNotification.new(device_token: "token", alert: "Moo") }
 
     it 'should raise a payload error' do
-      -> { notification.to_bytes }.should raise_error(Grocer::NoPayloadError)
+      expect { notification.to_bytes }.to raise_error(Grocer::NoPayloadError)
     end
   end
 
@@ -32,7 +32,7 @@ describe Grocer::MobileDeviceManagementNotification do
     let(:notification) { Grocer::MobileDeviceManagementNotification.new(device_token: "token", push_magic: "00000000-1111-3333-4444-555555555555", alert: "test") }
 
     it 'should raise a format error' do
-      -> { payload_dictionary_from_bytes }.should raise_error(Grocer::InvalidFormatError)
+      expect { payload_dictionary_from_bytes }.to raise_error(Grocer::InvalidFormatError)
     end
   end
 end

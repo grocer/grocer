@@ -1,8 +1,9 @@
 # Grocer
 
-[![Build Status](https://api.travis-ci.org/grocer/grocer.png?branch=master)](https://travis-ci.org/grocer/grocer)
-[![Dependency Status](https://gemnasium.com/grocer/grocer.png)](https://gemnasium.com/grocer/grocer)
-[![Code Climate](https://codeclimate.com/github/grocer/grocer.png)](https://codeclimate.com/github/grocer/grocer)
+[![Gem Version](http://img.shields.io/gem/v/grocer.svg)](https://rubygems.org/gems/grocer)
+[![Code Climate](http://img.shields.io/codeclimate/github/grocer/grocer.svg)](https://codeclimate.com/github/grocer/grocer)
+[![Build Status](https://img.shields.io/travis/grocer/grocer.svg)](https://travis-ci.org/grocer/grocer)
+[![Dependency Status](https://img.shields.io/gemnasium/grocer/grocer.svg)](https://gemnasium.com/grocer/grocer)
 
 **grocer** interfaces with the [Apple Push Notification
 Service](http://developer.apple.com/library/mac/#documentation/NetworkingInternet/Conceptual/RemoteNotificationsPG/ApplePushService/ApplePushService.html)

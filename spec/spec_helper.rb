@@ -1,4 +1,10 @@
 ENV['RACK_ENV'] = 'test'
+
+if ENV['CODECLIMATE_REPO_TOKEN']
+  require 'codeclimate-test-reporter'
+  CodeClimate::TestReporter.start
+end
+
 require 'mocha/api'
 require 'bourne'
 require 'support/notification_helpers'

@@ -38,7 +38,7 @@ describe Grocer::SafariNotification do
     end
 
     it 'is valid' do
-      expect(notification.valid?).to be_true
+      expect(notification.valid?).to be true
     end
 
     context 'missing parameters' do
@@ -50,7 +50,7 @@ describe Grocer::SafariNotification do
         end
 
         it 'is not valid' do
-          expect(notification.valid?).to be_false
+          expect(notification.valid?).to be false
         end
       end
 
@@ -62,7 +62,7 @@ describe Grocer::SafariNotification do
         end
 
         it 'is not valid' do
-          expect(notification.valid?).to be_false
+          expect(notification.valid?).to be false
         end
       end
     end
@@ -75,7 +75,7 @@ describe Grocer::SafariNotification do
       end
 
       it 'is not valid' do
-        expect(notification.valid?).to be_false
+        expect(notification.valid?).to be false
       end
     end
 

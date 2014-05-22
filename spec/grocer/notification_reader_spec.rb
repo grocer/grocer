@@ -68,7 +68,7 @@ describe Grocer::NotificationReader do
       io.rewind
 
       notification = subject.first
-      expect(notification.content_available).to be_true
+      expect(notification.content_available).to be_truthy
     end
   end
 end

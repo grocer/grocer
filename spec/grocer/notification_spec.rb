@@ -56,7 +56,7 @@ describe Grocer::Notification do
     end
 
     it "is valid" do
-      expect(notification.valid?).to be_true
+      expect(notification.valid?).to be true
     end
 
     context 'missing payload' do
@@ -67,7 +67,7 @@ describe Grocer::Notification do
       end
 
       it 'is not valid' do
-        expect(notification.valid?).to be_false
+        expect(notification.valid?).to be false
       end
 
       [{alert: 'hi'}, {badge: 1}, {custom: {a: 'b'}}].each do |payload|
@@ -89,7 +89,7 @@ describe Grocer::Notification do
       end
 
       it 'is not valid' do
-        expect(notification.valid?).to be_false
+        expect(notification.valid?).to be false
       end
     end
   end

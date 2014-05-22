@@ -18,16 +18,16 @@ describe Grocer::Feedback do
   let(:jan2)         { Time.utc(2012, 1, 2) }
   let(:device_token) { 'fe15a27d5df3c34778defb1f4f3880265cc52c0c047682223be59fb68500a9a2' }
 
-  subject { described_class.new(connection) }
+  subject(:feedback) { described_class.new(connection) }
 
   it 'is enumerable' do
-    expect(subject).to be_kind_of(Enumerable)
+    expect(feedback).to be_kind_of(Enumerable)
   end
 
   it 'reads failed delivery attempt messages from the connection' do
     stub_feedback
 
-    delivery_attempts = subject.to_a
+    delivery_attempts = feedback.to_a
 
     expect(delivery_attempts[0].timestamp).to eq(jan1)
     expect(delivery_attempts[0].device_token).to eq(device_token)

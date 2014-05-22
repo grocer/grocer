@@ -35,4 +35,16 @@ describe Grocer::Feedback do
     expect(delivery_attempts[1].timestamp).to eq(jan2)
     expect(delivery_attempts[1].device_token).to eq(device_token)
   end
+
+  it 'can report count and still enumerate' do
+    stub_feedback
+    expect(feedback.count).to eq(2)
+    stub_feedback
+
+    yield_count = 0
+    feedback.each do |f|
+      yield_count += 1
+    end
+    expect(yield_count).to eq(2)
+  end
 end

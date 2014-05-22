@@ -9,9 +9,23 @@ module Grocer
     end
 
     def each
-      while buf = @connection.read(FailedDeliveryAttempt::LENGTH)
-        yield FailedDeliveryAttempt.new(buf)
-      end
+      return to_enum unless block_given?
+
+      feedback_items.each { |f| yield f }
+    end
+
+    private
+
+    def feedback_items
+      @feedback_items ||= read_feedback
+    end
+
+    def read_feedback
+      Enumerator.new { |yielder|
+        while buf = @connection.read(FailedDeliveryAttempt::LENGTH)
+          yielder.yield(FailedDeliveryAttempt.new(buf))
+        end
+      }.to_a
     end
   end
 end

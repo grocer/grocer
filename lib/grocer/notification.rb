@@ -66,6 +66,10 @@ module Grocer
       @encoded_payload = nil
     end
 
+    def content_available?
+      !!content_available
+    end
+
     def validate_payload
       fail NoPayloadError unless alert || badge || custom
       fail PayloadTooLargeError if payload_too_large?
@@ -87,7 +91,7 @@ module Grocer
       aps_hash[:alert] = alert if alert
       aps_hash[:badge] = badge if badge
       aps_hash[:sound] = sound if sound
-      aps_hash[:'content-available'] = content_available if content_available
+      aps_hash[:'content-available'] = content_available if content_available?
 
       { aps: aps_hash }.merge(custom || { })
     end

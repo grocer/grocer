@@ -75,7 +75,7 @@ notification = Grocer::Notification.new(
   badge:             42,
   sound:             "siren.aiff",         # optional
   expiry:            Time.now + 60*60,     # optional; 0 is default, meaning the message is not stored
-  identifier:        1234,                 # optional
+  identifier:        1234,                 # optional; must be an integer
   content_available: true                  # optional; any truthy value will set 'content-available' to 1
 )
 

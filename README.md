@@ -73,6 +73,7 @@ notification = Grocer::Notification.new(
   device_token:      "fe15a27d5df3c34778defb1f4f3880265cc52c0c047682223be59fb68500a9a2",
   alert:             "Hello from Grocer!",
   badge:             42,
+  category:          "a category",         # optional; used for custom notification actions
   sound:             "siren.aiff",         # optional
   expiry:            Time.now + 60*60,     # optional; 0 is default, meaning the message is not stored
   identifier:        1234,                 # optional; must be an integer

@@ -5,7 +5,7 @@ require 'grocer/shared_examples_for_notifications'
 
 describe Grocer::Notification do
   describe 'binary format' do
-    let(:payload_options) { { alert: 'hi', badge: 2, sound: 'siren.aiff' } }
+    let(:payload_options) { { alert: 'hi', badge: 2, sound: 'siren.aiff', category: 'a category' } }
     let(:payload) { payload_hash(notification) }
 
     include_examples 'a notification'
@@ -23,6 +23,11 @@ describe Grocer::Notification do
     it 'encodes sound as part of the payload' do
       notification.sound = 'siren.aiff'
       expect(payload[:aps][:sound]).to eq('siren.aiff')
+    end
+
+    it 'encodes category as part of the payload' do
+      notification.category = 'a different category'
+      expect(payload[:aps][:category]).to eq('a different category')
     end
 
     it 'encodes custom payload attributes' do

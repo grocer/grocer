@@ -2,11 +2,16 @@
 
 ## Unreleased
 
+## 0.6.0
+
+* Add `category` option for custom notification actions. ([Michel
+  Billard](https://github.com/mbillard))
+
 ## 0.5.0
 
 * Add `Grocer::SafariNotification` for sending Safari notifications in OS X
   Mavericks. ([Ben Ubois](https://github.com/benubois) and [Adam
-  Duke](adamvduke))
+  Duke](https://github.com/adamvduke))
 
 ## 0.4.1
 

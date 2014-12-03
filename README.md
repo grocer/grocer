@@ -201,7 +201,8 @@ end
 ### Acceptance Testing
 
 Grocer ships with framework to setup a real looking APNS server. It listens on
-a real SSL-capable socket bound to localhost.
+a real SSL-capable socket bound to localhost. See the [Connecting
+Notes](#notes) above for details.
 
 You can setup an APNS client to talk to it, then inspect the notifications the
 server received.
@@ -296,3 +297,4 @@ Requests](https://github.com/grocer/grocer/pulls) are the primary venues for
 communicating issues and discussing possible features. Several of us also
 regularly hang out in the `#grocer` channel on Freenode; feel free to pop in
 and ask questions there as well. Thanks! :heart:
+

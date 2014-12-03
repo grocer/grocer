@@ -25,8 +25,8 @@ Gem::Specification.new do |gem|
   gem.require_paths = ["lib"]
   gem.version       = Grocer::VERSION
 
-  gem.add_development_dependency 'rspec', '~> 3.0.0.rc1'
-  gem.add_development_dependency 'pry', '~> 0.9.8'
+  gem.add_development_dependency 'rspec', '~> 3.1'
+  gem.add_development_dependency 'pry', '~> 0.10.1'
   gem.add_development_dependency 'mocha'
   gem.add_development_dependency 'bourne'
   gem.add_development_dependency 'rake'

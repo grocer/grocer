@@ -80,7 +80,7 @@ notification = Grocer::Notification.new(
   content_available: true                  # optional; any truthy value will set 'content-available' to 1
 )
 
-pusher.push(notification)
+pusher.push(notification) # return value is the number of bytes sent successfully
 ```
 
 It is desirable to reuse the same connection to send multiple notifications, as

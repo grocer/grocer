@@ -285,8 +285,14 @@ Save the items as a `.p12` file. Open a terminal window and run the following
 command:
 
 ```bash
-openssl pkcs12 -in exported_certificate.p12 -out certificate.pem -nodes -clcerts
+openssl pkcs12 -in exported_certificate.p12 -out certificate.pem -nodes -clcerts -des3
 ```
+
+You will be prompted for two password. The first one is the password
+that you used when you exported the private key and certificate from
+Keychain Access. The second password will be used to encrypt and lock
+the private key. This will be the passphrase used when configuring
+**grocer** to connect to APNs.
 
 The `certificate.pem` file that is generated can be used with **grocer**.
 

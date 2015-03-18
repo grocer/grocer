@@ -29,6 +29,19 @@ describe Grocer::Server do
     }
   end
 
+  it "accepts a client connection and reads safari notifications into a queue" do
+    n = Grocer::SafariNotification.new(title: "title", body: "body")
+    expect( n ).to be_valid
+    mock_client.write(n.to_bytes)
+    mock_client.rewind
+
+    subject.accept
+    Timeout.timeout(5) {
+      notification = subject.notifications.pop
+      expect(notification.alert).to eq({:title=>"title", :body=>"body"})
+    }
+  end
+
   it "closes the socket" do
     ssl_server.expects(:close).at_least(1)
 

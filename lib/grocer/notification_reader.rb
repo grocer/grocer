@@ -35,7 +35,11 @@ module Grocer
 
       payload[:custom] = payload_hash
 
-      Grocer::Notification.new(payload)
+      if payload[:url_args]
+        Grocer::SafariNotification.new( payload )
+      else
+        Grocer::Notification.new(payload)
+      end
     end
 
     def sanitize_keys(hash)

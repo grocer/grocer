@@ -151,7 +151,6 @@ notification = Grocer::SafariNotification.new(
   body: 'Hi',                 # required
   action: 'Read',             # optional; the label of the action button
   url_args: ['arg1']          # required (array); values that are paired with the placeholders inside the urlFormatString.
-                              # Apple's documention lists url-args as optional, but in testing it was found to be required
 )
 ```
 

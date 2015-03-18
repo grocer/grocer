@@ -2,6 +2,11 @@
 
 ## Unreleased
 
+## 0.6.1
+
+* Support SafariNotifications in the test server. ([Will
+  Schenk](https://github.com/wschenk))
+
 ## 0.6.0
 
 * Add `category` option for custom notification actions. ([Michel

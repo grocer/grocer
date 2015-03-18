@@ -17,6 +17,14 @@ module Grocer
 
     private
 
+    def build_notification(payload)
+      if payload[:url_args]
+        Grocer::SafariNotification.new(payload)
+      else
+        Grocer::Notification.new(payload)
+      end
+    end
+
     def read_notification
       @io.read(1) # version (not used for now)
 
@@ -35,11 +43,7 @@ module Grocer
 
       payload[:custom] = payload_hash
 
-      if payload[:url_args]
-        Grocer::SafariNotification.new( payload )
-      else
-        Grocer::Notification.new(payload)
-      end
+      build_notification(payload)
     end
 
     def sanitize_keys(hash)

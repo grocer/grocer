@@ -270,18 +270,18 @@ Configure the appropriate certificate for push notifications and download the
 certificate:
 
 ![Downloading the Push Notification
-Certificate](https://raw.githubusercontent.com/eychu/grocer/master/images/Downloading_the_Push_Notification_Certificate.png)
+Certificate](images/Downloading_the_Push_Notification_Certificate.png)
 
 Open the file in Keychain Access, then expand the certificate to show both the
 certificate *and* the private key. Command select so both are highlighted:
 
 ![Selecting both the certificate and private
-key](https://raw.githubusercontent.com/eychu/grocer/master/images/Selecting_both_the_certificate_and_private_key.png)
+key](images/Selecting_both_the_certificate_and_private_key.png)
 
 Control click and select to export the 2 items:
 
 ![Exporting the certificate and private
-key](https://raw.githubusercontent.com/eychu/grocer/master/images/Exporting_the_certificate_and_private_key.png)
+key](images/Exporting_the_certificate_and_private_key.png)
 
 Save the items as a `.p12` file. Open a terminal window and run the following
 command:

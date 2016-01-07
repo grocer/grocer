@@ -14,7 +14,7 @@ cleanest, most extensible, and friendliest.
 
 ## Requirements
 
-* Ruby/MRI 2.1, 2.0, 1.9.x, JRuby 1.7.x in 1.9 mode, Rubinius in 1.9 mode
+* Ruby/MRI 2.x, 1.9.x, JRuby 1.7.x in 1.9 mode, Rubinius in 1.9 mode
 
 ## Installation
 

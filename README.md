@@ -306,18 +306,18 @@ Generate private key and unsigned certificate:
  openssl req -nodes -newkey rsa:2048 -keyout push_private_key.pem -out push.csr
 ```
 
-* Go to apple developer site and select [Add iOS Certificate](https://developer.apple.com/account/ios/certificate/certificateCreate.action)
-* Choose *Apple Push Notification service SSL (Sandbox & Production)*
-* Upload `push.csr` file on *Generate your certificate.* step
-* Download `aps.cer` on the next step
+* Go to Apple Developer site and select [Add iOS Certificate](https://developer.apple.com/account/ios/certificate/certificateCreate.action).
+* Choose *Apple Push Notification service SSL (Sandbox & Production)*.
+* Upload the `push.csr` file during the *Generate your certificate* step.
+* Download `aps.cer` on the next step.
 
-Create pem file from `aps.cer` with following command:
+Create `push.pem` file from `aps.cer` with following command:
 
 ```bash
 openssl x509 -in aps.cer -inform der -out push.pem
 ```
 
-Merge pem file and your private key into `certificate.pem`
+Merge `push.pem` file and your private key into `certificate.pem`:
 
 ```bash
 cat push.pem push_private_key.pem > certificate.pem

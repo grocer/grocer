@@ -298,7 +298,7 @@ the private key. This will be the passphrase used when configuring
 
 The `certificate.pem` file that is generated can be used with **grocer**.
 
-### Alternative way to generate certificate file (no macos required)
+### Alternative way to generate certificate file (no Mac OS X required)
 
 Generate private key and unsigned certificate:
 

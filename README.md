@@ -298,6 +298,31 @@ the private key. This will be the passphrase used when configuring
 
 The `certificate.pem` file that is generated can be used with **grocer**.
 
+### Alternative way to generate certificate file (no Mac OS X required)
+
+Generate private key and unsigned certificate:
+
+```bash
+ openssl req -nodes -newkey rsa:2048 -keyout push_private_key.pem -out push.csr
+```
+
+* Go to apple developer site and select [Add iOS Certificate](https://developer.apple.com/account/ios/certificate/certificateCreate.action)
+* Choose *Apple Push Notification service SSL (Sandbox & Production)*
+* Upload `push.csr` file on *Generate your certificate.* step
+* Download `aps.cer` on the next step
+
+Create pem file from `aps.cer` with following command:
+
+```bash
+openssl x509 -in aps.cer -inform der -out push.pem
+```
+
+Merge pem file and your private key into `certificate.pem`
+
+```bash
+cat push.pem push_private_key.pem > certificate.pem
+```
+
 ## Support Channels
 
 [GitHub Issues](https://github.com/grocer/grocer/issues) and [Pull

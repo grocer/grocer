@@ -11,6 +11,21 @@ to send push notifications to iOS devices.
 
 There are other gems out there to do this, but **grocer** plans to be the cleanest, most extensible, and friendliest.
 
+## Important Note
+
+iOS 9.0 (and subsequent versions) introduced a subtle change to the way push tokens are provided.
+
+If you delete and then re-install an application the push token is invalidated and a new push token is generated.
+This is important because the [Feedback service](#feedback) does not deliver the list of invalidated tokens quickly enough to prevent you from using the now invalidated token.
+
+There is currently a [bug in grocer (#14)](https://github.com/grocer/grocer/issues/14) that will cause the APNS socket connect to hang up and fail to send subsequent notifications when one of these invalid tokens is used.
+
+This bug combined with the change to push tokens in iOS results in varied reliability of push notification delivery.
+This may or may not affect you, but if you are seeing a large amount of undelivered notifications - specifically when sending multiple messages in quick succession - it is likely that you are coming up against this.
+
+We are looking for help [moving over to Apple's HTTP/2 notification API](https://github.com/grocer/grocer/issues/104) which should address this situation.
+The current maintainer doesn't have time to do this work, but please leave us a note if you would like to drive the effort.
+
 ## Requirements
 
 * Ruby/MRI 2.x, 1.9.x, JRuby 1.7.x in 1.9 mode, Rubinius in 1.9 mode

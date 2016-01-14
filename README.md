@@ -1,7 +1,7 @@
 # Grocer
 
-[![Gem Version](http://img.shields.io/gem/v/grocer.svg)](https://rubygems.org/gems/grocer)
-[![Code Climate](http://img.shields.io/codeclimate/github/grocer/grocer.svg)](https://codeclimate.com/github/grocer/grocer)
+[![Gem Version](https://img.shields.io/gem/v/grocer.svg)](https://rubygems.org/gems/grocer)
+[![Code Climate](https://img.shields.io/codeclimate/github/grocer/grocer.svg)](https://codeclimate.com/github/grocer/grocer)
 [![Build Status](https://img.shields.io/travis/grocer/grocer.svg)](https://travis-ci.org/grocer/grocer)
 [![Dependency Status](https://img.shields.io/gemnasium/grocer/grocer.svg)](https://gemnasium.com/grocer/grocer)
 
@@ -9,8 +9,7 @@
 Service](http://developer.apple.com/library/mac/#documentation/NetworkingInternet/Conceptual/RemoteNotificationsPG/ApplePushService/ApplePushService.html)
 to send push notifications to iOS devices.
 
-There are other gems out there to do this, but **grocer** plans to be the
-cleanest, most extensible, and friendliest.
+There are other gems out there to do this, but **grocer** plans to be the cleanest, most extensible, and friendliest.
 
 ## Requirements
 

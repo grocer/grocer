@@ -8,7 +8,7 @@ rvm:
   - jruby-19mode
   - rbx
   - rbx-2
-  - rbx-2.5
+  - rbx-3
 sudo: false
 addons:
   code_climate:

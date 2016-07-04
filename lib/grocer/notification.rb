@@ -5,9 +5,10 @@ module Grocer
   class Notification
     MAX_PAYLOAD_SIZE = 2048
     CONTENT_AVAILABLE_INDICATOR = 1
+    MUTABLE_CONTENT_INDICATOR = 1
 
     attr_accessor :identifier, :expiry, :device_token
-    attr_reader :alert, :badge, :custom, :sound, :content_available, :category
+    attr_reader :alert, :badge, :custom, :sound, :content_available, :mutable_content, :category
 
     # Public: Initialize a new Grocer::Notification. You must specify at least an `alert` or `badge`.
     #
@@ -19,6 +20,7 @@ module Grocer
     #           :expiry            - The Integer representing UNIX epoch date sent to APNS as the notification expiry. (default: 0)
     #           :identifier        - The arbitrary Integer sent to APNS to uniquely this notification. (default: 0)
     #           :content_available - The truthy or falsy value indicating the availability of new content for background fetch. (optional)
+    #           :mutable_content   - The truthy or falsy value indicating whether to have this notification be processed by a Notification Service Extension (since iOS 10) (optional)
     #           :category          - The String to be sent as the category portion of the payload. (optional)
     def initialize(payload = {})
       @identifier = 0
@@ -76,6 +78,15 @@ module Grocer
       !!content_available
     end
 
+    def mutable_content=(mutable_content)
+      @mutable_content = MUTABLE_CONTENT_INDICATOR if mutable_content
+      @encoded_payload = nil
+    end
+
+    def mutable_content?
+      !!mutable_content
+    end
+
     def validate_payload
       fail NoPayloadError unless alert || badge || custom
       fail PayloadTooLargeError if payload_too_large?
@@ -98,6 +109,7 @@ module Grocer
       aps_hash[:badge] = badge if badge
       aps_hash[:sound] = sound if sound
       aps_hash[:'content-available'] = content_available if content_available?
+      aps_hash[:'mutable-content'] = mutable_content if mutable_content?
       aps_hash[:category] = category if category
 
       { aps: aps_hash }.merge(custom || { })

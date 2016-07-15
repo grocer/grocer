@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+## 0.7.0
+
 * Support for `mutable-content` flag (for iOS 10). ([Matthias
   Lüdtke](https://github.com/mat))
 

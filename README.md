@@ -91,7 +91,8 @@ notification = Grocer::Notification.new(
   sound:             "siren.aiff",         # optional
   expiry:            Time.now + 60*60,     # optional; 0 is default, meaning the message is not stored
   identifier:        1234,                 # optional; must be an integer
-  content_available: true                  # optional; any truthy value will set 'content-available' to 1
+  content_available: true,                 # optional; any truthy value will set 'content-available' to 1
+  mutable_content:   true                  # optional; any truthy value will set 'mutable-content' to 1
 )
 
 pusher.push(notification) # return value is the number of bytes sent successfully

@@ -60,6 +60,16 @@ describe Grocer::Notification do
       expect(payload[:aps]).to_not have_key(:'content-available')
     end
 
+    it 'encodes mutable-content as part of the payload if a truthy value is passed' do
+      notification.mutable_content = :foo
+      expect(payload[:aps][:'mutable-content']).to eq(1)
+    end
+
+    it 'does not encode mutable-content as part of the payload if a falsy value is passed' do
+      notification.mutable_content = false
+      expect(payload[:aps]).to_not have_key(:'mutable-content')
+    end
+
     it "is valid" do
       expect(notification.valid?).to be true
     end

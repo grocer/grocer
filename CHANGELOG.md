@@ -2,6 +2,9 @@
 
 ## Unreleased
 
+* Support for `mutable-content` flag (for iOS 10). ([Matthias
+  Lüdtke](https://github.com/mat))
+
 ## 0.6.1
 
 * Support SafariNotifications in the test server. ([Will

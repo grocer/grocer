@@ -28,7 +28,7 @@ The current maintainer doesn't have time to do this work, but please leave us a 
 
 ## Requirements
 
-* Ruby/MRI 2.x, 1.9.x, JRuby 1.7.x in 1.9 mode, Rubinius in 1.9 mode
+* Ruby/MRI 2.x, JRuby 9000, Rubinius 2 & 3
 
 ## Installation
 

@@ -281,7 +281,7 @@ The key code for this purpose is:
 
 Login to the [iOS Provisioning Portal (App IDs)](https://developer.apple.com/account/ios/identifier/bundle).
 
-Select the your app bundle, scroll down and click "Edit." This will bring you to a page that will allow you to setup and configure services for your app. Scroll down until you see the service labeled “Push Notifications.” Depending on whether you’re creating a Development or Production certificate, click the appropriate “Create Certificate” button.
+Select your app bundle, scroll down and click "Edit." This will bring you to a page that will allow you to setup and configure services for your app. Scroll down until you see the service labeled “Push Notifications.” Depending on whether you’re creating a Development or Production certificate, click the appropriate “Create Certificate” button.
 
 ![Creating the Push Notification
 Certificate](https://cdn-images-1.medium.com/max/1600/1*zHi-WR44OGYtOdFCy79jZw.png)

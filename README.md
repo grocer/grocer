@@ -279,15 +279,16 @@ The key code for this purpose is:
 
 ## Certificate File
 
-Login to the [iOS Provisioning Portal (App IDs)](https://developer.apple.com/ios/manage/bundles/index.action).
+Login to the [iOS Provisioning Portal (App IDs)](https://developer.apple.com/account/ios/identifier/bundle).
 
-Configure the appropriate certificate for push notifications and download the
-certificate:
+Select the your app bundle, scroll down and click "Edit." This will bring you to a page that will allow you to setup and configure services for your app. Scroll down until you see the service labeled “Push Notifications.” Depending on whether you’re creating a Development or Production certificate, click the appropriate “Create Certificate” button.
 
-![Downloading the Push Notification
-Certificate](images/Downloading_the_Push_Notification_Certificate.png)
+![Creating the Push Notification
+Certificate](ihttps://cdn-images-1.medium.com/max/1600/1*zHi-WR44OGYtOdFCy79jZw.png)
 
-Open the file in Keychain Access, then expand the certificate to show both the
+Follow the instructions to create a Certificate Signing Request, click "Continue," upload the CSR, and download the resulting .cer file.
+
+Open the .cer file in Keychain Access, then expand the certificate to show both the
 certificate *and* the private key. Command select so both are highlighted:
 
 ![Selecting both the certificate and private
@@ -345,4 +346,3 @@ Requests](https://github.com/grocer/grocer/pulls) are the primary venues for
 communicating issues and discussing possible features. Several of us also
 regularly hang out in the `#grocer` channel on Freenode; feel free to pop in
 and ask questions there as well. Thanks! :heart:
-

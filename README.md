@@ -5,9 +5,7 @@
 [![Build Status](https://img.shields.io/travis/grocer/grocer.svg)](https://travis-ci.org/grocer/grocer)
 [![Dependency Status](https://img.shields.io/gemnasium/grocer/grocer.svg)](https://gemnasium.com/grocer/grocer)
 
-**grocer** interfaces with the [Apple Push Notification
-Service](http://developer.apple.com/library/mac/#documentation/NetworkingInternet/Conceptual/RemoteNotificationsPG/ApplePushService/ApplePushService.html)
-to send push notifications to iOS devices.
+**grocer** interfaces with the [Apple Push Notification Service](http://developer.apple.com/library/mac/#documentation/NetworkingInternet/Conceptual/RemoteNotificationsPG/ApplePushService/ApplePushService.html) to send push notifications to iOS devices.
 
 There are other gems out there to do this, but **grocer** plans to be the cleanest, most extensible, and friendliest.
 
@@ -65,17 +63,11 @@ pusher = Grocer.pusher(
 
 #### Notes
 
-* `certificate`: If you don't have the certificate stored in a file, you
-  can pass any object that responds to `read`.
+* `certificate`: If you don't have the certificate stored in a file, you can pass any object that responds to `read`.
   Example: `certificate: StringIO.new(pem_string)`
-* `gateway`: Defaults to different values depending on the `RAILS_ENV` or
-  `RACK_ENV` environment variables. If set to `production`, defaults to
-  `gateway.push.apple.com`, if set to `test`, defaults to `localhost` (see
-  [Acceptance Testing](#acceptance-testing) later), otherwise defaults to
-  `gateway.sandbox.push.apple.com`.
-* `retries`: The number of times **grocer** will retry writing to or reading
-  from the Apple Push Notification Service before raising any errors to client
-  code.
+* `gateway`: Defaults to different values depending on the `RAILS_ENV` or `RACK_ENV` environment variables.
+  If set to `production`, defaults to `gateway.push.apple.com`, if set to `test`, defaults to `localhost` (see [Acceptance Testing](#acceptance-testing) later), otherwise defaults to `gateway.sandbox.push.apple.com`.
+* `retries`: The number of times **grocer** will retry writing to or reading from the Apple Push Notification Service before raising any errors to client code.
 
 ### Sending Notifications
 
@@ -98,8 +90,7 @@ notification = Grocer::Notification.new(
 pusher.push(notification) # return value is the number of bytes sent successfully
 ```
 
-It is desirable to reuse the same connection to send multiple notifications, as
-is recommended by Apple.
+It is desirable to reuse the same connection to send multiple notifications, as is recommended by Apple.
 
 ```ruby
 pusher = Grocer.pusher(connection_options)
@@ -110,9 +101,8 @@ end
 
 #### Custom Payloads
 
-The Apple documentation says "Providers can specify custom payload values
-outside the Apple-reserved aps namespace." To specify a custom payload, set
-`Grocer::Notification#custom`.
+The Apple documentation says "Providers can specify custom payload values outside the Apple-reserved aps namespace."
+To specify a custom payload, set `Grocer::Notification#custom`.
 
 ```ruby
 notification = Grocer::Notification.new(
@@ -129,10 +119,9 @@ notification = Grocer::Notification.new(
 
 #### Passbook Notifications
 
-A `Grocer::PassbookNotification` is a specialized kind of notification which
-does not require any payload. That is, you need not (and *[Apple explicitly says
-not to](http://developer.apple.com/library/ios/#Documentation/UserExperience/Conceptual/PassKit_PG/Chapters/Updating.html#//apple_ref/doc/uid/TP40012195-CH5-SW1)*)
-send any payload for a Passbook notification. If you do, it will be ignored.
+A `Grocer::PassbookNotification` is a specialized kind of notification which does not require any payload.
+That is, you need not (and *[Apple explicitly says not to](http://developer.apple.com/library/ios/#Documentation/UserExperience/Conceptual/PassKit_PG/Chapters/Updating.html#//apple_ref/doc/uid/TP40012195-CH5-SW1)*) send any payload for a Passbook notification.
+If you do, it will be ignored.
 
 ```ruby
 notification = Grocer::PassbookNotification.new(device_token: "...")
@@ -143,21 +132,19 @@ notification = Grocer::PassbookNotification.new(device_token: "...")
 #### Newsstand Notifications
 
 Grocer also supports the special Newsstand 'content-available' notification.
-`Grocer::NewsstandNotification` can be used for this. Like
-`Grocer::PassbookNotification`, it is a specialized kind of notification which
-does not require any payload. Likewise, anything you add to it will be ignored.
+`Grocer::NewsstandNotification` can be used for this.
+Like `Grocer::PassbookNotification`, it is a specialized kind of notification which does not require any payload.
+Likewise, anything you add to it will be ignored.
 
 ```ruby
 notification = Grocer::NewsstandNotification.new(device_token: "...")
 # Generates a JSON payload like:
 # {"aps": {"content-available":1}}
-````
+```
 
 #### Safari Notifications
 
-Grocer can be used for [Safari Push
-Notifications](https://developer.apple.com/notifications/safari-push-notifications/)
-introduced in Mavericks.
+Grocer can be used for [Safari Push Notifications](https://developer.apple.com/notifications/safari-push-notifications/) introduced in Mavericks.
 
 ```ruby
 notification = Grocer::SafariNotification.new(
@@ -204,26 +191,20 @@ end
 
 #### Notes
 
-* `gateway`: Defaults to `feedback.push.apple.com` **only** when running in a
-  production environment, as determined by either the `RAILS_ENV` or
-  `RACK_ENV` environment variables. In all other cases, it defaults to the
-  sandbox gateway, `feedback.sandbox.push.apple.com`.
-* `retries`: The number of times **grocer** will retry writing to or reading
-  from the Apple Push Notification Service before raising any errors to client
-  code.
+* `gateway`: Defaults to `feedback.push.apple.com` **only** when running in a production environment, as determined by either the `RAILS_ENV` or `RACK_ENV` environment variables.
+  In all other cases, it defaults to the sandbox gateway, `feedback.sandbox.push.apple.com`.
+* `retries`: The number of times **grocer** will retry writing to or reading from the Apple Push Notification Service before raising any errors to client code.
 
 ### Acceptance Testing
 
-Grocer ships with framework to setup a real looking APNS server. It listens on
-a real SSL-capable socket bound to localhost. See the [Connecting
-Notes](#notes) above for details.
+Grocer ships with framework to setup a real looking APNS server.
+It listens on a real SSL-capable socket bound to localhost.
+See the [Connecting Notes](#notes) above for details.
 
-You can setup an APNS client to talk to it, then inspect the notifications the
-server received.
+You can setup an APNS client to talk to it, then inspect the notifications the server received.
 
-The server simply exposes a blocking queue where notifications are placed when
-they are received. It is your responsibility to timeout if a message is not
-received in a reasonable amount of time.
+The server simply exposes a blocking queue where notifications are placed when they are received.
+It is your responsibility to timeout if a message is not received in a reasonable amount of time.
 
 For example, in RSpec:
 
@@ -253,10 +234,8 @@ end
 
 ## Device Token
 
-A device token is obtained from within the iOS app. More details are in Apple's
-[Registering for Remote
-Notifications](http://developer.apple.com/library/mac/#documentation/NetworkingInternet/Conceptual/RemoteNotificationsPG/IPhoneOSClientImp/IPhoneOSClientImp.html#//apple_ref/doc/uid/TP40008194-CH103-SW1)
-documentation.
+A device token is obtained from within the iOS app.
+More details are in Apple's [Registering for Remote Notifications](http://developer.apple.com/library/mac/#documentation/NetworkingInternet/Conceptual/RemoteNotificationsPG/IPhoneOSClientImp/IPhoneOSClientImp.html#//apple_ref/doc/uid/TP40008194-CH103-SW1) documentation.
 
 The key code for this purpose is:
 
@@ -281,36 +260,36 @@ The key code for this purpose is:
 
 Login to the [iOS Provisioning Portal (App IDs)](https://developer.apple.com/account/ios/identifier/bundle).
 
-Select your app bundle, scroll down and click "Edit." This will bring you to a page that will allow you to setup and configure services for your app. Scroll down until you see the service labeled “Push Notifications.” Depending on whether you’re creating a Development or Production certificate, click the appropriate “Create Certificate” button.
+Select your app bundle, scroll down and click "Edit."
+This will bring you to a page that will allow you to setup and configure services for your app.
+Scroll down until you see the service labeled "Push Notifications."
+Depending on whether you’re creating a Development or Production certificate, click the appropriate "Create Certificate" button.
 
 ![Creating the Push Notification
 Certificate](images/Creating_the_Push_Notification_Certificate.png)
 
-Follow the instructions to create a Certificate Signing Request, click "Continue," upload the CSR, and download the resulting .cer file.
+Follow the instructions to create a Certificate Signing Request, click "Continue," upload the CSR, and download the resulting `.cer` file.
 
-Open the .cer file in Keychain Access, then expand the certificate to show both the
-certificate *and* the private key. Command select so both are highlighted:
+Open the `.cer` file in Keychain Access, then expand the certificate to show both the certificate *and* the private key.
+Command-select so both are highlighted:
 
-![Selecting both the certificate and private
-key](images/Selecting_both_the_certificate_and_private_key.png)
+![Selecting both the certificate and private key](images/Selecting_both_the_certificate_and_private_key.png)
 
 Control click and select to export the 2 items:
 
-![Exporting the certificate and private
-key](images/Exporting_the_certificate_and_private_key.png)
+![Exporting the certificate and private key](images/Exporting_the_certificate_and_private_key.png)
 
-Save the items as a `.p12` file. Open a terminal window and run the following
-command:
+Save the items as a `.p12` file.
+Open a terminal window and run the following command:
 
 ```bash
 openssl pkcs12 -in exported_certificate.p12 -out certificate.pem -nodes -clcerts -des3
 ```
 
-You will be prompted for two password. The first one is the password
-that you used when you exported the private key and certificate from
-Keychain Access. The second password will be used to encrypt and lock
-the private key. This will be the passphrase used when configuring
-**grocer** to connect to APNs.
+You will be prompted for two password.
+The first one is the password that you used when you exported the private key and certificate from Keychain Access.
+The second password will be used to encrypt and lock the private key.
+This will be the passphrase used when configuring **grocer** to connect to APNs.
 
 The `certificate.pem` file that is generated can be used with **grocer**.
 
@@ -341,8 +320,6 @@ cat push.pem push_private_key.pem > certificate.pem
 
 ## Support Channels
 
-[GitHub Issues](https://github.com/grocer/grocer/issues) and [Pull
-Requests](https://github.com/grocer/grocer/pulls) are the primary venues for
-communicating issues and discussing possible features. Several of us also
-regularly hang out in the `#grocer` channel on Freenode; feel free to pop in
-and ask questions there as well. Thanks! :heart:
+[GitHub Issues](https://github.com/grocer/grocer/issues) and [Pull Requests](https://github.com/grocer/grocer/pulls) are the primary venues for communicating issues and discussing possible features.
+Several of us also regularly hang out in the `#grocer` channel on Freenode; feel free to pop in and ask questions there as well.
+Thanks! :heart:

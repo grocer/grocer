@@ -284,7 +284,7 @@ Login to the [iOS Provisioning Portal (App IDs)](https://developer.apple.com/acc
 Select your app bundle, scroll down and click "Edit." This will bring you to a page that will allow you to setup and configure services for your app. Scroll down until you see the service labeled “Push Notifications.” Depending on whether you’re creating a Development or Production certificate, click the appropriate “Create Certificate” button.
 
 ![Creating the Push Notification
-Certificate](https://cdn-images-1.medium.com/max/1600/1*zHi-WR44OGYtOdFCy79jZw.png)
+Certificate](images/Creating_the_Push_Notification_Certificate.png)
 
 Follow the instructions to create a Certificate Signing Request, click "Continue," upload the CSR, and download the resulting .cer file.
 

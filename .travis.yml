@@ -6,7 +6,7 @@ rvm:
   - 2.1.10
   - 2.0.0
   - jruby
-  - rbx-3.74
+  - rbx-2.2.7
 sudo: false
 addons:
   code_climate:

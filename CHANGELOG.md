@@ -2,6 +2,11 @@
 
 ## Unreleased
 
+## 0.7.1
+
+* Convert Fixnum to Integer, for Ruby >= 2.4.0. ([Ben
+  Rugg](https://github.com/benrugg))
+
 ## 0.7.0
 
 * Support for `mutable-content` flag (for iOS 10). ([Matthias

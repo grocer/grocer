@@ -24,9 +24,17 @@ This may or may not affect you, but if you are seeing a large amount of undelive
 We are looking for help [moving over to Apple's HTTP/2 notification API](https://github.com/grocer/grocer/issues/104) which should address this situation.
 The current maintainer doesn't have time to do this work, but please leave us a note if you would like to drive the effort.
 
-## Requirements
+## Supported Rubies
 
-* Ruby/MRI 2.x, JRuby 9000, Rubinius 2 & 3
+* Ruby/MRI 2.x
+* JRuby (latest)
+
+### Probably-supported Rubies
+
+* Rubinius 2 & 3
+
+In truth, it's become hard to keep TravisCI building Rubinius versions, so we're officially removing it from our build pipeline.
+Things *probably* work, but if things break, feel free to keep both pieces.
 
 ## Installation
 
